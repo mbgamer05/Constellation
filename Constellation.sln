@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constellation", "Constellation\Constellation.csproj", "{2AB72C54-6645-48D0-86B3-BCCB3AD77200}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AB72C54-6645-48D0-86B3-BCCB3AD77200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AB72C54-6645-48D0-86B3-BCCB3AD77200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AB72C54-6645-48D0-86B3-BCCB3AD77200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AB72C54-6645-48D0-86B3-BCCB3AD77200}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {70FEC846-D535-4CC5-9B18-3C5778DC2B80}
+	EndGlobalSection
+EndGlobal
