@@ -36,7 +36,7 @@
             label1 = new Label();
             button1 = new Button();
             textBox1 = new TextBox();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            note1 = new Note();
             pTest.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -47,34 +47,38 @@
             pTest.Controls.Add(lblPName);
             pTest.Controls.Add(btnPSettings);
             pTest.Controls.Add(txtPInput);
-            pTest.Location = new Point(1021, 318);
+            pTest.Location = new Point(1263, 238);
+            pTest.Margin = new Padding(3, 2, 3, 2);
             pTest.Name = "pTest";
-            pTest.Size = new Size(250, 125);
+            pTest.Size = new Size(219, 94);
             pTest.TabIndex = 8;
+            pTest.Paint += pTest_Paint;
             // 
             // lblPName
             // 
             lblPName.AutoSize = true;
-            lblPName.Location = new Point(3, 5);
+            lblPName.Location = new Point(3, 4);
             lblPName.Name = "lblPName";
-            lblPName.Size = new Size(54, 20);
+            lblPName.Size = new Size(42, 15);
             lblPName.TabIndex = 2;
             lblPName.Text = "Note 1";
             // 
             // btnPSettings
             // 
-            btnPSettings.Location = new Point(221, 3);
+            btnPSettings.Location = new Point(193, 2);
+            btnPSettings.Margin = new Padding(3, 2, 3, 2);
             btnPSettings.Name = "btnPSettings";
-            btnPSettings.Size = new Size(26, 27);
+            btnPSettings.Size = new Size(23, 20);
             btnPSettings.TabIndex = 1;
             btnPSettings.Text = "Settings";
             btnPSettings.UseVisualStyleBackColor = true;
             // 
             // txtPInput
             // 
-            txtPInput.Location = new Point(3, 29);
+            txtPInput.Location = new Point(3, 22);
+            txtPInput.Margin = new Padding(3, 2, 3, 2);
             txtPInput.Name = "txtPInput";
-            txtPInput.Size = new Size(125, 27);
+            txtPInput.Size = new Size(110, 23);
             txtPInput.TabIndex = 0;
             // 
             // panel1
@@ -83,58 +87,58 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(textBox1);
-            panel1.Location = new Point(1021, 187);
+            panel1.Location = new Point(1263, 140);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(250, 125);
+            panel1.Size = new Size(219, 94);
             panel1.TabIndex = 9;
             panel1.Paint += panel1_Paint;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(3, 5);
+            label1.Location = new Point(3, 4);
             label1.Name = "label1";
-            label1.Size = new Size(54, 20);
+            label1.Size = new Size(42, 15);
             label1.TabIndex = 2;
             label1.Text = "Note 2";
             label1.Click += label1_Click;
             // 
             // button1
             // 
-            button1.Location = new Point(221, 3);
+            button1.Location = new Point(193, 2);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(26, 27);
+            button1.Size = new Size(23, 20);
             button1.TabIndex = 1;
             button1.Text = "Settings";
             button1.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(3, 29);
+            textBox1.Location = new Point(3, 22);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
+            textBox1.Size = new Size(110, 23);
             textBox1.TabIndex = 0;
             // 
-            // tableLayoutPanel1
+            // note1
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Location = new Point(12, 12);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(866, 768);
-            tableLayoutPanel1.TabIndex = 10;
+            note1.BackColor = SystemColors.ActiveCaption;
+            note1.Location = new Point(990, 228);
+            note1.Name = "note1";
+            note1.Size = new Size(219, 94);
+            note1.TabIndex = 10;
             // 
             // Board_F3_
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1283, 792);
-            Controls.Add(tableLayoutPanel1);
+            ClientSize = new Size(1494, 863);
+            Controls.Add(note1);
             Controls.Add(pTest);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Board_F3_";
             Text = "Board_F3_";
             Load += Board_F3__Load;
@@ -155,6 +159,6 @@
         private Label label1;
         private Button button1;
         private TextBox textBox1;
-        private TableLayoutPanel tableLayoutPanel1;
+        private Note note1;
     }
 }
