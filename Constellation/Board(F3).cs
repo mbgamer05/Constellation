@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,6 @@ namespace Constellation
         {
             InitializeComponent();
         }
-
         private void Board_F3__Load(object sender, EventArgs e)
         {
             foreach (Panel pl in this.Controls.OfType<Panel>())
@@ -28,15 +28,14 @@ namespace Constellation
                 pl.MouseDown += Panel_MouseDown;
                 pl.MouseMove += Panel_MouseMove_1;
                 pl.DragDrop += Panel_DragDrop;
+                pl.MouseUp += Panel_MouseUp;
             }
 
-            tableLayoutPanel1.DragDrop += new DragEventHandler(TLPDragDrop);
-            tableLayoutPanel1.DragDrop += new DragEventHandler(TLPDragEnter);
         }
 
         private void TLPDragEnter(object sender, DragEventArgs e)
         {
-           
+
         }
 
         private void TLPDragDrop(object sender, DragEventArgs e)
@@ -48,6 +47,13 @@ namespace Constellation
         private void Panel_DragDrop(object sender, DragEventArgs e)
         {
 
+        }
+        private void Panel_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Location == Location)
+            {
+
+            }
         }
         private void Panel_MouseMove_1(object sender, MouseEventArgs e)
         {
@@ -80,5 +86,19 @@ namespace Constellation
 
         }
 
+        private void pTest_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void note1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void note1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

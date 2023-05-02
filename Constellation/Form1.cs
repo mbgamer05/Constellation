@@ -1,6 +1,9 @@
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
+using System.Data.SQLite;
+using System.Data.Common;
+using System.Data;
 
 namespace Constellation
 {
@@ -60,6 +63,23 @@ namespace Constellation
             string[] Userdata = new string[2];
             Userdata[0] = txtUsername.Text;
             Userdata[1] = txtPassword.Text;
+
+
+            SQLiteConnection sqlconnection = new SQLiteConnection();
+            sqlconnection.ConnectionString = "DataSource = Main.db";
+            SQLiteCommand sqlCommand = new SQLiteCommand();
+            sqlCommand.Connection = sqlconnection;
+            sqlCommand.CommandType = System.Data.CommandType.Text;
+            sqlCommand.CommandText = "INSERT INTO Users (Username,Password) Values (@Username, @Password)";
+            sqlCommand.Parameters.AddWithValue("@Username", Userdata[0]);
+            sqlCommand.Parameters.AddWithValue("@Password", Userdata[1]);
+
+            sqlconnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlconnection.Close();
+
+            //File.Create("User" + +".db")
+
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
@@ -86,9 +106,28 @@ namespace Constellation
             Board.Show();
         }
 
-        private void Board_F3__FormClosed (object sender, EventArgs e)
+        private void Board_F3__FormClosed(object sender, EventArgs e)
         {
             this.Show();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string[] Userdata = new string[2];
+            Userdata[0] = txtUsername.Text;
+            Userdata[1] = txtPassword.Text;
+
+            SQLiteConnection sqlconnection = new SQLiteConnection();
+            sqlconnection.ConnectionString = "DataSource = Main.db";
+            string commandText = "SELECT Password FROM Users";
+            var datatable = new DataTable();
+            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
+            sqlconnection.Open();
+            myDataAdapter.Fill(datatable);
+            sqlconnection.Close();
+            txtUsername.Text = datatable.Rows[0].ToString();
+
+            
         }
     }
 }
