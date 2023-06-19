@@ -28,137 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pTest = new Panel();
-            lblPName = new Label();
-            btnPSettings = new Button();
-            txtPInput = new TextBox();
-            panel1 = new Panel();
-            label1 = new Label();
-            button1 = new Button();
-            textBox1 = new TextBox();
-            note1 = new Note();
-            pTest.SuspendLayout();
-            panel1.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            tlpBody = new TableLayoutPanel();
+            ng = new NoteGrid();
+            tlpTopBar = new TableLayoutPanel();
+            timer = new System.Windows.Forms.Timer(components);
+            tlpBody.SuspendLayout();
             SuspendLayout();
             // 
-            // pTest
+            // tlpBody
             // 
-            pTest.BackColor = SystemColors.ActiveCaption;
-            pTest.Controls.Add(lblPName);
-            pTest.Controls.Add(btnPSettings);
-            pTest.Controls.Add(txtPInput);
-            pTest.Location = new Point(1263, 238);
-            pTest.Margin = new Padding(3, 2, 3, 2);
-            pTest.Name = "pTest";
-            pTest.Size = new Size(219, 94);
-            pTest.TabIndex = 8;
-            pTest.Paint += pTest_Paint;
+            tlpBody.BackColor = Color.Transparent;
+            tlpBody.ColumnCount = 1;
+            tlpBody.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpBody.Controls.Add(ng, 0, 1);
+            tlpBody.Controls.Add(tlpTopBar, 0, 0);
+            tlpBody.Dock = DockStyle.Fill;
+            tlpBody.Location = new Point(0, 0);
+            tlpBody.Name = "tlpBody";
+            tlpBody.RowCount = 2;
+            tlpBody.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpBody.RowStyles.Add(new RowStyle(SizeType.Absolute, 749F));
+            tlpBody.Size = new Size(1283, 792);
+            tlpBody.TabIndex = 0;
             // 
-            // lblPName
+            // ng
             // 
-            lblPName.AutoSize = true;
-            lblPName.Location = new Point(3, 4);
-            lblPName.Name = "lblPName";
-            lblPName.Size = new Size(42, 15);
-            lblPName.TabIndex = 2;
-            lblPName.Text = "Note 1";
+            ng.Dock = DockStyle.Fill;
+            ng.DoingColor = SystemColors.Control;
+            ng.DoneColor = SystemColors.Control;
+            ng.Location = new Point(3, 46);
+            ng.Name = "ng";
+            ng.Size = new Size(1277, 743);
+            ng.TabIndex = 0;
+            ng.ToDoColor = SystemColors.Control;
             // 
-            // btnPSettings
+            // tlpTopBar
             // 
-            btnPSettings.Location = new Point(193, 2);
-            btnPSettings.Margin = new Padding(3, 2, 3, 2);
-            btnPSettings.Name = "btnPSettings";
-            btnPSettings.Size = new Size(23, 20);
-            btnPSettings.TabIndex = 1;
-            btnPSettings.Text = "Settings";
-            btnPSettings.UseVisualStyleBackColor = true;
-            // 
-            // txtPInput
-            // 
-            txtPInput.Location = new Point(3, 22);
-            txtPInput.Margin = new Padding(3, 2, 3, 2);
-            txtPInput.Name = "txtPInput";
-            txtPInput.Size = new Size(110, 23);
-            txtPInput.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(button1);
-            panel1.Controls.Add(textBox1);
-            panel1.Location = new Point(1263, 140);
-            panel1.Margin = new Padding(3, 2, 3, 2);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(219, 94);
-            panel1.TabIndex = 9;
-            panel1.Paint += panel1_Paint;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 4);
-            label1.Name = "label1";
-            label1.Size = new Size(42, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Note 2";
-            label1.Click += label1_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(193, 2);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(23, 20);
-            button1.TabIndex = 1;
-            button1.Text = "Settings";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(3, 22);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(110, 23);
-            textBox1.TabIndex = 0;
-            // 
-            // note1
-            // 
-            note1.BackColor = SystemColors.ActiveCaption;
-            note1.Location = new Point(990, 228);
-            note1.Name = "note1";
-            note1.Size = new Size(219, 94);
-            note1.TabIndex = 10;
+            tlpTopBar.BackColor = Color.Transparent;
+            tlpTopBar.ColumnCount = 7;
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 91F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 89F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 921F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 41F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 33F));
+            tlpTopBar.Dock = DockStyle.Fill;
+            tlpTopBar.Location = new Point(3, 3);
+            tlpTopBar.Name = "tlpTopBar";
+            tlpTopBar.RowCount = 1;
+            tlpTopBar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpTopBar.Size = new Size(1277, 37);
+            tlpTopBar.TabIndex = 1;
             // 
             // Board_F3_
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1494, 863);
-            Controls.Add(note1);
-            Controls.Add(pTest);
-            Controls.Add(panel1);
-            Margin = new Padding(3, 2, 3, 2);
+            ClientSize = new Size(1283, 792);
+            Controls.Add(tlpBody);
             Name = "Board_F3_";
             Text = "Board_F3_";
             Load += Board_F3__Load;
-            pTest.ResumeLayout(false);
-            pTest.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            tlpBody.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel pTest;
-        private Label lblPName;
-        private Button btnPSettings;
-        private TextBox txtPInput;
-        private Panel panel1;
-        private Label label1;
-        private Button button1;
-        private TextBox textBox1;
-        private Note note1;
+        private TableLayoutPanel tlpBody;
+        private NoteGrid ng;
+        private TableLayoutPanel tlpTopBar;
+        private System.Windows.Forms.Timer timer;
     }
 }

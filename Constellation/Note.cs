@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Constellation
 {
@@ -16,20 +18,19 @@ namespace Constellation
         {
             InitializeComponent();
         }
-
         private void Note_Load(object sender, EventArgs e)
         {
-
+            
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        public string TextPreview
         {
-
+            get { return txtPreview.Text; }
+            set { txtPreview.Text = value; }
         }
-
-        private void btnSettings_Click(object sender, EventArgs e)
+        public string NoteName
         {
-
+            get { return lblNoteName.Text; }
+            set { lblNoteName.Text = value;}
         }
     }
 }

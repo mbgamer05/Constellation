@@ -31,61 +31,46 @@
             txtUsername = new TextBox();
             txtPassword = new TextBox();
             btnSend = new Button();
-            btnSettings = new Button();
-            btnBoard = new Button();
             btnLogin = new Button();
             SuspendLayout();
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(172, 80);
+            txtUsername.Location = new Point(226, 122);
+            txtUsername.Margin = new Padding(3, 4, 3, 4);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(100, 23);
+            txtUsername.Size = new Size(114, 27);
             txtUsername.TabIndex = 0;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(172, 109);
+            txtPassword.Location = new Point(226, 160);
+            txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(100, 23);
+            txtPassword.Size = new Size(114, 27);
             txtPassword.TabIndex = 1;
             // 
             // btnSend
             // 
-            btnSend.Location = new Point(142, 138);
+            btnSend.Location = new Point(187, 195);
+            btnSend.Margin = new Padding(3, 4, 3, 4);
             btnSend.Name = "btnSend";
-            btnSend.Size = new Size(75, 23);
+            btnSend.Size = new Size(86, 31);
             btnSend.TabIndex = 2;
-            btnSend.Text = "Sign Up";
+            btnSend.Tag = "Secondary";
+            btnSend.Text = "Signup";
             btnSend.UseVisualStyleBackColor = true;
             btnSend.Click += btnSend_Click;
             // 
-            // btnSettings
-            // 
-            btnSettings.Location = new Point(465, 134);
-            btnSettings.Name = "btnSettings";
-            btnSettings.Size = new Size(75, 23);
-            btnSettings.TabIndex = 3;
-            btnSettings.Text = "Settings";
-            btnSettings.UseVisualStyleBackColor = true;
-            btnSettings.Click += btnSettings_Click;
-            // 
-            // btnBoard
-            // 
-            btnBoard.Location = new Point(465, 164);
-            btnBoard.Name = "btnBoard";
-            btnBoard.Size = new Size(75, 23);
-            btnBoard.TabIndex = 4;
-            btnBoard.Text = "Board";
-            btnBoard.UseVisualStyleBackColor = true;
-            btnBoard.Click += btnBoard_Click;
-            // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(223, 138);
+            btnLogin.FlatAppearance.BorderSize = 0;
+            btnLogin.Location = new Point(279, 195);
+            btnLogin.Margin = new Padding(3, 4, 3, 4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(75, 23);
+            btnLogin.Size = new Size(86, 31);
             btnLogin.TabIndex = 5;
+            btnLogin.Tag = "Primary";
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
@@ -93,20 +78,20 @@
             // Form1
             // 
             AllowDrop = true;
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(582, 353);
             Controls.Add(btnLogin);
-            Controls.Add(btnBoard);
-            Controls.Add(btnSettings);
             Controls.Add(btnSend);
             Controls.Add(txtPassword);
             Controls.Add(txtUsername);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
+
         }
 
         #endregion
@@ -114,8 +99,8 @@
         private TextBox txtUsername;
         private TextBox txtPassword;
         private Button btnSend;
-        private Button btnSettings;
-        private Button btnBoard;
         private Button btnLogin;
+
+        
     }
 }

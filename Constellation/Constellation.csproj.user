@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="Board%28F3%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Homepage%28F1%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Note.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="NoteExpanded%28F4%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="NoteGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Settings%28F2%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

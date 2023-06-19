@@ -29,47 +29,44 @@
         private void InitializeComponent()
         {
             btnSettings = new Button();
-            lnlName = new Label();
-            tbText = new TextBox();
+            lblNoteName = new Label();
+            txtPreview = new TextBox();
             SuspendLayout();
             // 
             // btnSettings
             // 
-            btnSettings.Location = new Point(221, 3);
+            btnSettings.Location = new Point(223, 3);
             btnSettings.Name = "btnSettings";
-            btnSettings.Size = new Size(26, 27);
-            btnSettings.TabIndex = 2;
+            btnSettings.Size = new Size(24, 29);
+            btnSettings.TabIndex = 0;
             btnSettings.Text = "Settings";
             btnSettings.UseVisualStyleBackColor = true;
-            btnSettings.Click += btnSettings_Click;
             // 
-            // lnlName
+            // lblNoteName
             // 
-            lnlName.AutoSize = true;
-            lnlName.Location = new Point(3, 3);
-            lnlName.Name = "lnlName";
-            lnlName.Size = new Size(0, 20);
-            lnlName.TabIndex = 3;
+            lblNoteName.AutoSize = true;
+            lblNoteName.Location = new Point(3, 7);
+            lblNoteName.Name = "lblNoteName";
+            lblNoteName.Size = new Size(0, 20);
+            lblNoteName.TabIndex = 3;
             // 
-            // tbText
+            // txtPreview
             // 
-            tbText.Location = new Point(3, 51);
-            tbText.Margin = new Padding(3, 4, 3, 4);
-            tbText.Multiline = true;
-            tbText.Name = "tbText";
-            tbText.Size = new Size(243, 70);
-            tbText.TabIndex = 4;
-            tbText.TextChanged += textBox1_TextChanged;
+            txtPreview.Location = new Point(3, 42);
+            txtPreview.Multiline = true;
+            txtPreview.Name = "txtPreview";
+            txtPreview.Size = new Size(244, 80);
+            txtPreview.TabIndex = 4;
             // 
             // Note
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Inherit;
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.ActiveCaption;
-            Controls.Add(tbText);
-            Controls.Add(lnlName);
+            Controls.Add(txtPreview);
+            Controls.Add(lblNoteName);
             Controls.Add(btnSettings);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Note";
             Size = new Size(250, 125);
             Load += Note_Load;
@@ -80,7 +77,7 @@
         #endregion
 
         private Button btnSettings;
-        private Label lnlName;
-        private TextBox tbText;
+        private Label lblNoteName;
+        private TextBox txtPreview;
     }
 }
