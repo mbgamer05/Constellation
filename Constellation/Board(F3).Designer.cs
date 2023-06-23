@@ -36,6 +36,7 @@
             btnBack = new Button();
             btnClose = new Button();
             timer = new System.Windows.Forms.Timer(components);
+            btnTest = new Button();
             tlpBody.SuspendLayout();
             tlpTopBar.SuspendLayout();
             SuspendLayout();
@@ -82,6 +83,7 @@
             tlpTopBar.Controls.Add(btnAddNote, 0, 0);
             tlpTopBar.Controls.Add(btnBack, 5, 0);
             tlpTopBar.Controls.Add(btnClose, 4, 0);
+            tlpTopBar.Controls.Add(btnTest, 1, 0);
             tlpTopBar.Dock = DockStyle.Fill;
             tlpTopBar.Location = new Point(3, 3);
             tlpTopBar.Name = "tlpTopBar";
@@ -126,6 +128,17 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
+            // btnTest
+            // 
+            btnTest.Dock = DockStyle.Fill;
+            btnTest.Location = new Point(103, 3);
+            btnTest.Name = "btnTest";
+            btnTest.Size = new Size(94, 37);
+            btnTest.TabIndex = 3;
+            btnTest.Tag = "Primary";
+            btnTest.Text = "Test";
+            btnTest.UseVisualStyleBackColor = true;
+            // 
             // Board_F3_
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -149,5 +162,6 @@
         private Button btnAddNote;
         private Button btnBack;
         private Button btnClose;
+        private Button btnTest;
     }
 }

@@ -267,7 +267,7 @@ namespace Constellation
                 ng.DonePanel.Controls.Add(nt);
             }
 
-            
+
             //updates the Database location where the name is equal to the note name
             //the update changes where the Note is stored on the board
             var ConfigLocation = DataLocation.Location;
@@ -299,8 +299,8 @@ namespace Constellation
             sqlCommand.Connection = sqlconnection;
             sqlCommand.CommandText = "UPDATE Board1" +
                 " SET Location = " + location +
-                " WHERE Name = " +"'"+ rows[i]["Name"].ToString() +"'";
-            
+                " WHERE Name = " + "'" + rows[i]["Name"].ToString() + "'";
+
             sqlconnection.Open();
             sqlCommand.ExecuteNonQuery();
             sqlconnection.Close();
@@ -341,7 +341,7 @@ namespace Constellation
             NoteExpanded.Show();
 
         }
-        
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
