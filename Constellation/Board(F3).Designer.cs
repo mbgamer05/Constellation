@@ -28,133 +28,126 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pTest = new Panel();
-            lblPName = new Label();
-            btnPSettings = new Button();
-            txtPInput = new TextBox();
-            panel1 = new Panel();
-            label1 = new Label();
-            button1 = new Button();
-            textBox1 = new TextBox();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            pTest.SuspendLayout();
-            panel1.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            tlpBody = new TableLayoutPanel();
+            ng = new NoteGrid();
+            tlpTopBar = new TableLayoutPanel();
+            btnAddNote = new Button();
+            btnBack = new Button();
+            btnClose = new Button();
+            timer = new System.Windows.Forms.Timer(components);
+            tlpBody.SuspendLayout();
+            tlpTopBar.SuspendLayout();
             SuspendLayout();
             // 
-            // pTest
+            // tlpBody
             // 
-            pTest.BackColor = SystemColors.ActiveCaption;
-            pTest.Controls.Add(lblPName);
-            pTest.Controls.Add(btnPSettings);
-            pTest.Controls.Add(txtPInput);
-            pTest.Location = new Point(1021, 318);
-            pTest.Name = "pTest";
-            pTest.Size = new Size(250, 125);
-            pTest.TabIndex = 8;
+            tlpBody.BackColor = Color.Transparent;
+            tlpBody.ColumnCount = 1;
+            tlpBody.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpBody.Controls.Add(ng, 0, 1);
+            tlpBody.Controls.Add(tlpTopBar, 0, 0);
+            tlpBody.Dock = DockStyle.Fill;
+            tlpBody.Location = new Point(0, 0);
+            tlpBody.Name = "tlpBody";
+            tlpBody.RowCount = 2;
+            tlpBody.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpBody.RowStyles.Add(new RowStyle(SizeType.Percent, 749F));
+            tlpBody.Size = new Size(1283, 792);
+            tlpBody.TabIndex = 0;
             // 
-            // lblPName
+            // ng
             // 
-            lblPName.AutoSize = true;
-            lblPName.Location = new Point(3, 5);
-            lblPName.Name = "lblPName";
-            lblPName.Size = new Size(54, 20);
-            lblPName.TabIndex = 2;
-            lblPName.Text = "Note 1";
+            ng.Dock = DockStyle.Fill;
+            ng.DoingColor = SystemColors.Control;
+            ng.DoneColor = SystemColors.Control;
+            ng.Location = new Point(3, 52);
+            ng.Name = "ng";
+            ng.Size = new Size(1277, 737);
+            ng.TabIndex = 0;
+            ng.ToDoColor = SystemColors.Control;
+            ng.Load += ng_Load;
             // 
-            // btnPSettings
+            // tlpTopBar
             // 
-            btnPSettings.Location = new Point(221, 3);
-            btnPSettings.Name = "btnPSettings";
-            btnPSettings.Size = new Size(26, 27);
-            btnPSettings.TabIndex = 1;
-            btnPSettings.Text = "Settings";
-            btnPSettings.UseVisualStyleBackColor = true;
+            tlpTopBar.BackColor = Color.Transparent;
+            tlpTopBar.ColumnCount = 7;
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 775F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tlpTopBar.Controls.Add(btnAddNote, 0, 0);
+            tlpTopBar.Controls.Add(btnBack, 5, 0);
+            tlpTopBar.Controls.Add(btnClose, 4, 0);
+            tlpTopBar.Dock = DockStyle.Fill;
+            tlpTopBar.Location = new Point(3, 3);
+            tlpTopBar.Name = "tlpTopBar";
+            tlpTopBar.RowCount = 1;
+            tlpTopBar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpTopBar.Size = new Size(1277, 43);
+            tlpTopBar.TabIndex = 1;
             // 
-            // txtPInput
+            // btnAddNote
             // 
-            txtPInput.Location = new Point(3, 29);
-            txtPInput.Name = "txtPInput";
-            txtPInput.Size = new Size(125, 27);
-            txtPInput.TabIndex = 0;
+            btnAddNote.Dock = DockStyle.Fill;
+            btnAddNote.Location = new Point(3, 3);
+            btnAddNote.Name = "btnAddNote";
+            btnAddNote.Size = new Size(94, 37);
+            btnAddNote.TabIndex = 0;
+            btnAddNote.Tag = "Primary";
+            btnAddNote.Text = "Add note";
+            btnAddNote.UseVisualStyleBackColor = true;
+            btnAddNote.Click += btnAddNote_Click;
             // 
-            // panel1
+            // btnBack
             // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(button1);
-            panel1.Controls.Add(textBox1);
-            panel1.Location = new Point(1021, 187);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(250, 125);
-            panel1.TabIndex = 9;
-            panel1.Paint += panel1_Paint;
+            btnBack.Dock = DockStyle.Fill;
+            btnBack.Location = new Point(1178, 3);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(94, 37);
+            btnBack.TabIndex = 1;
+            btnBack.Tag = "Primary";
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = true;
+            btnBack.Click += btnBack_Click;
             // 
-            // label1
+            // btnClose
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 5);
-            label1.Name = "label1";
-            label1.Size = new Size(54, 20);
-            label1.TabIndex = 2;
-            label1.Text = "Note 2";
-            label1.Click += label1_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(221, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(26, 27);
-            button1.TabIndex = 1;
-            button1.Text = "Settings";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(3, 29);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 0;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Location = new Point(12, 12);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(866, 768);
-            tableLayoutPanel1.TabIndex = 10;
+            btnClose.Dock = DockStyle.Fill;
+            btnClose.Location = new Point(1078, 3);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(94, 37);
+            btnClose.TabIndex = 2;
+            btnClose.Tag = "Primary";
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // Board_F3_
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1283, 792);
-            Controls.Add(tableLayoutPanel1);
-            Controls.Add(pTest);
-            Controls.Add(panel1);
+            Controls.Add(tlpBody);
             Name = "Board_F3_";
             Text = "Board_F3_";
             Load += Board_F3__Load;
-            pTest.ResumeLayout(false);
-            pTest.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            tlpBody.ResumeLayout(false);
+            tlpTopBar.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel pTest;
-        private Label lblPName;
-        private Button btnPSettings;
-        private TextBox txtPInput;
-        private Panel panel1;
-        private Label label1;
-        private Button button1;
-        private TextBox textBox1;
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tlpBody;
+        private NoteGrid ng;
+        private TableLayoutPanel tlpTopBar;
+        private System.Windows.Forms.Timer timer;
+        private Button btnAddNote;
+        private Button btnBack;
+        private Button btnClose;
     }
 }
