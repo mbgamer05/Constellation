@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using System;
 using System.Runtime.CompilerServices;
 
+
 namespace Constellation
 {
     public partial class Form1 : Form
@@ -25,10 +26,19 @@ namespace Constellation
             var ConfigFont = config.AppSettings.Settings["FontType"].Value;
             this.Font = new Font(ConfigFont, this.Font.Size);
         }
-
+       
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsNetworkDeployed"), out bool isNetworkDeployed);
+            bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsFirstRun"), out bool IsFirstRun);
+
+            if (isNetworkDeployed == true && IsFirstRun == true ) 
+            {
+                MessageBox.Show("applying update...");
+                Application.Restart();
+            }
+
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
             string ColourPath = Path.Combine(colourpathFind) + ".db";
             if (!File.Exists(FileCreatePath))

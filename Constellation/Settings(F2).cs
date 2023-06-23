@@ -108,15 +108,15 @@ namespace Constellation
             switch (colour)
             {
                 case "Preview1":
-                    rbSchemeOne.Enabled = false;
+                    rbSchemeOne.Checked = true;
                     break;
 
                 case "Preview2":
-                    rbSchemeTwo.Enabled = false;
+                    rbSchemeTwo.Checked = true;
                     break;
 
                 case "Preview3":
-                    rbSchemeThree.Enabled = false;
+                    rbSchemeThree.Checked = true;
                     break;
             }
 
