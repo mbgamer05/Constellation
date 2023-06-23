@@ -32,13 +32,7 @@ namespace Constellation
         {
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsNetworkDeployed"), out bool isNetworkDeployed);
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsFirstRun"), out bool IsFirstRun);
-            /*
-            if (isNetworkDeployed == true && IsFirstRun == true ) 
-            {
-                MessageBox.Show("applying update...");
-                Application.Restart();
-            }
-            */
+            
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
             string ColourPath = Path.Combine(colourpathFind) + ".db";
             if (!File.Exists(FileCreatePath))
