@@ -20,8 +20,19 @@ namespace Constellation
         }
         private void Note_Load(object sender, EventArgs e)
         {
-            
+
         }
+
+        private void tlpTopBar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void txtPreview_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         public string TextPreview
         {
             get { return txtPreview.Text; }
@@ -30,7 +41,7 @@ namespace Constellation
         public string NoteName
         {
             get { return lblNoteName.Text; }
-            set { lblNoteName.Text = value;}
+            set { lblNoteName.Text = value; }
         }
     }
 }

@@ -104,6 +104,22 @@ namespace Constellation
             string newfont = ConfigurationManager.AppSettings["FontType"];
             Font font = (Font = new Font(newfont, 9f));
 
+            string colour = ConfigurationManager.AppSettings["ColourScheme"];
+            switch (colour)
+            {
+                case "Preview1":
+                    rbSchemeOne.Enabled = false;
+                    break;
+
+                case "Preview2":
+                    rbSchemeTwo.Enabled = false;
+                    break;
+
+                case "Preview3":
+                    rbSchemeThree.Enabled = false;
+                    break;
+            }
+
         }
         public void LoadColours()
         {
@@ -251,6 +267,9 @@ namespace Constellation
                 MessageBox.Show("The application will restart soon");
                 //restarts application
                 Application.Restart();
+
+
+
             }
             else
             {

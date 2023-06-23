@@ -155,7 +155,6 @@ namespace Constellation
                     nt.Name = "Note" + i;
                     nt.Size = new Size(250, 125);
                     nt.Dock = DockStyle.Top;
-                    nt.Show();
                     nt.MouseDown += Note_MouseDown;
                     nt.MouseMove += Note_MouseMove_1;
                     nt.MouseUp += Note_MouseUp;
@@ -173,6 +172,7 @@ namespace Constellation
                             break;
                     }
                     i++;
+                    nt.Show();
                 }
             }
         }
