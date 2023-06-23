@@ -110,7 +110,7 @@ namespace Constellation
         private void NoteExpanded_F4__Load(object sender, EventArgs e)
         {
 
-            if (Board_F3_.Create == 1)
+            if (Board_F3_.Create != 0)
             {
                 btnClose.Enabled = false;
                 btnClose.Visible = false;
@@ -148,8 +148,6 @@ namespace Constellation
             {
                 btnClose.Enabled = false;
                 btnClose.Visible = false;
-
-
             }
             
         }

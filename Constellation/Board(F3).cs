@@ -197,7 +197,7 @@ namespace Constellation
         {
             Note nt = (Note)sender;
             SelectedNote = nt.Name;
-
+            Create = 1;
             NoteName = nt.NoteName.ToString();
             NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
             NoteExpanded.Show();
