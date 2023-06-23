@@ -36,7 +36,7 @@ namespace Constellation
                 MessageBox.Show("Creating directory for application");
                 Directory.CreateDirectory(FileCreatePath);
             }
-            if (File.Exists(ColourPath))
+            if (!File.Exists(ColourPath))
             {
                     SQLiteConnection.CreateFile(ColourPath);
                     for (int i = 1; i < 4; i++)
@@ -101,7 +101,7 @@ namespace Constellation
                     }
                 
             }
-            if (!File.Exists(ColourPath))
+            if (File.Exists(ColourPath))
             {
                 string findit = config.AppSettings.Settings["ColourScheme"].Value;
                 if (string.IsNullOrEmpty(findit))
@@ -261,7 +261,7 @@ namespace Constellation
             else
             {
                 MessageBox.Show("user not created\n" +
-                    "an error occured please check the help button for possible fixes");
+                    "an error occured please check the help button(Coming soon) for possible fixes");
             }
         }
         private static string ReadDataID(string[] Userdata)
@@ -355,8 +355,8 @@ namespace Constellation
             MessageBox.Show("attempting login");
             if (PasswordToFind.Contains("failed"))
             {
-                MessageBox.Show("couldn't find a username or password\n" +
-                    "make sure you're putting the right username and passwords in");
+                MessageBox.Show("couldn't find a username or password are you sure you have made an account?\n" +
+                    "maybe make sure you're putting the right username and passwords in");
             }
             else if (Userdata[1] == PasswordToFind)
             {
