@@ -337,7 +337,9 @@ namespace Constellation
         {
             NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
             Create = 0;
+            NoteExpanded.FormClosed += Form_Reload;
             NoteExpanded.Show();
+
         }
 
         private void btnBack_Click(object sender, EventArgs e)

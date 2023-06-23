@@ -34,37 +34,77 @@ namespace Constellation
             data[3] = dtpDate.Text;
             data[3] = data[3].Replace(",", "");
             int i = 0;
+            bool allow = false;
             foreach (string s in data)
             {
-                if (data[i].Contains("'"))
+                if (string.IsNullOrEmpty(s))
                 {
-                    data[i] = data[i].Replace("'", "''");
+                    MessageBox.Show("whoa there you've got some empty data please make sure everything is filled in please");
                 }
-                i++;
+                else
+                {
+                    allow = true;
+                }
             }
-            //makes sure note name is always valid
-            Board_F3_.NoteName = Board_F3_.NoteName.Replace("'", "''");
+            if (allow == true)
+            {
+                foreach (string s in data)
+                {
 
-            var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
-            //writes new data to database
-            SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
-            SQLiteCommand sqlCommand = new SQLiteCommand();
-            sqlCommand.Connection = sqlconnection;
-            sqlCommand.CommandType = CommandType.Text;
-            sqlCommand.CommandText = sqlCommand.CommandText = "UPDATE Board1 " +
-                "SET Name = '" + data[0] + "'," +
-                " PreviewBody = '" + data[1] + "'," +
-                " FullBody = '" + data[2] + "'," +
-                " Date = '" + data[3] + "'" +
-                " WHERE Name = '" + Board_F3_.NoteName + "'";
-            sqlconnection.Open();
-            sqlCommand.ExecuteNonQuery();
-            sqlconnection.Close();
-            MessageBox.Show("Changes applied");
+                    if (data[i].Contains("'"))
+                    {
+                        data[i] = data[i].Replace("'", "''");
+                    }
+                    i++;
+                }
+                //makes sure note name is always valid
+                if (!string.IsNullOrEmpty(Board_F3_.NoteName))
+                {
+                    Board_F3_.NoteName = Board_F3_.NoteName.Replace("'", "''");
+                }
+                var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
+                //writes new data to database
+                SQLiteConnection sqlconnection = new SQLiteConnection();
+                sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
+                SQLiteCommand sqlCommand = new SQLiteCommand();
+                sqlCommand.Connection = sqlconnection;
+                sqlCommand.CommandType = CommandType.Text;
+                switch(Board_F3_.Create)
+                {
+                    case 0:
+                        sqlCommand.CommandText = "INSERT INTO Board1 " +
+                   "(Name, PreviewBody, FullBody, Date, Location)" +
+                   " Values (@Name, @PreviewBody, @FullBody, @Date, @Location)";
+                        sqlCommand.Parameters.AddWithValue("@Name", data[0]);
+                        sqlCommand.Parameters.AddWithValue("@PreviewBody", data[1]);
+                        sqlCommand.Parameters.AddWithValue("@FullBody", data[2]);
+                        sqlCommand.Parameters.AddWithValue("@Date", data[3]);
+                        sqlCommand.Parameters.AddWithValue("@Location", 0);
+                        sqlconnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        sqlconnection.Close();
+                        MessageBox.Show("New note made");
+                        break;
 
-            btnClose.Visible = true;
-            btnClose.Enabled = true;
+                    case 1:
+                        sqlCommand.CommandText = sqlCommand.CommandText = "UPDATE Board1 " +
+                                        "SET Name = '" + data[0] + "'," +
+                                        " PreviewBody = '" + data[1] + "'," +
+                                        " FullBody = '" + data[2] + "'," +
+                                        " Date = '" + data[3] + "'" +
+                                        " WHERE Name = '" + Board_F3_.NoteName + "'";
+                        sqlconnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        sqlconnection.Close();
+                        MessageBox.Show("Changes applied");
+                        break;
+                }
+
+
+                btnClose.Visible = true;
+                btnClose.Enabled = true;
+            }
+            
         }
 
         private void NoteExpanded_F4__Load(object sender, EventArgs e)
