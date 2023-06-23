@@ -81,5 +81,10 @@ namespace Constellation
             }
 
         }
+
+        private void pbUserIcon_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-	<appSettings>
-		<add key="FontType" value =""/>
-		<add key="UserLoginLocation" value=""/>
-		<add key ="UserLocation" value=""/>
-		<add key="ColourScheme" value="Preview1"/>
-	</appSettings>
-</configuration>

@@ -31,15 +31,13 @@ namespace Constellation
         {
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
             string ColourPath = Path.Combine(colourpathFind) + ".db";
-            if (File.Exists(FileCreatePath))
+            if (!File.Exists(FileCreatePath))
             {
                 MessageBox.Show("Creating directory for application");
                 Directory.CreateDirectory(FileCreatePath);
             }
-            if (!File.Exists(ColourPath))
+            if (File.Exists(ColourPath))
             {
-                if (!File.Exists(ColourPath))
-                {
                     SQLiteConnection.CreateFile(ColourPath);
                     for (int i = 1; i < 4; i++)
                     {
@@ -101,9 +99,9 @@ namespace Constellation
                         SetUpCommand.ExecuteNonQuery();
                         NewDatabaseConnection.Close();
                     }
-                }
+                
             }
-            if (File.Exists(ColourPath))
+            if (!File.Exists(ColourPath))
             {
                 string findit = config.AppSettings.Settings["ColourScheme"].Value;
                 if (string.IsNullOrEmpty(findit))

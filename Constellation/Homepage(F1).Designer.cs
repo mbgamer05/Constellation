@@ -91,13 +91,14 @@
             // 
             // pbUserIcon
             // 
-            pbUserIcon.Image = Properties.Resources.Screenshot_2023_04_28_185923;
+            pbUserIcon.Image = (Image)resources.GetObject("pbUserIcon.Image");
             pbUserIcon.Location = new Point(10, 9);
             pbUserIcon.Name = "pbUserIcon";
             pbUserIcon.Size = new Size(75, 75);
             pbUserIcon.SizeMode = PictureBoxSizeMode.Zoom;
             pbUserIcon.TabIndex = 0;
             pbUserIcon.TabStop = false;
+            pbUserIcon.Click += pbUserIcon_Click;
             // 
             // Homepage_F1_
             // 
