@@ -235,7 +235,7 @@ namespace Constellation
                 "PreviewBody TEXT NOT NULL," +
                 "FullBody TEXT," +
                 "Date TEXT," +
-                "Priority INT," +
+                "Location INT," +
                 "PRIMARY KEY (Name))";
             NewDatabaseConnection.Open();
             SetUpCommand.ExecuteNonQuery();
@@ -248,13 +248,13 @@ namespace Constellation
                 {
                     //puts sample data into database
                     SetUpCommand.CommandText = "INSERT INTO Board1 " +
-                    "(Name, PreviewBody, FullBody, Date, Priority)" +
-                    " Values (@Name, @PreviewBody, @FullBody, @Date, @Priority)";
+                    "(Name, PreviewBody, FullBody, Date, Location)" +
+                    " Values (@Name, @PreviewBody, @FullBody, @Date, @Location)";
                     SetUpCommand.Parameters.AddWithValue("@Name", "Note " + (i + 1));
                     SetUpCommand.Parameters.AddWithValue("@PreviewBody", "Preview data is shown here it's a small blurb about you note");
                     SetUpCommand.Parameters.AddWithValue("@FullBody", "data shown here is bigger and larger than the preview message, this is great for large projects where you need to write down what you need to do,\n also the date stamp is when the idea/work needs to be done by");
                     SetUpCommand.Parameters.AddWithValue("@Date", DateTime.Today.AddDays(7));
-                    SetUpCommand.Parameters.AddWithValue("@Priority", i);
+                    SetUpCommand.Parameters.AddWithValue("@Location", i);
                     NewDatabaseConnection.Open();
                     SetUpCommand.ExecuteNonQuery();
                     NewDatabaseConnection.Close();

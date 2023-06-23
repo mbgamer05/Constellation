@@ -96,7 +96,7 @@ namespace Constellation
             {
              
             }
-            set { ToDo = value; Doing = value; Done = value; }
+            
         }
 
         

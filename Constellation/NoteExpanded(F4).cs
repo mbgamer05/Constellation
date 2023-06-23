@@ -69,37 +69,49 @@ namespace Constellation
 
         private void NoteExpanded_F4__Load(object sender, EventArgs e)
         {
-            btnClose.Enabled = false;
-            btnClose.Visible = false;
-            var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
-            //connects to the database to read data from already existing data
-            SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
-            SQLiteCommand sqlCommand = new SQLiteCommand();
-            string commandText = "SELECT * FROM Board1";
-            DataTable table = new DataTable();
-            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
-            sqlconnection.Open();
-            myDataAdapter.Fill(table);
-            sqlconnection.Close();
-            DataRow[] rows = table.Select();
-            int i = 0;
-            bool found = false;
-            while (!found)
+
+            if (Board_F3_.Create == 1)
             {
-                if (rows[i]["Name"].ToString() == Board_F3_.NoteName)
+                btnClose.Enabled = false;
+                btnClose.Visible = false;
+                var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
+                //connects to the database to read data from already existing data
+                SQLiteConnection sqlconnection = new SQLiteConnection();
+                sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
+                SQLiteCommand sqlCommand = new SQLiteCommand();
+                string commandText = "SELECT * FROM Board1";
+                DataTable table = new DataTable();
+                SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
+                sqlconnection.Open();
+                myDataAdapter.Fill(table);
+                sqlconnection.Close();
+                DataRow[] rows = table.Select();
+                int i = 0;
+                bool found = false;
+                while (!found)
                 {
-                    found = true;
+                    if (rows[i]["Name"].ToString() == Board_F3_.NoteName)
+                    {
+                        found = true;
+                    }
+                    else
+                    {
+                        i++;
+                    }
                 }
-                else
-                {
-                    i++;
-                }
+                txtName.Text = rows[i]["Name"].ToString();
+                txtPreview.Text = rows[i]["PreviewBody"].ToString();
+                txtBody.Text = rows[i]["FullBody"].ToString();
+                dtpDate.Value = DateTime.Parse(rows[i]["Date"].ToString());
             }
-            txtName.Text = rows[i]["Name"].ToString();
-            txtPreview.Text = rows[i]["PreviewBody"].ToString();
-            txtBody.Text = rows[i]["FullBody"].ToString();
-            dtpDate.Value = DateTime.Parse(rows[i]["Date"].ToString());
+            else if (Board_F3_.Create == 0)
+            {
+                btnClose.Enabled = false;
+                btnClose.Visible = false;
+
+
+            }
+            
         }
 
         private void btnClose_Click(object sender, EventArgs e)

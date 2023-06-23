@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.Timers;
 using System.Diagnostics;
 using Microsoft.VisualBasic.Devices;
+using System.Net.NetworkInformation;
 
 namespace Constellation
 {
@@ -28,6 +29,7 @@ namespace Constellation
             public static string Location = config.AppSettings.Settings["UserLoginLocation"].Value;
         }
         public static string NoteName;
+        public static int Create;
         public Board_F3_()
         {
             InitializeComponent();
@@ -120,8 +122,6 @@ namespace Constellation
         }
         private void GenerateNotes()
         {
-
-
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
             SQLiteConnection sqlconnection = new SQLiteConnection();
@@ -160,15 +160,15 @@ namespace Constellation
                     nt.MouseMove += Note_MouseMove_1;
                     nt.MouseUp += Note_MouseUp;
                     nt.DoubleClick += Note_DoubleClick;
-                    switch (rows[i]["Priority"].ToString())
+                    switch (rows[i]["Location"].ToString())
                     {
-                        case "1":
+                        case "0":
                             this.ng.ToDoPanel.Controls.Add(nt);
                             break;
-                        case "2":
+                        case "1":
                             this.ng.DoingPanel.Controls.Add(nt);
                             break;
-                        case "3":
+                        case "2":
                             this.ng.DonePanel.Controls.Add(nt);
                             break;
                     }
@@ -213,25 +213,8 @@ namespace Constellation
         {
             MessageBox.Show(sender.ToString());
         }
-        private void Note_DoubleClick(object sender, EventArgs e)
-        {
-            Note nt = (Note)sender;
-            SelectedNote = nt.Name;
-            NoteName = nt.NoteName.ToString();
-            NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
-            NoteExpanded.Show();
-            NoteExpanded.FormClosed += Form_Reload;
-        }
-        private void Form_Reload(object sender, EventArgs e)
-        {
-            //reloads the form by removing all notes and recreating them 
-            ClearNotes();
-            GenerateNotes();
-        }
-        private void ReloadNote(object sender)
-        {
-            MessageBox.Show(sender.ToString());
-        }
+
+
         private void Note_MouseMove_1(object sender, MouseEventArgs e)
         {
 
@@ -245,6 +228,8 @@ namespace Constellation
         }
         private void Note_MouseDown(object sender, MouseEventArgs e)
         {
+            //when the mouse is pressed down it removes the note from all controls and adds it back to the form
+            //while the mouse is down the note will follow the cursor 
             Note nt = (Note)sender;
             nt.Dock = DockStyle.None;
             foreach (Panel pl in ng.AllPanels)
@@ -260,22 +245,66 @@ namespace Constellation
 
         private void Note_MouseUp(object sender, EventArgs e)
         {
+            //if the note is touching any of the boards panels add the control to panel that the note is most over
             Note nt = (Note)sender;
+            int location = 0;
             if (nt.Bounds.IntersectsWith(ng.ToDoPanel.Bounds))
             {
+                location = 0;
                 nt.Dock = DockStyle.Top;
                 ng.ToDoPanel.Controls.Add(nt);
             }
             if (nt.Bounds.IntersectsWith(ng.DoingPanel.Bounds))
             {
+                location = 1;
                 nt.Dock = DockStyle.Top;
                 ng.DoingPanel.Controls.Add(nt);
             }
             if (nt.Bounds.IntersectsWith(ng.DonePanel.Bounds))
             {
+                location = 2;
                 nt.Dock = DockStyle.Top;
                 ng.DonePanel.Controls.Add(nt);
             }
+
+            
+            //updates the Database location where the name is equal to the note name
+            //the update changes where the Note is stored on the board
+            var ConfigLocation = DataLocation.Location;
+            //connects to the database to read data from already existing data
+            SQLiteConnection sqlconnection = new SQLiteConnection();
+            sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
+            SQLiteCommand sqlCommand = new SQLiteCommand();
+            string commandText = "SELECT * FROM Board1";
+            DataTable table = new DataTable();
+            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
+            sqlconnection.Open();
+            myDataAdapter.Fill(table);
+            sqlconnection.Close();
+            DataRow[] rows = table.Select();
+            int i = 0;
+            bool found = false;
+            while (!found)
+            {
+                if (rows[i]["Name"].ToString() == nt.NoteName)
+                {
+                    found = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            sqlCommand.CommandType = CommandType.Text;
+            sqlCommand.Connection = sqlconnection;
+            sqlCommand.CommandText = "UPDATE Board1" +
+                " SET Location = " + location +
+                " WHERE Name = " +"'"+ rows[i]["Name"].ToString() +"'";
+            
+            sqlconnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlconnection.Close();
+
         }
 
 
@@ -307,6 +336,7 @@ namespace Constellation
         private void btnAddNote_Click(object sender, EventArgs e)
         {
             NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
+            Create = 0;
             NoteExpanded.Show();
         }
 
