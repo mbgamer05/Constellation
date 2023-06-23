@@ -197,6 +197,26 @@ namespace Constellation
         {
             Note nt = (Note)sender;
             SelectedNote = nt.Name;
+
+            NoteName = nt.NoteName.ToString();
+            NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
+            NoteExpanded.Show();
+            NoteExpanded.FormClosed += Form_Reload;
+        }
+        private void Form_Reload(object sender, EventArgs e)
+        {
+            //reloads the form by removing all notes and recreating them 
+            ClearNotes();
+            GenerateNotes();
+        }
+        private void ReloadNote(object sender)
+        {
+            MessageBox.Show(sender.ToString());
+        }
+        private void Note_DoubleClick(object sender, EventArgs e)
+        {
+            Note nt = (Note)sender;
+            SelectedNote = nt.Name;
             NoteName = nt.NoteName.ToString();
             NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
             NoteExpanded.Show();
