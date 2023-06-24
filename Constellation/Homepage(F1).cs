@@ -45,6 +45,9 @@ namespace Constellation
 
         private void Homepage_F1__Load(object sender, EventArgs e)
         {
+            btnToDo.Visible = false;
+            btnDoing.Visible = false;
+            btnDone.Visible = false;
             LoadColours();
             BoardName = "Board1";
             GenerateListBoxEntries();
@@ -58,7 +61,7 @@ namespace Constellation
             var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
             SQLiteConnection sqlconnection = new SQLiteConnection();
             sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
-            string commandText = "SELECT * FROM " + BoardName;
+            string commandText = "SELECT * FROM " + BoardName + " WHERE Location = 0";
             DataTable table = new DataTable();
             SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
             sqlconnection.Open();
@@ -125,16 +128,34 @@ namespace Constellation
 
         private void btnMove_Click(object sender, EventArgs e)
         {
+            if (lbToDoNoteNames.SelectedIndex == -1)
+            {
+                MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
+            }
+            else
+            {
+                btnToDo.Visible = true;
+                btnDoing.Visible = true;
+                btnDone.Visible = true;
+            }
 
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Board_F3_.NoteName = lbToDoNoteNames.SelectedItem.ToString();
-            Board_F3_.Create = 1;
-            NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
-            NoteExpanded.Show();
-            NoteExpanded.FormClosed += Form_Reload;
+            if (lbToDoNoteNames.SelectedIndex == -1)
+            {
+                MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
+            }
+            else
+            {
+                Board_F3_.NoteName = lbToDoNoteNames.SelectedItem.ToString();
+                Board_F3_.Create = 1;
+                NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
+                NoteExpanded.Show();
+                NoteExpanded.FormClosed += Form_Reload;
+            }
+
         }
         private void Form_Reload(object sender, EventArgs e)
         {
@@ -143,7 +164,118 @@ namespace Constellation
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if (lbToDoNoteNames.SelectedIndex == -1)
+            {
+                MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to remove this entierly from the board\n this action cannot be undone", "conformation", MessageBoxButtons.YesNo);
+                switch (dr)
+                {
+                    case DialogResult.Yes:
 
+                        MessageBox.Show("Deleting note...");
+                        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                        var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
+                        //connects to the database to remove Data
+                        SQLiteConnection sqlconnection = new SQLiteConnection();
+                        sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
+                        SQLiteCommand sqlCommand = new SQLiteCommand();
+                        sqlCommand.Connection = sqlconnection;
+                        sqlCommand.CommandType = CommandType.Text;
+                        sqlCommand.CommandText = "DELETE FROM " + BoardName + " WHERE Name = '" + lbToDoNoteNames.SelectedItem.ToString() + "'";
+                        sqlconnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        sqlconnection.Close();
+                        lbToDoNoteNames.Items.Clear();
+                        GenerateListBoxEntries();
+                        break;
+
+                    case DialogResult.No:
+                        MessageBox.Show("ok canceling action");
+                        break;
+                }
+            }
+
+        }
+
+        private void btnToDo_Click(object sender, EventArgs e)
+        {
+            btnToDo.Visible = false;
+            btnDoing.Visible = false;
+            btnDone.Visible = false;
+            UpdateLocation(0);
+        }
+
+        private void UpdateLocation(int location)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
+            //connects to the database to read data from already existing data
+            SQLiteConnection sqlconnection = new SQLiteConnection();
+            sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
+            SQLiteCommand sqlCommand = new SQLiteCommand();
+            string commandText = "SELECT * FROM Board1";
+            DataTable table = new DataTable();
+            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
+            sqlconnection.Open();
+            myDataAdapter.Fill(table);
+            sqlconnection.Close();
+            DataRow[] rows = table.Select();
+            int i = 0;
+            bool found = false;
+            while (!found)
+            {
+                if (rows[i]["Name"].ToString() == lbToDoNoteNames.SelectedItem.ToString())
+                {
+                    found = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            sqlCommand.CommandType = CommandType.Text;
+            sqlCommand.Connection = sqlconnection;
+            sqlCommand.CommandText = "UPDATE Board1" +
+                " SET Location = " + location +
+                " WHERE Name = " + "'" + rows[i]["Name"].ToString() + "'";
+
+            sqlconnection.Open();
+            sqlCommand.ExecuteNonQuery();
+            sqlconnection.Close();
+        }
+
+        private void btnDoing_Click(object sender, EventArgs e)
+        {
+            btnToDo.Visible = false;
+            btnDoing.Visible = false;
+            btnDone.Visible = false;
+            UpdateLocation(1);
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            btnToDo.Visible = false;
+            btnDoing.Visible = false;
+            btnDone.Visible = false;
+            UpdateLocation(2);
+        }
+
+        private void Homepage_F1__FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            string QuickClose = config.AppSettings.Settings["QuickClose"].Value;
+            switch (QuickClose) 
+            {
+                case "True":
+                    Application.Exit();
+                    break;
+                case "False":
+                    this.Close();
+                    break;
+            }
         }
     }
 }

@@ -58,6 +58,7 @@
             tabPage2 = new TabPage();
             cbStartUp = new CheckBox();
             ColourD = new ColorDialog();
+            cbQuickClose = new CheckBox();
             tcSettings.SuspendLayout();
             Graphics.SuspendLayout();
             panelPreview.SuspendLayout();
@@ -366,6 +367,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(cbQuickClose);
             tabPage2.Controls.Add(cbStartUp);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Margin = new Padding(3, 4, 3, 4);
@@ -387,6 +389,18 @@
             cbStartUp.Text = "Launch on start up";
             cbStartUp.UseVisualStyleBackColor = true;
             cbStartUp.CheckedChanged += cbStartUp_CheckedChanged;
+            // 
+            // cbQuickClose
+            // 
+            cbQuickClose.AutoSize = true;
+            cbQuickClose.Location = new Point(9, 40);
+            cbQuickClose.Margin = new Padding(3, 4, 3, 4);
+            cbQuickClose.Name = "cbQuickClose";
+            cbQuickClose.Size = new Size(108, 24);
+            cbQuickClose.TabIndex = 1;
+            cbQuickClose.Text = "Quick Close";
+            cbQuickClose.UseVisualStyleBackColor = true;
+            cbQuickClose.CheckedChanged += cbQuickClose_CheckedChanged;
             // 
             // Settings_F2_
             // 
@@ -448,6 +462,7 @@
         private Button btnCancel;
         private Button btnBack;
         private Button btnApply;
+        private CheckBox cbQuickClose;
     }
 
 }

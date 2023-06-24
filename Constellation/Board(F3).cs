@@ -112,6 +112,7 @@ namespace Constellation
         }
         private void GenerateNotes()
         {
+            //connects to database
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
             SQLiteConnection sqlconnection = new SQLiteConnection();
@@ -185,6 +186,9 @@ namespace Constellation
         }
         private void Note_DoubleClick(object sender, EventArgs e)
         {
+            //when the note is double clicked make sure that
+            //create = 1 so that form 4 knows that the note already has data
+            //put note name into variale so that form 4 knows what note is being opened
             Note nt = (Note)sender;
             SelectedNote = nt.Name;
             Create = 1;
@@ -207,7 +211,6 @@ namespace Constellation
 
         private void Note_MouseMove_1(object sender, MouseEventArgs e)
         {
-
             Note nt = (Note)sender;
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {

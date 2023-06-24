@@ -119,6 +119,16 @@ namespace Constellation
                     rbSchemeThree.Checked = true;
                     break;
             }
+            string QuickClose = ConfigurationManager.AppSettings["QuickClose"];
+            switch (QuickClose)
+            {
+                case "True":
+                    cbQuickClose.Checked = true;
+                    break;
+                case "False":
+                    cbQuickClose.Checked = false;
+                    break;
+            }
 
         }
         public void LoadColours()
@@ -284,16 +294,24 @@ namespace Constellation
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("You have unsaved changes you sure you want to close","Closing" ,MessageBoxButtons.YesNo);
+            DialogResult dr = MessageBox.Show("You have unsaved changes you sure you want to close", "Closing", MessageBoxButtons.YesNo);
 
-            if(dr == DialogResult.Yes)
+            if (dr == DialogResult.Yes)
             {
                 this.Close();
             }
-            if(dr == DialogResult.No)
+            if (dr == DialogResult.No)
             {
-                
+
             }
+        }
+
+        private void cbQuickClose_CheckedChanged(object sender, EventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["QuickClose"].Value = cbQuickClose.Checked.ToString();
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Constellation
     {
         private static string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
         private static string FileCreatePath = FolderPath + "\\Constellation";
+        public static string UserLocation = FileCreatePath + "\\Main.db";
         static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public static PublicData PD = new PublicData();
 
@@ -202,7 +203,7 @@ namespace Constellation
             Userdata[0] = txtUsername.Text;
             Userdata[1] = txtPassword.Text;
             SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + PD.UserLocation;
+            sqlconnection.ConnectionString = "DataSource = " + UserLocation;
             SQLiteCommand sqlCommand = new SQLiteCommand();
             sqlCommand.Connection = sqlconnection;
             sqlCommand.CommandType = CommandType.Text;
@@ -283,7 +284,7 @@ namespace Constellation
         private static string ReadDataID(string[] Userdata)
         {
             SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + PD.UserLocation;
+            sqlconnection.ConnectionString = "DataSource = " + UserLocation;
             string commandText = "SELECT * FROM Users";
             DataTable table = new DataTable();
             SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
@@ -313,7 +314,7 @@ namespace Constellation
         private static string ReadDataPass(string[] Userdata)
         {
             SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + PD.UserLocation;
+            sqlconnection.ConnectionString = "DataSource = " + UserLocation;
             string commandText = "SELECT * FROM Users";
             DataTable table = new DataTable();
             SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
