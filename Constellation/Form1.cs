@@ -43,10 +43,7 @@ namespace Constellation
                     ConfigurationManager.RefreshSection("appSettings");
                     Application.Restart();
                 }
-                else if (newestrun == 1)
-                {
-                    return;
-                }
+                
             }
 
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
