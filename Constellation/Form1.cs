@@ -26,13 +26,29 @@ namespace Constellation
             var ConfigFont = config.AppSettings.Settings["FontType"].Value;
             this.Font = new Font(ConfigFont, this.Font.Size);
         }
-       
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsNetworkDeployed"), out bool isNetworkDeployed);
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsFirstRun"), out bool IsFirstRun);
-            
+            if (isNetworkDeployed == true && IsFirstRun == true)
+            {
+                var newestrun = Int32.Parse(config.AppSettings.Settings["FirstRunOfNewUPdate"].Value);
+                if (newestrun == 0)
+                {
+                    MessageBox.Show("Applying update....\n application will now restart");
+                    config.AppSettings.Settings["FirstRunOfNewUPdate"].Value = "1";
+                    config.Save(ConfigurationSaveMode.Modified);
+                    ConfigurationManager.RefreshSection("appSettings");
+                    Application.Restart();
+                }
+                else if (newestrun == 1)
+                {
+                    return;
+                }
+            }
+
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
             string ColourPath = Path.Combine(colourpathFind) + ".db";
             if (!File.Exists(FileCreatePath))
