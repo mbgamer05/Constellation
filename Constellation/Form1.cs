@@ -45,7 +45,6 @@ namespace Constellation
                 }
                 
             }
-
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
             string ColourPath = Path.Combine(colourpathFind) + ".db";
             if (!File.Exists(FileCreatePath))

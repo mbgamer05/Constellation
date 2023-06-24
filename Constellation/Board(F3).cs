@@ -104,20 +104,10 @@ namespace Constellation
 
         private void ClearNotes()
         {
-            var ControlsToRemove = new List<Note>();
-            //puts controls into array that are in the notegrid
+            //clears all contros in all the pannels in notegrid
             foreach (Panel pl in ng.AllPanels)
             {
-                foreach (Note nt in pl.Controls)
-                {
-                    ControlsToRemove.Add(nt);
-                }
-            }
-            foreach (var Control in ControlsToRemove)
-            {
-                //removes the control and disposes them
-                Controls.Remove(Control);
-                Control.Dispose();
+                pl.Controls.Clear();
             }
         }
         private void GenerateNotes()
