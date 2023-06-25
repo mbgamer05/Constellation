@@ -106,7 +106,6 @@ namespace Constellation
             this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
             Control cn = this;
             cn = Class.LoadColours.SetColours(cn, this);
-
         }
 
         private void pbUserIcon_Click(object sender, EventArgs e)

@@ -135,37 +135,10 @@ namespace Constellation
         {
             (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = MoreSettings.ReadStringData(MoreSettings.ReadData());
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            Graphics.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
-            Graphics.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
-            foreach (TabPage tp in tcSettings.TabPages)
-            {
-                foreach (Button bn in tp.Controls.OfType<Button>())
-                {
-                    if (bn.Tag.Equals("Primary"))
-                    {
-                        bn.BackColor = Color.FromArgb(PrimaryButtonARGB[1], PrimaryButtonARGB[2], PrimaryButtonARGB[3]);
-                        bn.FlatStyle = FlatStyle.Popup;
-                        bn.FlatAppearance.BorderSize = 0;
-                        bn.FlatAppearance.BorderColor = Color.FromArgb(PrimaryButtonARGB[1], PrimaryButtonARGB[2], PrimaryButtonARGB[3]);
-                        bn.ForeColor = this.ForeColor;
-                    }
-                    else
-                    {
-                        bn.BackColor = Color.FromArgb(SecondaryButtonARGB[0], SecondaryButtonARGB[1], SecondaryButtonARGB[2], SecondaryButtonARGB[3]);
-                        bn.FlatStyle = FlatStyle.Popup;
-                        bn.FlatAppearance.BorderSize = 0;
-                        bn.FlatAppearance.BorderColor = Color.FromArgb(SecondaryButtonARGB[1], SecondaryButtonARGB[2], SecondaryButtonARGB[3]);
-                        bn.ForeColor = this.ForeColor;
-                    }
-
-                }
-                foreach (TextBox tb in tp.Controls.OfType<TextBox>())
-                {
-                    tb.BackColor = Color.FromArgb(TextBoxBackgroundARGB[0], TextBoxBackgroundARGB[1], TextBoxBackgroundARGB[2], TextBoxBackgroundARGB[3]);
-                    tb.ForeColor = this.ForeColor;
-                }
-            }
-
+            this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
+            this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
+            Control cn = this;
+            cn = Class.LoadColours.SetColours(cn, this);
         }
         private void label1_Click(object sender, EventArgs e)
         {
