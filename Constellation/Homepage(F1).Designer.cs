@@ -48,6 +48,7 @@
             btnToDo = new Button();
             btnDoing = new Button();
             btnDone = new Button();
+            btnNewBoard = new Button();
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -88,6 +89,7 @@
             // panelRightBarHold
             // 
             panelRightBarHold.BackColor = SystemColors.AppWorkspace;
+            panelRightBarHold.Controls.Add(btnNewBoard);
             panelRightBarHold.Controls.Add(PanelIconHold);
             panelRightBarHold.Controls.Add(btnBoard);
             panelRightBarHold.Controls.Add(btnSettings);
@@ -289,6 +291,19 @@
             btnDone.UseVisualStyleBackColor = true;
             btnDone.Click += btnDone_Click;
             // 
+            // btnNewBoard
+            // 
+            btnNewBoard.Dock = DockStyle.Bottom;
+            btnNewBoard.Location = new Point(0, 704);
+            btnNewBoard.Margin = new Padding(3, 4, 3, 4);
+            btnNewBoard.Name = "btnNewBoard";
+            btnNewBoard.Size = new Size(223, 31);
+            btnNewBoard.TabIndex = 7;
+            btnNewBoard.Tag = "Primary";
+            btnNewBoard.Text = "New Board";
+            btnNewBoard.UseVisualStyleBackColor = true;
+            btnNewBoard.Click += btnNewBoard_Click;
+            // 
             // Homepage_F1_
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -332,5 +347,6 @@
         private Button btnToDo;
         private Button btnDoing;
         private Button btnDone;
+        private Button btnNewBoard;
     }
 }

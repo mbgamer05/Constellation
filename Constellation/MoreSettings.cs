@@ -7,7 +7,7 @@ namespace Constellation
     public class MoreSettings
     {
         static PublicData PD = new PublicData();
-
+        
         static string[] colourpathFind = new string[2] { PD.FileCreatePath, "Colour" };
         static string ColourPath = Path.Combine(colourpathFind) + ".db";
 

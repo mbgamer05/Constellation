@@ -15,6 +15,7 @@ namespace Constellation
     public partial class NoteExpanded_F4_ : Form
     {
         static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         public NoteExpanded_F4_()
         {
             InitializeComponent();
@@ -72,7 +73,7 @@ namespace Constellation
                 switch(Board_F3_.Create)
                 {
                     case 0:
-                        sqlCommand.CommandText = "INSERT INTO Board1 " +
+                        sqlCommand.CommandText = "INSERT INTO " + BoardOpened +
                    "(Name, PreviewBody, FullBody, Date, Location)" +
                    " Values (@Name, @PreviewBody, @FullBody, @Date, @Location)";
                         sqlCommand.Parameters.AddWithValue("@Name", data[0]);
@@ -87,8 +88,8 @@ namespace Constellation
                         break;
 
                     case 1:
-                        sqlCommand.CommandText = sqlCommand.CommandText = "UPDATE Board1 " +
-                                        "SET Name = '" + data[0] + "'," +
+                        sqlCommand.CommandText = sqlCommand.CommandText = "UPDATE "+ BoardOpened +
+                                        " SET Name = '" + data[0] + "'," +
                                         " PreviewBody = '" + data[1] + "'," +
                                         " FullBody = '" + data[2] + "'," +
                                         " Date = '" + data[3] + "'" +
@@ -119,7 +120,7 @@ namespace Constellation
                 SQLiteConnection sqlconnection = new SQLiteConnection();
                 sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
                 SQLiteCommand sqlCommand = new SQLiteCommand();
-                string commandText = "SELECT * FROM Board1";
+                string commandText = "SELECT * FROM " + BoardOpened;
                 DataTable table = new DataTable();
                 SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
                 sqlconnection.Open();

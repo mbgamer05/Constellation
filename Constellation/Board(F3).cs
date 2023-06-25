@@ -17,6 +17,7 @@ using System.Timers;
 using System.Diagnostics;
 using Microsoft.VisualBasic.Devices;
 using System.Net.NetworkInformation;
+using Constellation.Class;
 
 namespace Constellation
 {
@@ -27,9 +28,11 @@ namespace Constellation
         {
             public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             public static string Location = config.AppSettings.Settings["UserLoginLocation"].Value;
+            public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         }
         public static string NoteName;
         public static int Create;
+        public static string Action;
         public Board_F3_()
         {
             InitializeComponent();
@@ -112,18 +115,7 @@ namespace Constellation
         }
         private void GenerateNotes()
         {
-            //connects to database
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
-            SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
-            string commandText = "SELECT * FROM Board1";
-            DataTable table = new DataTable();
-            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
-            sqlconnection.Open();
-            myDataAdapter.Fill(table);
-            //put all data from the database into datarow
-            DataRow[] rows = table.Select();
+            DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowNote();
             bool create = true;
             int i = 0;
             NoteGrid ng = new NoteGrid();
@@ -263,37 +255,14 @@ namespace Constellation
 
             //updates the Database location where the name is equal to the note name
             //the update changes where the Note is stored on the board
-            var ConfigLocation = DataLocation.Location;
-            //connects to the database to read data from already existing data
+            (DataRow[] rows, int i) = Class.DataRowReadNote.FindInDataRowNote(nt.Name);
             SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
             SQLiteCommand sqlCommand = new SQLiteCommand();
-            string commandText = "SELECT * FROM Board1";
-            DataTable table = new DataTable();
-            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
-            sqlconnection.Open();
-            myDataAdapter.Fill(table);
-            sqlconnection.Close();
-            DataRow[] rows = table.Select();
-            int i = 0;
-            bool found = false;
-            while (!found)
-            {
-                if (rows[i]["Name"].ToString() == nt.NoteName)
-                {
-                    found = true;
-                }
-                else
-                {
-                    i++;
-                }
-            }
             sqlCommand.CommandType = CommandType.Text;
             sqlCommand.Connection = sqlconnection;
-            sqlCommand.CommandText = "UPDATE Board1" +
+            sqlCommand.CommandText = "UPDATE " + DataLocation.BoardOpened +
                 " SET Location = " + location +
                 " WHERE Name = " + "'" + rows[i]["Name"].ToString() + "'";
-
             sqlconnection.Open();
             sqlCommand.ExecuteNonQuery();
             sqlconnection.Close();
@@ -354,6 +323,15 @@ namespace Constellation
                     MessageBox.Show("All good have fun!");
                     break;
             }
+        }
+
+        private void btnDeleteNote_Click(object sender, EventArgs e)
+        {
+            SelectorForm_F5_ Selector = new SelectorForm_F5_();
+            Action = "Delete";
+            Selector.FormClosing += Form_Reload;
+            Selector.Show();
+
         }
     }
 }

@@ -19,6 +19,9 @@ namespace Constellation
             InitializeComponent();
         }
         public string BoardName;
+        public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
+
         private void btnSettings_Click(object sender, EventArgs e)
         {
             Settings_F2_ settings = new Settings_F2_();
@@ -27,12 +30,29 @@ namespace Constellation
             settings.Show();
         }
 
-        private void btnBoard_Click(object sender, EventArgs e)
+        private async void btnBoard_Click(object sender, EventArgs e)
         {
-            Board_F3_ Board = new Board_F3_();
-            Board.FormClosed += Board_F3__FormClosed;
-            this.Hide();
-            Board.Show();
+            Board_F3_.Action = "FindBoard";
+            SelectorForm_F5_ selector = new SelectorForm_F5_();
+            selector.Show();
+            selector.FormClosing += Open_board;
+
+            
+            
+        }
+        private void Open_board(object sender, EventArgs e)
+        {
+            if (SelectorForm_F5_.allow == true)
+            {
+                Board_F3_ Board = new Board_F3_();
+                Board.FormClosed += Board_F3__FormClosed;
+                this.Hide();
+                Board.Show();
+            }
+            else
+            {
+
+            }
         }
         private void Settings_F2__FormClosed(object sender, EventArgs e)
         {
@@ -49,7 +69,7 @@ namespace Constellation
             btnDoing.Visible = false;
             btnDone.Visible = false;
             LoadColours();
-            BoardName = "Board1";
+            BoardName = BoardOpened;
             GenerateListBoxEntries();
 
         }
@@ -57,17 +77,7 @@ namespace Constellation
         private void GenerateListBoxEntries()
         {
             lbToDoNoteNames.HorizontalScrollbar = true;
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
-            SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
-            string commandText = "SELECT * FROM " + BoardName + " WHERE Location = 0";
-            DataTable table = new DataTable();
-            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
-            sqlconnection.Open();
-            myDataAdapter.Fill(table);
-            //put all data from the database into datarow
-            DataRow[] rows = table.Select();
+            DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowNote();
             bool create = true;
             int i = 0;
             while (create == true)
@@ -82,7 +92,6 @@ namespace Constellation
                     i++;
                 }
             }
-            sqlconnection.Close();
         }
 
         private void LoadColours()
@@ -170,7 +179,7 @@ namespace Constellation
             }
             else
             {
-                DialogResult dr = MessageBox.Show("Are you sure you want to remove this entierly from the board\n this action cannot be undone", "conformation", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageBox.Show("Are you sure you want to delete this from the board\n this action cannot be undone", "conformation", MessageBoxButtons.YesNo);
                 switch (dr)
                 {
                     case DialogResult.Yes:
@@ -210,35 +219,13 @@ namespace Constellation
 
         private void UpdateLocation(int location)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
-            //connects to the database to read data from already existing data
+            //updates the location(todo,doing,done) of the note
+            (DataRow[] rows, int i) = Class.DataRowReadNote.FindInDataRowNote(lbToDoNoteNames.SelectedItem.ToString());
             SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
             SQLiteCommand sqlCommand = new SQLiteCommand();
-            string commandText = "SELECT * FROM Board1";
-            DataTable table = new DataTable();
-            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
-            sqlconnection.Open();
-            myDataAdapter.Fill(table);
-            sqlconnection.Close();
-            DataRow[] rows = table.Select();
-            int i = 0;
-            bool found = false;
-            while (!found)
-            {
-                if (rows[i]["Name"].ToString() == lbToDoNoteNames.SelectedItem.ToString())
-                {
-                    found = true;
-                }
-                else
-                {
-                    i++;
-                }
-            }
             sqlCommand.CommandType = CommandType.Text;
             sqlCommand.Connection = sqlconnection;
-            sqlCommand.CommandText = "UPDATE Board1" +
+            sqlCommand.CommandText = "UPDATE "+ BoardOpened +
                 " SET Location = " + location +
                 " WHERE Name = " + "'" + rows[i]["Name"].ToString() + "'";
 
@@ -267,7 +254,7 @@ namespace Constellation
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             string QuickClose = config.AppSettings.Settings["QuickClose"].Value;
-            switch (QuickClose) 
+            switch (QuickClose)
             {
                 case "True":
                     Application.Exit();
@@ -276,6 +263,11 @@ namespace Constellation
                     this.Close();
                     break;
             }
+        }
+
+        private void btnNewBoard_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -22,6 +22,9 @@
     <Compile Update="NoteGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="SelectorForm%28F5%29.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Settings%28F2%29.cs">
       <SubType>Form</SubType>
     </Compile>

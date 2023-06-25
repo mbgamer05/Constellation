@@ -35,8 +35,8 @@
             btnAddNote = new Button();
             btnBack = new Button();
             btnClose = new Button();
+            btnDeleteNote = new Button();
             timer = new System.Windows.Forms.Timer(components);
-            btnTest = new Button();
             tlpBody.SuspendLayout();
             tlpTopBar.SuspendLayout();
             SuspendLayout();
@@ -74,8 +74,8 @@
             tlpTopBar.BackColor = Color.Transparent;
             tlpTopBar.ColumnCount = 7;
             tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 108F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 92F));
             tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 775F));
             tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
             tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
@@ -83,7 +83,7 @@
             tlpTopBar.Controls.Add(btnAddNote, 0, 0);
             tlpTopBar.Controls.Add(btnBack, 5, 0);
             tlpTopBar.Controls.Add(btnClose, 4, 0);
-            tlpTopBar.Controls.Add(btnTest, 1, 0);
+            tlpTopBar.Controls.Add(btnDeleteNote, 1, 0);
             tlpTopBar.Dock = DockStyle.Fill;
             tlpTopBar.Location = new Point(3, 3);
             tlpTopBar.Name = "tlpTopBar";
@@ -128,16 +128,17 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
-            // btnTest
+            // btnDeleteNote
             // 
-            btnTest.Dock = DockStyle.Fill;
-            btnTest.Location = new Point(103, 3);
-            btnTest.Name = "btnTest";
-            btnTest.Size = new Size(94, 37);
-            btnTest.TabIndex = 3;
-            btnTest.Tag = "Primary";
-            btnTest.Text = "Test";
-            btnTest.UseVisualStyleBackColor = true;
+            btnDeleteNote.Dock = DockStyle.Fill;
+            btnDeleteNote.Location = new Point(103, 3);
+            btnDeleteNote.Name = "btnDeleteNote";
+            btnDeleteNote.Size = new Size(102, 37);
+            btnDeleteNote.TabIndex = 3;
+            btnDeleteNote.Tag = "Primary";
+            btnDeleteNote.Text = "Delete Note";
+            btnDeleteNote.UseVisualStyleBackColor = true;
+            btnDeleteNote.Click += btnDeleteNote_Click;
             // 
             // Board_F3_
             // 
@@ -162,6 +163,6 @@
         private Button btnAddNote;
         private Button btnBack;
         private Button btnClose;
-        private Button btnTest;
+        private Button btnDeleteNote;
     }
 }
