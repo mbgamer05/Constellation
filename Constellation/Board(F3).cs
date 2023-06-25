@@ -50,61 +50,9 @@ namespace Constellation
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
             this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
-            foreach (Control cn in GetAllChildrens(tlpTopBar))
-            {
-                if (cn != null)
-                {
-                    switch (cn)
-                    {
-                        case Button bn:
-                            if (bn == null)
-                            {
-                                break;
-                            }
-                            if (bn.Tag.Equals("Primary"))
-                            {
-                                bn.BackColor = Color.FromArgb(PrimaryButtonARGB[1], PrimaryButtonARGB[2], PrimaryButtonARGB[3]);
-                                bn.FlatStyle = FlatStyle.Popup;
-                                bn.FlatAppearance.BorderSize = 0;
-                                bn.FlatAppearance.BorderColor = Color.FromArgb(PrimaryButtonARGB[1], PrimaryButtonARGB[2], PrimaryButtonARGB[3]);
-                                bn.ForeColor = this.ForeColor;
-                            }
-                            else
-                            {
-                                bn.BackColor = Color.FromArgb(SecondaryButtonARGB[0], SecondaryButtonARGB[1], SecondaryButtonARGB[2], SecondaryButtonARGB[3]);
-                                bn.FlatStyle = FlatStyle.Popup;
-                                bn.FlatAppearance.BorderSize = 0;
-                                bn.FlatAppearance.BorderColor = Color.FromArgb(SecondaryButtonARGB[1], SecondaryButtonARGB[2], SecondaryButtonARGB[3]);
-                                bn.ForeColor = this.ForeColor;
-                            }
-                            break;
-
-                        case TextBox tb:
-                            tb.BackColor = Color.FromArgb(TextBoxBackgroundARGB[0], TextBoxBackgroundARGB[1], TextBoxBackgroundARGB[2], TextBoxBackgroundARGB[3]);
-                            tb.ForeColor = this.ForeColor;
-                            break;
-                    }
-                }
-
-            }
+            Control cn = tlpTopBar;
+            cn = Class.LoadColours.SetColours(cn, this);
         }
-        public static IEnumerable<T> GetChildrens<T>(Control control)
-        {
-            var type = typeof(T);
-
-            var allControls = GetAllChildrens(control);
-
-            return allControls.Where(c => c.GetType() == type).Cast<T>();
-        }
-
-        private static IEnumerable<Control> GetAllChildrens(Control control)
-        {
-            var controls = control.Controls.Cast<Control>();
-            return controls.SelectMany(c => GetAllChildrens(c))
-              .Concat(controls);
-        }
-
-
         private void ClearNotes()
         {
             //clears all contros in all the pannels in notegrid

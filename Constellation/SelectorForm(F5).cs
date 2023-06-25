@@ -40,7 +40,7 @@ namespace Constellation
                 Choice = false;
                 //sets text of buttons
                 btnNo.Text = "Cancel";
-                btnYes.Text = "Yes";
+                btnYes.Text = "Open";
                 this.Text = "Select Board";
                 LoadBoards();
             }
