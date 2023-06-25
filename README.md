@@ -7,6 +7,7 @@ Project Constellation is a small and lightweight application i am developing, it
 ### starting out
 when first launched you'll see a login screen please create a username and password and press sign up after that you don't need to sign up again, how great is that!
 
+all you'll have to do when you next launch the application is put your username and password in and press login 
 ### Homepage
 welcome to the homepage here you can access your board or go to settings, the homepage is still under development so be sure to keep an eye out for change
 
