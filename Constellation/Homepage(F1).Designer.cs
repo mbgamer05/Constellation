@@ -32,6 +32,7 @@
             btnBoard = new Button();
             btnSettings = new Button();
             panelRightBarHold = new Panel();
+            btnNewBoard = new Button();
             PanelIconHold = new Panel();
             pbUserIcon = new PictureBox();
             tlpRight = new TableLayoutPanel();
@@ -48,7 +49,6 @@
             btnToDo = new Button();
             btnDoing = new Button();
             btnDone = new Button();
-            btnNewBoard = new Button();
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -60,10 +60,9 @@
             // 
             // btnBoard
             // 
-            btnBoard.Location = new Point(0, 140);
-            btnBoard.Margin = new Padding(3, 4, 3, 4);
+            btnBoard.Location = new Point(0, 105);
             btnBoard.Name = "btnBoard";
-            btnBoard.Size = new Size(221, 31);
+            btnBoard.Size = new Size(193, 23);
             btnBoard.TabIndex = 6;
             btnBoard.Tag = "Primary";
             btnBoard.Text = "Board";
@@ -75,10 +74,9 @@
             btnSettings.Dock = DockStyle.Bottom;
             btnSettings.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSettings.Image = (Image)resources.GetObject("btnSettings.Image");
-            btnSettings.Location = new Point(0, 735);
-            btnSettings.Margin = new Padding(3, 4, 3, 4);
+            btnSettings.Location = new Point(0, 551);
             btnSettings.Name = "btnSettings";
-            btnSettings.Size = new Size(223, 29);
+            btnSettings.Size = new Size(195, 22);
             btnSettings.TabIndex = 5;
             btnSettings.Tag = "Primary";
             btnSettings.Text = "Settings";
@@ -95,9 +93,22 @@
             panelRightBarHold.Controls.Add(btnSettings);
             panelRightBarHold.Dock = DockStyle.Left;
             panelRightBarHold.Location = new Point(0, 0);
+            panelRightBarHold.Margin = new Padding(3, 2, 3, 2);
             panelRightBarHold.Name = "panelRightBarHold";
-            panelRightBarHold.Size = new Size(223, 764);
+            panelRightBarHold.Size = new Size(195, 573);
             panelRightBarHold.TabIndex = 7;
+            // 
+            // btnNewBoard
+            // 
+            btnNewBoard.Dock = DockStyle.Bottom;
+            btnNewBoard.Location = new Point(0, 528);
+            btnNewBoard.Name = "btnNewBoard";
+            btnNewBoard.Size = new Size(195, 23);
+            btnNewBoard.TabIndex = 7;
+            btnNewBoard.Tag = "Primary";
+            btnNewBoard.Text = "IN PROGRESS";
+            btnNewBoard.UseVisualStyleBackColor = true;
+            btnNewBoard.Click += btnNewBoard_Click;
             // 
             // PanelIconHold
             // 
@@ -105,16 +116,18 @@
             PanelIconHold.Controls.Add(pbUserIcon);
             PanelIconHold.Dock = DockStyle.Top;
             PanelIconHold.Location = new Point(0, 0);
+            PanelIconHold.Margin = new Padding(3, 2, 3, 2);
             PanelIconHold.Name = "PanelIconHold";
-            PanelIconHold.Size = new Size(223, 133);
+            PanelIconHold.Size = new Size(195, 100);
             PanelIconHold.TabIndex = 0;
             // 
             // pbUserIcon
             // 
             pbUserIcon.Image = (Image)resources.GetObject("pbUserIcon.Image");
-            pbUserIcon.Location = new Point(10, 9);
+            pbUserIcon.Location = new Point(9, 7);
+            pbUserIcon.Margin = new Padding(3, 2, 3, 2);
             pbUserIcon.Name = "pbUserIcon";
-            pbUserIcon.Size = new Size(75, 75);
+            pbUserIcon.Size = new Size(66, 56);
             pbUserIcon.SizeMode = PictureBoxSizeMode.Zoom;
             pbUserIcon.TabIndex = 0;
             pbUserIcon.TabStop = false;
@@ -130,38 +143,39 @@
             tlpRight.Controls.Add(lblBottomLeft, 0, 1);
             tlpRight.Controls.Add(tlpToDoHoldTL, 0, 0);
             tlpRight.Dock = DockStyle.Fill;
-            tlpRight.Location = new Point(223, 0);
+            tlpRight.Location = new Point(195, 0);
+            tlpRight.Margin = new Padding(3, 2, 3, 2);
             tlpRight.Name = "tlpRight";
             tlpRight.RowCount = 2;
             tlpRight.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpRight.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlpRight.Size = new Size(1082, 764);
+            tlpRight.Size = new Size(947, 573);
             tlpRight.TabIndex = 8;
             // 
             // lblBottomRight
             // 
             lblBottomRight.AutoSize = true;
-            lblBottomRight.Location = new Point(544, 382);
+            lblBottomRight.Location = new Point(476, 286);
             lblBottomRight.Name = "lblBottomRight";
-            lblBottomRight.Size = new Size(116, 20);
+            lblBottomRight.Size = new Size(94, 15);
             lblBottomRight.TabIndex = 0;
             lblBottomRight.Text = "COMING SOON ";
             // 
             // lblComingUp
             // 
             lblComingUp.AutoSize = true;
-            lblComingUp.Location = new Point(544, 0);
+            lblComingUp.Location = new Point(476, 0);
             lblComingUp.Name = "lblComingUp";
-            lblComingUp.Size = new Size(112, 20);
+            lblComingUp.Size = new Size(91, 15);
             lblComingUp.TabIndex = 1;
             lblComingUp.Text = "COMING SOON";
             // 
             // lblBottomLeft
             // 
             lblBottomLeft.AutoSize = true;
-            lblBottomLeft.Location = new Point(3, 382);
+            lblBottomLeft.Location = new Point(3, 286);
             lblBottomLeft.Name = "lblBottomLeft";
-            lblBottomLeft.Size = new Size(112, 20);
+            lblBottomLeft.Size = new Size(91, 15);
             lblBottomLeft.TabIndex = 3;
             lblBottomLeft.Text = "COMING SOON";
             // 
@@ -173,24 +187,27 @@
             tlpToDoHoldTL.Controls.Add(lbToDoNoteNames, 0, 1);
             tlpToDoHoldTL.Controls.Add(tlpHoldButtonsTL, 1, 1);
             tlpToDoHoldTL.Dock = DockStyle.Fill;
-            tlpToDoHoldTL.Location = new Point(3, 3);
+            tlpToDoHoldTL.Location = new Point(3, 2);
+            tlpToDoHoldTL.Margin = new Padding(3, 2, 3, 2);
             tlpToDoHoldTL.Name = "tlpToDoHoldTL";
             tlpToDoHoldTL.RowCount = 2;
             tlpToDoHoldTL.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1702127F));
             tlpToDoHoldTL.RowStyles.Add(new RowStyle(SizeType.Percent, 88.82979F));
-            tlpToDoHoldTL.Size = new Size(535, 376);
+            tlpToDoHoldTL.Size = new Size(467, 282);
             tlpToDoHoldTL.TabIndex = 4;
             // 
             // lbToDoNoteNames
             // 
             lbToDoNoteNames.Dock = DockStyle.Fill;
             lbToDoNoteNames.FormattingEnabled = true;
-            lbToDoNoteNames.ItemHeight = 20;
-            lbToDoNoteNames.Location = new Point(3, 45);
+            lbToDoNoteNames.ItemHeight = 15;
+            lbToDoNoteNames.Location = new Point(3, 33);
+            lbToDoNoteNames.Margin = new Padding(3, 2, 3, 2);
             lbToDoNoteNames.Name = "lbToDoNoteNames";
             lbToDoNoteNames.ScrollAlwaysVisible = true;
-            lbToDoNoteNames.Size = new Size(253, 328);
+            lbToDoNoteNames.Size = new Size(220, 247);
             lbToDoNoteNames.TabIndex = 0;
+            lbToDoNoteNames.SelectedIndexChanged += lbToDoNoteNames_SelectedIndexChanged;
             // 
             // tlpHoldButtonsTL
             // 
@@ -202,20 +219,22 @@
             tlpHoldButtonsTL.Controls.Add(btnEdit, 0, 1);
             tlpHoldButtonsTL.Controls.Add(tlpMoveButtons, 1, 0);
             tlpHoldButtonsTL.Dock = DockStyle.Fill;
-            tlpHoldButtonsTL.Location = new Point(262, 45);
+            tlpHoldButtonsTL.Location = new Point(229, 33);
+            tlpHoldButtonsTL.Margin = new Padding(3, 2, 3, 2);
             tlpHoldButtonsTL.Name = "tlpHoldButtonsTL";
             tlpHoldButtonsTL.RowCount = 3;
             tlpHoldButtonsTL.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
             tlpHoldButtonsTL.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
-            tlpHoldButtonsTL.RowStyles.Add(new RowStyle(SizeType.Absolute, 147F));
-            tlpHoldButtonsTL.Size = new Size(270, 328);
+            tlpHoldButtonsTL.RowStyles.Add(new RowStyle(SizeType.Absolute, 110F));
+            tlpHoldButtonsTL.Size = new Size(235, 247);
             tlpHoldButtonsTL.TabIndex = 1;
             // 
             // btnMove
             // 
-            btnMove.Location = new Point(3, 3);
+            btnMove.Location = new Point(3, 2);
+            btnMove.Margin = new Padding(3, 2, 3, 2);
             btnMove.Name = "btnMove";
-            btnMove.Size = new Size(94, 29);
+            btnMove.Size = new Size(82, 22);
             btnMove.TabIndex = 0;
             btnMove.Text = "Move";
             btnMove.UseVisualStyleBackColor = true;
@@ -223,9 +242,10 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(3, 183);
+            btnDelete.Location = new Point(3, 138);
+            btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(94, 29);
+            btnDelete.Size = new Size(82, 22);
             btnDelete.TabIndex = 1;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -233,9 +253,10 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(3, 111);
+            btnEdit.Location = new Point(3, 84);
+            btnEdit.Margin = new Padding(3, 2, 3, 2);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(94, 29);
+            btnEdit.Size = new Size(82, 22);
             btnEdit.TabIndex = 2;
             btnEdit.Text = "Edit";
             btnEdit.UseVisualStyleBackColor = true;
@@ -249,21 +270,23 @@
             tlpMoveButtons.Controls.Add(btnDoing, 0, 1);
             tlpMoveButtons.Controls.Add(btnDone, 0, 2);
             tlpMoveButtons.Dock = DockStyle.Fill;
-            tlpMoveButtons.Location = new Point(138, 3);
+            tlpMoveButtons.Location = new Point(120, 2);
+            tlpMoveButtons.Margin = new Padding(3, 2, 3, 2);
             tlpMoveButtons.Name = "tlpMoveButtons";
             tlpMoveButtons.RowCount = 3;
             tlpMoveButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
             tlpMoveButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
             tlpMoveButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            tlpMoveButtons.Size = new Size(129, 102);
+            tlpMoveButtons.Size = new Size(112, 78);
             tlpMoveButtons.TabIndex = 3;
             // 
             // btnToDo
             // 
             btnToDo.Dock = DockStyle.Fill;
-            btnToDo.Location = new Point(3, 3);
+            btnToDo.Location = new Point(3, 2);
+            btnToDo.Margin = new Padding(3, 2, 3, 2);
             btnToDo.Name = "btnToDo";
-            btnToDo.Size = new Size(123, 28);
+            btnToDo.Size = new Size(106, 22);
             btnToDo.TabIndex = 0;
             btnToDo.Text = "ToDo";
             btnToDo.UseVisualStyleBackColor = true;
@@ -272,9 +295,10 @@
             // btnDoing
             // 
             btnDoing.Dock = DockStyle.Fill;
-            btnDoing.Location = new Point(3, 37);
+            btnDoing.Location = new Point(3, 28);
+            btnDoing.Margin = new Padding(3, 2, 3, 2);
             btnDoing.Name = "btnDoing";
-            btnDoing.Size = new Size(123, 28);
+            btnDoing.Size = new Size(106, 22);
             btnDoing.TabIndex = 1;
             btnDoing.Text = "Doing";
             btnDoing.UseVisualStyleBackColor = true;
@@ -283,34 +307,23 @@
             // btnDone
             // 
             btnDone.Dock = DockStyle.Fill;
-            btnDone.Location = new Point(3, 71);
+            btnDone.Location = new Point(3, 54);
+            btnDone.Margin = new Padding(3, 2, 3, 2);
             btnDone.Name = "btnDone";
-            btnDone.Size = new Size(123, 28);
+            btnDone.Size = new Size(106, 22);
             btnDone.TabIndex = 2;
             btnDone.Text = "Done";
             btnDone.UseVisualStyleBackColor = true;
             btnDone.Click += btnDone_Click;
             // 
-            // btnNewBoard
-            // 
-            btnNewBoard.Dock = DockStyle.Bottom;
-            btnNewBoard.Location = new Point(0, 704);
-            btnNewBoard.Margin = new Padding(3, 4, 3, 4);
-            btnNewBoard.Name = "btnNewBoard";
-            btnNewBoard.Size = new Size(223, 31);
-            btnNewBoard.TabIndex = 7;
-            btnNewBoard.Tag = "Primary";
-            btnNewBoard.Text = "New Board";
-            btnNewBoard.UseVisualStyleBackColor = true;
-            btnNewBoard.Click += btnNewBoard_Click;
-            // 
             // Homepage_F1_
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1305, 764);
+            ClientSize = new Size(1142, 573);
             Controls.Add(tlpRight);
             Controls.Add(panelRightBarHold);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Homepage_F1_";
             Text = "Homepage_F1_";
             FormClosing += Homepage_F1__FormClosing;

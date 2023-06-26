@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -119,7 +120,10 @@ namespace Constellation
                 txtName.Text = rows[i]["Name"].ToString();
                 txtPreview.Text = rows[i]["PreviewBody"].ToString();
                 txtBody.Text = rows[i]["FullBody"].ToString();
-                dtpDate.Value = DateTime.Parse(rows[i]["Date"].ToString());
+                
+                DateTimeFormatInfo dtfi = CultureInfo.CurrentCulture.DateTimeFormat;
+                var date = DateTime.Parse(rows[i]["date"].ToString());
+                dtpDate.Value = DateTime.ParseExact(date.ToString(),"G",dtfi);
             }
             else if (Board_F3_.Create == 0)
             {

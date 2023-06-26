@@ -32,26 +32,22 @@ namespace Constellation
 
         private async void btnBoard_Click(object sender, EventArgs e)
         {
+            //opens the selector form up
+            //in the selctor form the user selects the board they want to open
             Board_F3_.Action = "FindBoard";
             SelectorForm_F5_ selector = new SelectorForm_F5_();
             selector.Show();
             selector.FormClosing += Open_board;
-
-            
-            
         }
         private void Open_board(object sender, EventArgs e)
         {
+            //opens the note board and hides the homepage
             if (SelectorForm_F5_.allow == true)
             {
                 Board_F3_ Board = new Board_F3_();
                 Board.FormClosed += Board_F3__FormClosed;
                 this.Hide();
                 Board.Show();
-            }
-            else
-            {
-
             }
         }
         private void Settings_F2__FormClosed(object sender, EventArgs e)
@@ -65,13 +61,16 @@ namespace Constellation
 
         private void Homepage_F1__Load(object sender, EventArgs e)
         {
+            //form set up
             btnToDo.Visible = false;
             btnDoing.Visible = false;
             btnDone.Visible = false;
             LoadColours();
             BoardName = BoardOpened;
             GenerateListBoxEntries();
-
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
+            btnMove.Enabled = false;
         }
 
         private void GenerateListBoxEntries()
@@ -115,6 +114,9 @@ namespace Constellation
 
         private void btnMove_Click(object sender, EventArgs e)
         {
+            //checks that there is a selected note
+            //if nothing is selected display error message
+            //if something is selected make movement buttons visable
             if (lbToDoNoteNames.SelectedIndex == -1)
             {
                 MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
@@ -130,6 +132,8 @@ namespace Constellation
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            //checks if there is a note selected
+            //if something is selected open the note editor and edit the selected note
             if (lbToDoNoteNames.SelectedIndex == -1)
             {
                 MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
@@ -151,6 +155,8 @@ namespace Constellation
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            //cofirms that the user wants to delete the note
+            //if yes deletes the selected note
             if (lbToDoNoteNames.SelectedIndex == -1)
             {
                 MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
@@ -203,7 +209,7 @@ namespace Constellation
             SQLiteCommand sqlCommand = new SQLiteCommand();
             sqlCommand.CommandType = CommandType.Text;
             sqlCommand.Connection = sqlconnection;
-            sqlCommand.CommandText = "UPDATE "+ BoardOpened +
+            sqlCommand.CommandText = "UPDATE " + BoardOpened +
                 " SET Location = " + location +
                 " WHERE Name = " + "'" + rows[i]["Name"].ToString() + "'";
 
@@ -230,6 +236,7 @@ namespace Constellation
 
         private void Homepage_F1__FormClosing(object sender, FormClosingEventArgs e)
         {
+            //if quick close is true then close the application on the homepage and don't go back to the login screen
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             string QuickClose = config.AppSettings.Settings["QuickClose"].Value;
             switch (QuickClose)
@@ -246,6 +253,22 @@ namespace Constellation
         private void btnNewBoard_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void lbToDoNoteNames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbToDoNoteNames.SelectedIndex == -1)
+            {
+                btnEdit.Enabled = false;
+                btnDelete.Enabled = false;
+                btnMove.Enabled = false;
+            }
+            else
+            {
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+                btnMove.Enabled = true;
+            }
         }
     }
 }
