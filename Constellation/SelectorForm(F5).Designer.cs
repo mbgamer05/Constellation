@@ -49,11 +49,12 @@
             tlpMainHold.Controls.Add(tlpBottomHold, 0, 1);
             tlpMainHold.Dock = DockStyle.Fill;
             tlpMainHold.Location = new Point(0, 0);
+            tlpMainHold.Margin = new Padding(3, 2, 3, 2);
             tlpMainHold.Name = "tlpMainHold";
             tlpMainHold.RowCount = 2;
             tlpMainHold.RowStyles.Add(new RowStyle(SizeType.Percent, 15.9235668F));
             tlpMainHold.RowStyles.Add(new RowStyle(SizeType.Percent, 84.07643F));
-            tlpMainHold.Size = new Size(452, 241);
+            tlpMainHold.Size = new Size(396, 181);
             tlpMainHold.TabIndex = 0;
             // 
             // tlpTopBar
@@ -64,20 +65,22 @@
             tlpTopBar.Controls.Add(cbSelector, 1, 0);
             tlpTopBar.Controls.Add(lblSelector, 0, 0);
             tlpTopBar.Dock = DockStyle.Fill;
-            tlpTopBar.Location = new Point(3, 3);
+            tlpTopBar.Location = new Point(3, 2);
+            tlpTopBar.Margin = new Padding(3, 2, 3, 2);
             tlpTopBar.Name = "tlpTopBar";
             tlpTopBar.RowCount = 1;
             tlpTopBar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlpTopBar.Size = new Size(446, 32);
+            tlpTopBar.Size = new Size(390, 24);
             tlpTopBar.TabIndex = 2;
             // 
             // cbSelector
             // 
             cbSelector.Dock = DockStyle.Fill;
             cbSelector.FormattingEnabled = true;
-            cbSelector.Location = new Point(93, 3);
+            cbSelector.Location = new Point(81, 2);
+            cbSelector.Margin = new Padding(3, 2, 3, 2);
             cbSelector.Name = "cbSelector";
-            cbSelector.Size = new Size(350, 28);
+            cbSelector.Size = new Size(306, 23);
             cbSelector.TabIndex = 1;
             // 
             // lblSelector
@@ -86,7 +89,7 @@
             lblSelector.Dock = DockStyle.Fill;
             lblSelector.Location = new Point(3, 0);
             lblSelector.Name = "lblSelector";
-            lblSelector.Size = new Size(84, 32);
+            lblSelector.Size = new Size(72, 24);
             lblSelector.TabIndex = 2;
             lblSelector.Text = "Select";
             lblSelector.TextAlign = ContentAlignment.TopCenter;
@@ -100,20 +103,22 @@
             tlpBottomHold.Controls.Add(btnYes, 1, 0);
             tlpBottomHold.Controls.Add(txtConfirm, 1, 1);
             tlpBottomHold.Dock = DockStyle.Fill;
-            tlpBottomHold.Location = new Point(3, 41);
+            tlpBottomHold.Location = new Point(3, 30);
+            tlpBottomHold.Margin = new Padding(3, 2, 3, 2);
             tlpBottomHold.Name = "tlpBottomHold";
             tlpBottomHold.RowCount = 2;
             tlpBottomHold.RowStyles.Add(new RowStyle(SizeType.Percent, 23.2558136F));
             tlpBottomHold.RowStyles.Add(new RowStyle(SizeType.Percent, 76.74419F));
-            tlpBottomHold.Size = new Size(446, 197);
+            tlpBottomHold.Size = new Size(390, 149);
             tlpBottomHold.TabIndex = 3;
             tlpBottomHold.Paint += tlpBottomHold_Paint;
             // 
             // btnNo
             // 
-            btnNo.Location = new Point(3, 3);
+            btnNo.Location = new Point(3, 2);
+            btnNo.Margin = new Padding(3, 2, 3, 2);
             btnNo.Name = "btnNo";
-            btnNo.Size = new Size(94, 29);
+            btnNo.Size = new Size(82, 22);
             btnNo.TabIndex = 0;
             btnNo.Tag = "";
             btnNo.Text = "1";
@@ -122,9 +127,10 @@
             // 
             // btnYes
             // 
-            btnYes.Location = new Point(226, 3);
+            btnYes.Location = new Point(198, 2);
+            btnYes.Margin = new Padding(3, 2, 3, 2);
             btnYes.Name = "btnYes";
-            btnYes.Size = new Size(94, 29);
+            btnYes.Size = new Size(82, 22);
             btnYes.TabIndex = 1;
             btnYes.Text = "2";
             btnYes.UseVisualStyleBackColor = true;
@@ -133,18 +139,20 @@
             // txtConfirm
             // 
             txtConfirm.Dock = DockStyle.Fill;
-            txtConfirm.Location = new Point(226, 48);
+            txtConfirm.Location = new Point(198, 36);
+            txtConfirm.Margin = new Padding(3, 2, 3, 2);
             txtConfirm.Name = "txtConfirm";
-            txtConfirm.Size = new Size(217, 27);
+            txtConfirm.Size = new Size(189, 23);
             txtConfirm.TabIndex = 2;
             txtConfirm.Visible = false;
             // 
             // SelectorForm_F5_
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(452, 241);
+            ClientSize = new Size(396, 181);
             Controls.Add(tlpMainHold);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "SelectorForm_F5_";
             Text = "Select";
             Load += SelectorForm_F5__Load;

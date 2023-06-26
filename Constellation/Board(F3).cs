@@ -27,7 +27,7 @@ namespace Constellation
         static class DataLocation
         {
             public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            public static string Location = config.AppSettings.Settings["UserLoginLocation"].Value;
+            public static string UserDataLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
             public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         }
         public static string NoteName;
@@ -148,7 +148,6 @@ namespace Constellation
             MessageBox.Show(sender.ToString());
         }
 
-
         private void Note_MouseMove_1(object sender, MouseEventArgs e)
         {
             Note nt = (Note)sender;
@@ -186,37 +185,44 @@ namespace Constellation
                 location = 0;
                 nt.Dock = DockStyle.Top;
                 ng.ToDoPanel.Controls.Add(nt);
+                UpdateLocation(nt, location);
+
             }
             if (nt.Bounds.IntersectsWith(ng.DoingPanel.Bounds))
             {
                 location = 1;
                 nt.Dock = DockStyle.Top;
                 ng.DoingPanel.Controls.Add(nt);
+                UpdateLocation(nt, location);
+
             }
             if (nt.Bounds.IntersectsWith(ng.DonePanel.Bounds))
             {
                 location = 2;
                 nt.Dock = DockStyle.Top;
                 ng.DonePanel.Controls.Add(nt);
+                UpdateLocation(nt, location);
+
             }
+        }
 
-
+        private void UpdateLocation(Note nt, int location)
+        {
             //updates the Database location where the name is equal to the note name
             //the update changes where the Note is stored on the board
-            (DataRow[] rows, int i) = Class.DataRowReadNote.FindInDataRowNote(nt.Name);
+            (DataRow[] rows, int i) = Class.DataRowReadNote.FindInDataRowNote(nt.NoteName);
             SQLiteConnection sqlconnection = new SQLiteConnection();
             SQLiteCommand sqlCommand = new SQLiteCommand();
+            sqlconnection.ConnectionString = "DataSource = " + DataLocation.UserDataLocation;
             sqlCommand.CommandType = CommandType.Text;
             sqlCommand.Connection = sqlconnection;
-            sqlCommand.CommandText = "UPDATE " + DataLocation.BoardOpened +
+            sqlCommand.CommandText = "UPDATE '" + DataLocation.BoardOpened + "'" +
                 " SET Location = " + location +
                 " WHERE Name = " + "'" + rows[i]["Name"].ToString() + "'";
             sqlconnection.Open();
             sqlCommand.ExecuteNonQuery();
             sqlconnection.Close();
-
         }
-
 
         public void AddNoteToNoteGrid(Note nt, NoteGrid ng)
         {

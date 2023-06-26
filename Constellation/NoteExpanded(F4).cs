@@ -115,31 +115,7 @@ namespace Constellation
             {
                 btnClose.Enabled = false;
                 btnClose.Visible = false;
-                var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
-                //connects to the database to read data from already existing data
-                SQLiteConnection sqlconnection = new SQLiteConnection();
-                sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
-                SQLiteCommand sqlCommand = new SQLiteCommand();
-                string commandText = "SELECT * FROM " + BoardOpened;
-                DataTable table = new DataTable();
-                SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
-                sqlconnection.Open();
-                myDataAdapter.Fill(table);
-                sqlconnection.Close();
-                DataRow[] rows = table.Select();
-                int i = 0;
-                bool found = false;
-                while (!found)
-                {
-                    if (rows[i]["Name"].ToString() == Board_F3_.NoteName)
-                    {
-                        found = true;
-                    }
-                    else
-                    {
-                        i++;
-                    }
-                }
+                (DataRow[] rows, int i) = Class.DataRowReadNote.FindInDataRowNote(Board_F3_.NoteName);
                 txtName.Text = rows[i]["Name"].ToString();
                 txtPreview.Text = rows[i]["PreviewBody"].ToString();
                 txtBody.Text = rows[i]["FullBody"].ToString();
