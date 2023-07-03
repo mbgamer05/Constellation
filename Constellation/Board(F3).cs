@@ -282,7 +282,7 @@ namespace Constellation
         private void btnDeleteNote_Click(object sender, EventArgs e)
         {
             SelectorForm_F5_ Selector = new SelectorForm_F5_();
-            Action = "Delete";
+            Selector.Action = "Delete";
             Selector.FormClosing += Form_Reload;
             Selector.Show();
 

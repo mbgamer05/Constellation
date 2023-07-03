@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -14,6 +15,7 @@ namespace Constellation
 {
     public partial class Homepage_F1_ : Form
     {
+        public string Action;
         public Homepage_F1_()
         {
             InitializeComponent();
@@ -34,8 +36,8 @@ namespace Constellation
         {
             //opens the selector form up
             //in the selctor form the user selects the board they want to open
-            Board_F3_.Action = "FindBoard";
             SelectorForm_F5_ selector = new SelectorForm_F5_();
+            selector.Action = "FindBoard";
             selector.Show();
             selector.FormClosing += Open_board;
         }
@@ -169,7 +171,6 @@ namespace Constellation
                     case DialogResult.Yes:
 
                         MessageBox.Show("Deleting note...");
-                        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                         var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
                         //connects to the database to remove Data
                         SQLiteConnection sqlconnection = new SQLiteConnection();
@@ -177,7 +178,7 @@ namespace Constellation
                         SQLiteCommand sqlCommand = new SQLiteCommand();
                         sqlCommand.Connection = sqlconnection;
                         sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.CommandText = "DELETE FROM " + BoardName + " WHERE Name = '" + lbToDoNoteNames.SelectedItem.ToString() + "'";
+                        sqlCommand.CommandText = "DELETE FROM '" + BoardName + "' WHERE Name = '" + lbToDoNoteNames.SelectedItem.ToString() + "'";
                         sqlconnection.Open();
                         sqlCommand.ExecuteNonQuery();
                         sqlconnection.Close();
@@ -209,7 +210,7 @@ namespace Constellation
             SQLiteCommand sqlCommand = new SQLiteCommand();
             sqlCommand.CommandType = CommandType.Text;
             sqlCommand.Connection = sqlconnection;
-            sqlCommand.CommandText = "UPDATE " + BoardOpened +
+            sqlCommand.CommandText = "UPDATE '" + BoardOpened + "'" +
                 " SET Location = " + location +
                 " WHERE Name = " + "'" + rows[i]["Name"].ToString() + "'";
 
@@ -252,7 +253,30 @@ namespace Constellation
 
         private void btnNewBoard_Click(object sender, EventArgs e)
         {
+            string BoardName = Interaction.InputBox("Please enter name of the board", "Board Creation", "");
+            if (!string.IsNullOrEmpty(BoardName))
+            {
+                var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
+                SQLiteConnection CreateTable = new SQLiteConnection();
+                CreateTable.ConnectionString = "DataSource = " + ConfigLocation;
+                SQLiteCommand SetUpCommand = new SQLiteCommand();
+                SetUpCommand.Connection = CreateTable;
+                SetUpCommand.CommandType = CommandType.Text;
+                SetUpCommand.CommandText = "CREATE TABLE '" + BoardName + "'" +
+                        "(Name TEXT NOT NULL, " +
+                        " PreviewBody TEXT NOT NULL," +
+                        " FullBody TEXT," +
+                        " Date TEXT," +
+                        " Location INT," +
+                        "PRIMARY KEY (Name))";
+                CreateTable.Open();
+                SetUpCommand.ExecuteNonQuery();
+                CreateTable.Close();
+            }
+            else
+            {
 
+            }
         }
 
         private void lbToDoNoteNames_SelectedIndexChanged(object sender, EventArgs e)

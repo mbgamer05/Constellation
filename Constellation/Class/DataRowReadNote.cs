@@ -5,18 +5,22 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Constellation.Class
 {
     internal class DataRowReadNote
     {
+        
 
         public static DataRow[] ReadDatabaseRowNote()
         {
-            PublicData PD = new PublicData();
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
+            string UserDataLocaion = config.AppSettings.Settings["UserLoginLocation"].Value;
             SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + PD.UserDataLocaion;
-            string commandText = "SELECT * FROM " + PD.BoardOpened;
+            sqlconnection.ConnectionString = "DataSource = " + UserDataLocaion;
+            string commandText = "SELECT * FROM '" + BoardOpened + "'";
             DataTable table = new DataTable();
             SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
             sqlconnection.Open();

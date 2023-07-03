@@ -49,6 +49,7 @@
             btnToDo = new Button();
             btnDoing = new Button();
             btnDone = new Button();
+            plQuickSelect = new Panel();
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -60,12 +61,13 @@
             // 
             // btnBoard
             // 
-            btnBoard.Location = new Point(0, 105);
+            btnBoard.Dock = DockStyle.Top;
+            btnBoard.Location = new Point(0, 100);
             btnBoard.Name = "btnBoard";
-            btnBoard.Size = new Size(193, 23);
+            btnBoard.Size = new Size(195, 23);
             btnBoard.TabIndex = 6;
             btnBoard.Tag = "Primary";
-            btnBoard.Text = "Board";
+            btnBoard.Text = "Select Board";
             btnBoard.UseVisualStyleBackColor = true;
             btnBoard.Click += btnBoard_Click;
             // 
@@ -87,9 +89,10 @@
             // panelRightBarHold
             // 
             panelRightBarHold.BackColor = SystemColors.AppWorkspace;
+            panelRightBarHold.Controls.Add(plQuickSelect);
             panelRightBarHold.Controls.Add(btnNewBoard);
-            panelRightBarHold.Controls.Add(PanelIconHold);
             panelRightBarHold.Controls.Add(btnBoard);
+            panelRightBarHold.Controls.Add(PanelIconHold);
             panelRightBarHold.Controls.Add(btnSettings);
             panelRightBarHold.Dock = DockStyle.Left;
             panelRightBarHold.Location = new Point(0, 0);
@@ -106,7 +109,7 @@
             btnNewBoard.Size = new Size(195, 23);
             btnNewBoard.TabIndex = 7;
             btnNewBoard.Tag = "Primary";
-            btnNewBoard.Text = "IN PROGRESS";
+            btnNewBoard.Text = "New Board";
             btnNewBoard.UseVisualStyleBackColor = true;
             btnNewBoard.Click += btnNewBoard_Click;
             // 
@@ -182,7 +185,7 @@
             // tlpToDoHoldTL
             // 
             tlpToDoHoldTL.ColumnCount = 2;
-            tlpToDoHoldTL.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 48.4112167F));
+            tlpToDoHoldTL.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 48.41122F));
             tlpToDoHoldTL.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 51.5887833F));
             tlpToDoHoldTL.Controls.Add(lbToDoNoteNames, 0, 1);
             tlpToDoHoldTL.Controls.Add(tlpHoldButtonsTL, 1, 1);
@@ -191,7 +194,7 @@
             tlpToDoHoldTL.Margin = new Padding(3, 2, 3, 2);
             tlpToDoHoldTL.Name = "tlpToDoHoldTL";
             tlpToDoHoldTL.RowCount = 2;
-            tlpToDoHoldTL.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1702127F));
+            tlpToDoHoldTL.RowStyles.Add(new RowStyle(SizeType.Percent, 11.17021F));
             tlpToDoHoldTL.RowStyles.Add(new RowStyle(SizeType.Percent, 88.82979F));
             tlpToDoHoldTL.Size = new Size(467, 282);
             tlpToDoHoldTL.TabIndex = 4;
@@ -316,6 +319,15 @@
             btnDone.UseVisualStyleBackColor = true;
             btnDone.Click += btnDone_Click;
             // 
+            // plQuickSelect
+            // 
+            plQuickSelect.AutoScroll = true;
+            plQuickSelect.Dock = DockStyle.Fill;
+            plQuickSelect.Location = new Point(0, 123);
+            plQuickSelect.Name = "plQuickSelect";
+            plQuickSelect.Size = new Size(195, 405);
+            plQuickSelect.TabIndex = 8;
+            // 
             // Homepage_F1_
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -361,5 +373,6 @@
         private Button btnDoing;
         private Button btnDone;
         private Button btnNewBoard;
+        private Panel plQuickSelect;
     }
 }

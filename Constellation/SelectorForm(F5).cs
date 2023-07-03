@@ -21,10 +21,11 @@ namespace Constellation
         public bool Choice = false;
         public static bool allow = false;
         public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        public string Action;
 
         private void SelectorForm_F5__Load(object sender, EventArgs e)
         {
-            if (Board_F3_.Action == "Delete")
+            if (Action == "Delete")
             {
                 txtConfirm.Visible = true;
                 Choice = true;
@@ -91,7 +92,7 @@ namespace Constellation
                                 SQLiteCommand sqlCommand = new SQLiteCommand();
                                 sqlCommand.Connection = sqlconnection;
                                 sqlCommand.CommandType = CommandType.Text;
-                                sqlCommand.CommandText = "DELETE FROM " + PD.BoardOpened + " WHERE Name = '" + cbSelector.SelectedItem.ToString() + "'";
+                                sqlCommand.CommandText = "DELETE FROM '" + PD.BoardOpened + "' WHERE Name = '" + cbSelector.SelectedItem.ToString() + "'";
                                 sqlconnection.Open();
                                 sqlCommand.ExecuteNonQuery();
                                 sqlconnection.Close();

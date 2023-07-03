@@ -74,7 +74,7 @@ namespace Constellation
                 switch(Board_F3_.Create)
                 {
                     case 0:
-                        sqlCommand.CommandText = "INSERT INTO " + BoardOpened +
+                        sqlCommand.CommandText = "INSERT INTO' " + BoardOpened +"'"+
                    "(Name, PreviewBody, FullBody, Date, Location)" +
                    " Values (@Name, @PreviewBody, @FullBody, @Date, @Location)";
                         sqlCommand.Parameters.AddWithValue("@Name", data[0]);
@@ -89,7 +89,7 @@ namespace Constellation
                         break;
 
                     case 1:
-                        sqlCommand.CommandText = sqlCommand.CommandText = "UPDATE "+ BoardOpened +
+                        sqlCommand.CommandText = sqlCommand.CommandText = "UPDATE '"+ BoardOpened +"'"+
                                         " SET Name = '" + data[0] + "'," +
                                         " PreviewBody = '" + data[1] + "'," +
                                         " FullBody = '" + data[2] + "'," +
@@ -111,7 +111,13 @@ namespace Constellation
 
         private void NoteExpanded_F4__Load(object sender, EventArgs e)
         {
-
+            (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = MoreSettings.ReadStringData(MoreSettings.ReadData());
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
+            this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
+            Control cn = this;
+            cn = Class.LoadColours.SetColours(cn, this);
+            
             if (Board_F3_.Create != 0)
             {
                 btnClose.Enabled = false;
@@ -121,9 +127,7 @@ namespace Constellation
                 txtPreview.Text = rows[i]["PreviewBody"].ToString();
                 txtBody.Text = rows[i]["FullBody"].ToString();
                 
-                DateTimeFormatInfo dtfi = CultureInfo.CurrentCulture.DateTimeFormat;
-                var date = DateTime.Parse(rows[i]["date"].ToString());
-                dtpDate.Value = DateTime.ParseExact(date.ToString(),"G",dtfi);
+                dtpDate.Value = DateTime.Parse(rows[i]["date"].ToString());
             }
             else if (Board_F3_.Create == 0)
             {

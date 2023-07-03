@@ -8,7 +8,7 @@ namespace Constellation.Class
 {
     internal class LoadColours
     {
-        //gets all the children of the control given to it(even child controls)
+        //gets all the children of the control given to it(even child controls of controls)
         public static IEnumerable<Control> GetAllChildrens(Control control)
         {
             var controls = control.Controls.Cast<Control>();
