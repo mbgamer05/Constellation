@@ -32,6 +32,7 @@
             btnBoard = new Button();
             btnSettings = new Button();
             panelRightBarHold = new Panel();
+            plQuickSelect = new Panel();
             btnNewBoard = new Button();
             PanelIconHold = new Panel();
             pbUserIcon = new PictureBox();
@@ -49,7 +50,7 @@
             btnToDo = new Button();
             btnDoing = new Button();
             btnDone = new Button();
-            plQuickSelect = new Panel();
+            bsBoards = new BoardSelector();
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -100,6 +101,15 @@
             panelRightBarHold.Name = "panelRightBarHold";
             panelRightBarHold.Size = new Size(195, 573);
             panelRightBarHold.TabIndex = 7;
+            // 
+            // plQuickSelect
+            // 
+            plQuickSelect.AutoScroll = true;
+            plQuickSelect.Dock = DockStyle.Fill;
+            plQuickSelect.Location = new Point(0, 123);
+            plQuickSelect.Name = "plQuickSelect";
+            plQuickSelect.Size = new Size(195, 405);
+            plQuickSelect.TabIndex = 8;
             // 
             // btnNewBoard
             // 
@@ -189,6 +199,7 @@
             tlpToDoHoldTL.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 51.5887833F));
             tlpToDoHoldTL.Controls.Add(lbToDoNoteNames, 0, 1);
             tlpToDoHoldTL.Controls.Add(tlpHoldButtonsTL, 1, 1);
+            tlpToDoHoldTL.Controls.Add(bsBoards, 0, 0);
             tlpToDoHoldTL.Dock = DockStyle.Fill;
             tlpToDoHoldTL.Location = new Point(3, 2);
             tlpToDoHoldTL.Margin = new Padding(3, 2, 3, 2);
@@ -319,14 +330,14 @@
             btnDone.UseVisualStyleBackColor = true;
             btnDone.Click += btnDone_Click;
             // 
-            // plQuickSelect
+            // bsBoards
             // 
-            plQuickSelect.AutoScroll = true;
-            plQuickSelect.Dock = DockStyle.Fill;
-            plQuickSelect.Location = new Point(0, 123);
-            plQuickSelect.Name = "plQuickSelect";
-            plQuickSelect.Size = new Size(195, 405);
-            plQuickSelect.TabIndex = 8;
+            bsBoards.Dock = DockStyle.Fill;
+            bsBoards.Location = new Point(3, 3);
+            bsBoards.Name = "bsBoards";
+            bsBoards.Size = new Size(220, 25);
+            bsBoards.TabIndex = 2;
+            bsBoards.Load += bsBoards_Load;
             // 
             // Homepage_F1_
             // 
@@ -374,5 +385,6 @@
         private Button btnDone;
         private Button btnNewBoard;
         private Panel plQuickSelect;
+        private BoardSelector bsBoards;
     }
 }

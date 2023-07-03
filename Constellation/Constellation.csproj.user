@@ -7,19 +7,22 @@
     <Compile Update="Board%28F3%29.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Controls\BoardSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Homepage%28F1%29.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Note.cs">
+    <Compile Update="Controls\Note.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="NoteExpanded%28F4%29.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="NoteGrid.cs">
+    <Compile Update="Controls\NoteGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="SelectorForm%28F5%29.cs">

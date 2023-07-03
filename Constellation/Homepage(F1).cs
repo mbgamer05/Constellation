@@ -101,6 +101,7 @@ namespace Constellation
         /// </summary>
         private void LoadColours()
         {
+
             (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = MoreSettings.ReadStringData(MoreSettings.ReadData());
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
@@ -293,6 +294,19 @@ namespace Constellation
                 btnDelete.Enabled = true;
                 btnMove.Enabled = true;
             }
+        }
+
+        private void bsBoards_Load(object sender, EventArgs e)
+        {
+            bsBoards.Left.Click += bsLeft_Click;
+            bsBoards.Right.Click += bsLeft_Click;
+
+        }
+        private void bsLeft_Click(object sender, EventArgs e)
+        {
+        }
+        private void bsRight_Click(object sender, EventArgs e)
+        {
         }
     }
 }
