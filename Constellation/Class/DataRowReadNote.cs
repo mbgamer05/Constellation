@@ -11,8 +11,6 @@ namespace Constellation.Class
 {
     internal class DataRowReadNote
     {
-        
-
         public static DataRow[] ReadDatabaseRowNote()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

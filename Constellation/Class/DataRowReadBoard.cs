@@ -24,5 +24,24 @@ namespace Constellation.Class
             DataRow[] rows = table.Select();
             return rows;
         }
+        public static (DataRow[], int) FindBoardInDatabase (string Find)
+        {
+            int i = 0;
+            DataRow[] rows = Class.DataRowReadBoard.ReadDatabaseRowBoard();
+            bool found = false;
+            while (!found)
+            {
+                if (rows[i]["name"].ToString() == Find)
+                {
+                    found = true;
+                }
+                else
+                {
+                    i++;
+                }
+            }
+            return (rows, i);
+        }
+
     }
 }

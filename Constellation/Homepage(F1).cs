@@ -299,14 +299,38 @@ namespace Constellation
         private void bsBoards_Load(object sender, EventArgs e)
         {
             bsBoards.Left.Click += bsLeft_Click;
-            bsBoards.Right.Click += bsLeft_Click;
-
+            bsBoards.Right.Click += bsRight_Click;
+            bsBoards.BoardName = BoardOpened;
         }
         private void bsLeft_Click(object sender, EventArgs e)
         {
+            (DataRow[] rows, int i) = Class.DataRowReadBoard.FindBoardInDatabase(bsBoards.BoardName);
+            try
+            {
+                bsBoards.BoardName = rows[i - 1]["name"].ToString();
+            }
+            catch
+            {
+                bsBoards.BoardName = rows[i = rows.Length-1]["name"].ToString();
+            }
+            lbToDoNoteNames.Items.Clear();
+            Class.UpdateConfig.NewValue(bsBoards.BoardName, "BoardToOpen");
+            GenerateListBoxEntries();
         }
         private void bsRight_Click(object sender, EventArgs e)
         {
+            (DataRow[] rows, int i) = Class.DataRowReadBoard.FindBoardInDatabase(bsBoards.BoardName);
+            try
+            {
+                bsBoards.BoardName = rows[i + 1]["name"].ToString();
+            }
+            catch
+            {
+                bsBoards.BoardName = rows[0]["name"].ToString();
+            }
+            lbToDoNoteNames.Items.Clear();
+            Class.UpdateConfig.NewValue(bsBoards.BoardName, "BoardToOpen");
+            GenerateListBoxEntries();
         }
     }
 }
