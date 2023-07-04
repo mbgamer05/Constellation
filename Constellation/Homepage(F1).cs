@@ -23,7 +23,7 @@ namespace Constellation
         public string BoardName;
         public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
-
+        public string Username;
         private void btnSettings_Click(object sender, EventArgs e)
         {
             Settings_F2_ settings = new Settings_F2_();
@@ -73,6 +73,7 @@ namespace Constellation
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             btnMove.Enabled = false;
+            lblUsername.Text = Username;
         }
 
         private void GenerateListBoxEntries()
@@ -91,7 +92,10 @@ namespace Constellation
                 }
                 else
                 {
-                    lbToDoNoteNames.Items.Add(rows[i]["Name"].ToString());
+                    if (rows[i]["Location"].ToString() == "0") 
+                    {
+                        lbToDoNoteNames.Items.Add(rows[i]["Name"].ToString());
+                    }
                     i++;
                 }
             }
@@ -311,7 +315,7 @@ namespace Constellation
             }
             catch
             {
-                bsBoards.BoardName = rows[i = rows.Length-1]["name"].ToString();
+                bsBoards.BoardName = rows[i = rows.Length - 1]["name"].ToString();
             }
             lbToDoNoteNames.Items.Clear();
             Class.UpdateConfig.NewValue(bsBoards.BoardName, "BoardToOpen");

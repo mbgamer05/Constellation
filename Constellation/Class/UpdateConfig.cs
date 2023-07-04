@@ -10,9 +10,9 @@ namespace Constellation.Class
 {
     internal class UpdateConfig
     {
-        public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public static void NewValue(string Input, string Location)
         {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings[Location].Value = Input;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");

@@ -35,6 +35,7 @@
             plQuickSelect = new Panel();
             btnNewBoard = new Button();
             PanelIconHold = new Panel();
+            lblUsername = new Label();
             pbUserIcon = new PictureBox();
             tlpRight = new TableLayoutPanel();
             lblBottomRight = new Label();
@@ -126,6 +127,7 @@
             // PanelIconHold
             // 
             PanelIconHold.BackColor = Color.Transparent;
+            PanelIconHold.Controls.Add(lblUsername);
             PanelIconHold.Controls.Add(pbUserIcon);
             PanelIconHold.Dock = DockStyle.Top;
             PanelIconHold.Location = new Point(0, 0);
@@ -134,10 +136,19 @@
             PanelIconHold.Size = new Size(195, 100);
             PanelIconHold.TabIndex = 0;
             // 
+            // lblUsername
+            // 
+            lblUsername.AutoSize = true;
+            lblUsername.Location = new Point(75, 5);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(60, 15);
+            lblUsername.TabIndex = 1;
+            lblUsername.Text = "Username";
+            // 
             // pbUserIcon
             // 
             pbUserIcon.Image = (Image)resources.GetObject("pbUserIcon.Image");
-            pbUserIcon.Location = new Point(9, 7);
+            pbUserIcon.Location = new Point(3, 5);
             pbUserIcon.Margin = new Padding(3, 2, 3, 2);
             pbUserIcon.Name = "pbUserIcon";
             pbUserIcon.Size = new Size(66, 56);
@@ -332,6 +343,7 @@
             // 
             // bsBoards
             // 
+            bsBoards.BoardName = "FILLTEXT";
             bsBoards.Dock = DockStyle.Fill;
             bsBoards.Location = new Point(3, 3);
             bsBoards.Name = "bsBoards";
@@ -353,6 +365,7 @@
             Load += Homepage_F1__Load;
             panelRightBarHold.ResumeLayout(false);
             PanelIconHold.ResumeLayout(false);
+            PanelIconHold.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).EndInit();
             tlpRight.ResumeLayout(false);
             tlpRight.PerformLayout();
@@ -386,5 +399,6 @@
         private Button btnNewBoard;
         private Panel plQuickSelect;
         private BoardSelector bsBoards;
+        private Label lblUsername;
     }
 }

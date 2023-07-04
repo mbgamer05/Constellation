@@ -410,6 +410,7 @@ namespace Constellation
             ConfigurationManager.RefreshSection("appSettings");
             this.Hide();
             Homepage_F1_ homepage = new Homepage_F1_();
+            homepage.Username = txtUsername.Text;
             homepage.Show();
             homepage.FormClosed += Homepage_F1__FormClosed;
             
