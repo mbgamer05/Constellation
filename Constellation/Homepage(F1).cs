@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace Constellation
 {
@@ -24,6 +25,7 @@ namespace Constellation
         public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         public string Username;
+        public bool Allow;
         private void btnSettings_Click(object sender, EventArgs e)
         {
             Settings_F2_ settings = new Settings_F2_();
@@ -44,7 +46,7 @@ namespace Constellation
         private void Open_board(object sender, EventArgs e)
         {
             //opens the note board and hides the homepage
-            if (SelectorForm_F5_.allow == true)
+            if (SelectorForm_F5_.allow == true || Allow == true)
             {
                 Board_F3_ Board = new Board_F3_();
                 Board.FormClosed += Board_F3__FormClosed;
@@ -58,6 +60,8 @@ namespace Constellation
         }
         private void Board_F3__FormClosed(object sender, EventArgs e)
         {
+            plQuickSelect.Controls.Clear();
+            LoadPinnedBoards();
             this.Show();
         }
 
@@ -67,15 +71,52 @@ namespace Constellation
             btnToDo.Visible = false;
             btnDoing.Visible = false;
             btnDone.Visible = false;
-            LoadColours();
             BoardName = BoardOpened;
             GenerateListBoxEntries();
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
             btnMove.Enabled = false;
             lblUsername.Text = Username;
+            LoadPinnedBoards();
+            LoadColours();
         }
 
+        private void LoadPinnedBoards()
+        {
+            foreach (DataRow row in Class.DataRowReadBoard.ReadDatabaseRowBoard())
+            {
+                DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowSelectedNote(row["name"].ToString());
+                try
+                {
+                    if (rows[0]["PBoard"].ToString() == "1")
+                    {
+                        Button btn = new Button();
+                        btn.Text = row["name"].ToString();
+                        btn.Height = 23;
+                        btn.Tag = "Secondary";
+                        plQuickSelect.Controls.Add(btn);
+                        btn.Dock = DockStyle.Top;
+                        btn.Click += btnQuickBoard_Click;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+            Class.LoadColours.SetColours(plQuickSelect, this);
+        }
+
+        private void btnQuickBoard_Click(object sender, EventArgs e) 
+        { 
+            Button btn = sender as Button;
+            string BoardOpening = btn.Text;
+            MessageBox.Show("loading the board up now please wait...");
+            Class.UpdateConfig.NewValue(BoardOpening, "BoardToOpen");
+            Allow = true;
+            Open_board(sender, e);
+
+        }
         private void GenerateListBoxEntries()
         {
             //allows list box scrolling
@@ -159,6 +200,7 @@ namespace Constellation
         {
             lbToDoNoteNames.Items.Clear();
             GenerateListBoxEntries();
+
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -273,6 +315,7 @@ namespace Constellation
                         " FullBody TEXT," +
                         " Date TEXT," +
                         " Location INT," +
+                        "PBoard INT" +
                         "PRIMARY KEY (Name))";
                 CreateTable.Open();
                 SetUpCommand.ExecuteNonQuery();

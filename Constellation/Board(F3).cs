@@ -106,6 +106,14 @@ namespace Constellation
                     nt.Show();
                 }
             }
+            if (i == 0)
+            {
+                btnPinBoard.Enabled = false;
+            }
+            else
+            {
+                btnPinBoard.Enabled = true;
+            }
         }
 
         private void TLPDragEnter(object sender, DragEventArgs e)
@@ -142,10 +150,6 @@ namespace Constellation
             //reloads the form by removing all notes and recreating them 
             ClearNotes();
             GenerateNotes();
-        }
-        private void ReloadNote(object sender)
-        {
-            MessageBox.Show(sender.ToString());
         }
 
         private void Note_MouseMove_1(object sender, MouseEventArgs e)
@@ -285,6 +289,56 @@ namespace Constellation
             Selector.Action = "Delete";
             Selector.FormClosing += Form_Reload;
             Selector.Show();
+
+        }
+
+        private void btnPinBoard_Click(object sender, EventArgs e)
+        {
+            DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowNote();
+            if (rows[0]["PBoard"].ToString() == "0")
+            {
+                DialogResult dr = MessageBox.Show("Do you want to pin this board?", "Pin Board", MessageBoxButtons.YesNo);
+                switch (dr)
+                {
+                    case DialogResult.Yes:
+                        SQLiteConnection sqlconnection = new SQLiteConnection();
+                        SQLiteCommand sqlCommand = new SQLiteCommand();
+                        sqlconnection.ConnectionString = "DataSource = " + DataLocation.UserDataLocation;
+                        sqlCommand.CommandType = CommandType.Text;
+                        sqlCommand.Connection = sqlconnection;
+                        sqlCommand.CommandText = "UPDATE '" + DataLocation.BoardOpened + "'" +
+                            " SET PBoard = 1";
+                        sqlconnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        sqlconnection.Close();
+                        break;
+
+                    case DialogResult.No:
+                        break;
+                }
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("Do you want to unpin this board?", "Pin Board", MessageBoxButtons.YesNo);
+                switch (dr)
+                {
+                    case DialogResult.Yes:
+                        SQLiteConnection sqlconnection = new SQLiteConnection();
+                        SQLiteCommand sqlCommand = new SQLiteCommand();
+                        sqlconnection.ConnectionString = "DataSource = " + DataLocation.UserDataLocation;
+                        sqlCommand.CommandType = CommandType.Text;
+                        sqlCommand.Connection = sqlconnection;
+                        sqlCommand.CommandText = "UPDATE '" + DataLocation.BoardOpened + "'" +
+                            " SET PBoard = 0";
+                        sqlconnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        sqlconnection.Close();
+                        break;
+
+                    case DialogResult.No:
+                        break;
+                }
+            }
 
         }
     }

@@ -75,13 +75,14 @@ namespace Constellation
                 {
                     case 0:
                         sqlCommand.CommandText = "INSERT INTO' " + BoardOpened +"'"+
-                   "(Name, PreviewBody, FullBody, Date, Location)" +
-                   " Values (@Name, @PreviewBody, @FullBody, @Date, @Location)";
+                   "(Name, PreviewBody, FullBody, Date, Location, PBoard)" +
+                   " Values (@Name, @PreviewBody, @FullBody, @Date, @Location, @PBoard)";
                         sqlCommand.Parameters.AddWithValue("@Name", data[0]);
                         sqlCommand.Parameters.AddWithValue("@PreviewBody", data[1]);
                         sqlCommand.Parameters.AddWithValue("@FullBody", data[2]);
                         sqlCommand.Parameters.AddWithValue("@Date", data[3]);
                         sqlCommand.Parameters.AddWithValue("@Location", 0);
+                        sqlCommand.Parameters.AddWithValue("@PBoard", 0);
                         sqlconnection.Open();
                         sqlCommand.ExecuteNonQuery();
                         sqlconnection.Close();
