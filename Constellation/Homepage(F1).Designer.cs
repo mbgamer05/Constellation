@@ -39,7 +39,6 @@
             pbUserIcon = new PictureBox();
             tlpRight = new TableLayoutPanel();
             lblBottomRight = new Label();
-            lblComingUp = new Label();
             lblBottomLeft = new Label();
             tlpToDoHoldTL = new TableLayoutPanel();
             lbToDoNoteNames = new ListBox();
@@ -52,6 +51,7 @@
             btnDoing = new Button();
             btnDone = new Button();
             bsBoards = new BoardSelector();
+            tlpComingUp = new TableLayoutPanel();
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -163,9 +163,9 @@
             tlpRight.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpRight.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpRight.Controls.Add(lblBottomRight, 1, 1);
-            tlpRight.Controls.Add(lblComingUp, 1, 0);
             tlpRight.Controls.Add(lblBottomLeft, 0, 1);
             tlpRight.Controls.Add(tlpToDoHoldTL, 0, 0);
+            tlpRight.Controls.Add(tlpComingUp, 1, 0);
             tlpRight.Dock = DockStyle.Fill;
             tlpRight.Location = new Point(195, 0);
             tlpRight.Margin = new Padding(3, 2, 3, 2);
@@ -184,15 +184,6 @@
             lblBottomRight.Size = new Size(94, 15);
             lblBottomRight.TabIndex = 0;
             lblBottomRight.Text = "COMING SOON ";
-            // 
-            // lblComingUp
-            // 
-            lblComingUp.AutoSize = true;
-            lblComingUp.Location = new Point(476, 0);
-            lblComingUp.Name = "lblComingUp";
-            lblComingUp.Size = new Size(91, 15);
-            lblComingUp.TabIndex = 1;
-            lblComingUp.Text = "COMING SOON";
             // 
             // lblBottomLeft
             // 
@@ -351,6 +342,20 @@
             bsBoards.TabIndex = 2;
             bsBoards.Load += bsBoards_Load;
             // 
+            // tlpComingUp
+            // 
+            tlpComingUp.ColumnCount = 2;
+            tlpComingUp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpComingUp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpComingUp.Dock = DockStyle.Fill;
+            tlpComingUp.Location = new Point(476, 3);
+            tlpComingUp.Name = "tlpComingUp";
+            tlpComingUp.RowCount = 2;
+            tlpComingUp.RowStyles.Add(new RowStyle(SizeType.Percent, 49.6428566F));
+            tlpComingUp.RowStyles.Add(new RowStyle(SizeType.Percent, 50.3571434F));
+            tlpComingUp.Size = new Size(468, 280);
+            tlpComingUp.TabIndex = 5;
+            // 
             // Homepage_F1_
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -384,7 +389,6 @@
         private PictureBox pbUserIcon;
         private TableLayoutPanel tlpRight;
         private Label lblBottomRight;
-        private Label lblComingUp;
         private Label lblBottomLeft;
         private TableLayoutPanel tlpToDoHoldTL;
         private ListBox lbToDoNoteNames;
@@ -400,5 +404,6 @@
         private Panel plQuickSelect;
         private BoardSelector bsBoards;
         private Label lblUsername;
+        private TableLayoutPanel tlpComingUp;
     }
 }

@@ -107,8 +107,8 @@ namespace Constellation
             Class.LoadColours.SetColours(plQuickSelect, this);
         }
 
-        private void btnQuickBoard_Click(object sender, EventArgs e) 
-        { 
+        private void btnQuickBoard_Click(object sender, EventArgs e)
+        {
             Button btn = sender as Button;
             string BoardOpening = btn.Text;
             MessageBox.Show("loading the board up now please wait...");
@@ -133,7 +133,7 @@ namespace Constellation
                 }
                 else
                 {
-                    if (rows[i]["Location"].ToString() == "0") 
+                    if (rows[i]["Location"].ToString() == "0")
                     {
                         lbToDoNoteNames.Items.Add(rows[i]["Name"].ToString());
                     }
