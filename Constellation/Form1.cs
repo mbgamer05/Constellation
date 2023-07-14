@@ -371,7 +371,6 @@ namespace Constellation
             }
             //attempts login by check username and password
             string PasswordToFind = ReadDataPass(Userdata);
-            MessageBox.Show("attempting login");
             if (PasswordToFind.Contains("failed"))
             {
                 MessageBox.Show("couldn't find a username or password are you sure you have made an account?\n" +

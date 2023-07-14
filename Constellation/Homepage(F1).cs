@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
+
 namespace Constellation
 {
     public partial class Homepage_F1_ : Form
@@ -309,14 +310,14 @@ namespace Constellation
                 SQLiteCommand SetUpCommand = new SQLiteCommand();
                 SetUpCommand.Connection = CreateTable;
                 SetUpCommand.CommandType = CommandType.Text;
-                SetUpCommand.CommandText = "CREATE TABLE '" + BoardName + "'" +
-                        "(Name TEXT NOT NULL, " +
-                        " PreviewBody TEXT NOT NULL," +
-                        " FullBody TEXT," +
-                        " Date TEXT," +
-                        " Location INT," +
-                        "PBoard INT" +
-                        "PRIMARY KEY (Name))";
+                SetUpCommand.CommandText = "CREATE TABLE '" +BoardName +"'"+
+                "(Name  TEXT NOT NULL,"+
+	            "PreviewBody   TEXT NOT NULL,"+
+	            "FullBody  TEXT,"+
+	            "Date  TEXT,"+
+	            "Location  INT,"+
+	            "PBoard    INTEGER,"+
+	            "PRIMARY KEY(Name))";
                 CreateTable.Open();
                 SetUpCommand.ExecuteNonQuery();
                 CreateTable.Close();
