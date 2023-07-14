@@ -278,7 +278,6 @@ namespace Constellation
                     break;
 
                 case DialogResult.No:
-                    MessageBox.Show("All good have fun!");
                     break;
             }
         }
