@@ -1,6 +1,6 @@
 ﻿namespace Constellation
 {
-    partial class BoardSelector
+    partial class BannerSelector
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,7 +31,7 @@
             tlpSelectorHold = new TableLayoutPanel();
             btnLeft = new Button();
             btnRight = new Button();
-            lblBoardName = new Label();
+            lblBannerText = new Label();
             tlpSelectorHold.SuspendLayout();
             SuspendLayout();
             // 
@@ -43,7 +43,7 @@
             tlpSelectorHold.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tlpSelectorHold.Controls.Add(btnLeft, 0, 0);
             tlpSelectorHold.Controls.Add(btnRight, 2, 0);
-            tlpSelectorHold.Controls.Add(lblBoardName, 1, 0);
+            tlpSelectorHold.Controls.Add(lblBannerText, 1, 0);
             tlpSelectorHold.Dock = DockStyle.Fill;
             tlpSelectorHold.Location = new Point(0, 0);
             tlpSelectorHold.Name = "tlpSelectorHold";
@@ -78,17 +78,17 @@
             btnRight.UseVisualStyleBackColor = true;
             btnRight.Click += btnRight_Click;
             // 
-            // lblBoardName
+            // lblBannerText
             // 
-            lblBoardName.AutoSize = true;
-            lblBoardName.Dock = DockStyle.Fill;
-            lblBoardName.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            lblBoardName.Location = new Point(177, 0);
-            lblBoardName.Name = "lblBoardName";
-            lblBoardName.Size = new Size(168, 47);
-            lblBoardName.TabIndex = 2;
-            lblBoardName.Text = "FILLTEXT";
-            lblBoardName.TextAlign = ContentAlignment.MiddleCenter;
+            lblBannerText.AutoSize = true;
+            lblBannerText.Dock = DockStyle.Fill;
+            lblBannerText.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            lblBannerText.Location = new Point(177, 0);
+            lblBannerText.Name = "lblBannerText";
+            lblBannerText.Size = new Size(168, 47);
+            lblBannerText.TabIndex = 2;
+            lblBannerText.Text = "FILLTEXT";
+            lblBannerText.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // BoardSelector
             // 
@@ -107,6 +107,6 @@
         private TableLayoutPanel tlpSelectorHold;
         private Button btnLeft;
         private Button btnRight;
-        private Label lblBoardName;
+        private Label lblBannerText;
     }
 }

@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace Constellation
 {
-    public partial class BoardSelector : UserControl
+    public partial class BannerSelector : UserControl
     {
-        public BoardSelector()
+        public BannerSelector()
         {
             InitializeComponent();
         }
-        public string BoardName
+        public string BannerText
         {
-            get { return lblBoardName.Text; }
-            set { lblBoardName.Text = value; }
+            get { return lblBannerText.Text; }
+            set { lblBannerText.Text = value; }
         }
         public Button Left
         {

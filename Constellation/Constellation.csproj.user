@@ -7,7 +7,7 @@
     <Compile Update="Board%28F3%29.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Controls\BoardSelector.cs">
+    <Compile Update="Controls\BannerSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Form1.cs">

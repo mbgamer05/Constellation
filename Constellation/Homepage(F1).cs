@@ -310,14 +310,14 @@ namespace Constellation
                 SQLiteCommand SetUpCommand = new SQLiteCommand();
                 SetUpCommand.Connection = CreateTable;
                 SetUpCommand.CommandType = CommandType.Text;
-                SetUpCommand.CommandText = "CREATE TABLE '" +BoardName +"'"+
-                "(Name  TEXT NOT NULL,"+
-	            "PreviewBody   TEXT NOT NULL,"+
-	            "FullBody  TEXT,"+
-	            "Date  TEXT,"+
-	            "Location  INT,"+
-	            "PBoard    INTEGER,"+
-	            "PRIMARY KEY(Name))";
+                SetUpCommand.CommandText = "CREATE TABLE '" + BoardName + "'" +
+                "(Name  TEXT NOT NULL," +
+                "PreviewBody   TEXT NOT NULL," +
+                "FullBody  TEXT," +
+                "Date  TEXT," +
+                "Location  INT," +
+                "PBoard    INTEGER," +
+                "PRIMARY KEY(Name))";
                 CreateTable.Open();
                 SetUpCommand.ExecuteNonQuery();
                 CreateTable.Close();
@@ -348,36 +348,36 @@ namespace Constellation
         {
             bsBoards.Left.Click += bsLeft_Click;
             bsBoards.Right.Click += bsRight_Click;
-            bsBoards.BoardName = BoardOpened;
+            bsBoards.BannerText = BoardOpened;
         }
         private void bsLeft_Click(object sender, EventArgs e)
         {
-            (DataRow[] rows, int i) = Class.DataRowReadBoard.FindBoardInDatabase(bsBoards.BoardName);
+            (DataRow[] rows, int i) = Class.DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
             try
             {
-                bsBoards.BoardName = rows[i - 1]["name"].ToString();
+                bsBoards.BannerText = rows[i - 1]["name"].ToString();
             }
             catch
             {
-                bsBoards.BoardName = rows[i = rows.Length - 1]["name"].ToString();
+                bsBoards.BannerText = rows[i = rows.Length - 1]["name"].ToString();
             }
             lbToDoNoteNames.Items.Clear();
-            Class.UpdateConfig.NewValue(bsBoards.BoardName, "BoardToOpen");
+            Class.UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
             GenerateListBoxEntries();
         }
         private void bsRight_Click(object sender, EventArgs e)
         {
-            (DataRow[] rows, int i) = Class.DataRowReadBoard.FindBoardInDatabase(bsBoards.BoardName);
+            (DataRow[] rows, int i) = Class.DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
             try
             {
-                bsBoards.BoardName = rows[i + 1]["name"].ToString();
+                bsBoards.BannerText = rows[i + 1]["name"].ToString();
             }
             catch
             {
-                bsBoards.BoardName = rows[0]["name"].ToString();
+                bsBoards.BannerText = rows[0]["name"].ToString();
             }
             lbToDoNoteNames.Items.Clear();
-            Class.UpdateConfig.NewValue(bsBoards.BoardName, "BoardToOpen");
+            Class.UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
             GenerateListBoxEntries();
         }
     }
