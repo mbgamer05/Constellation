@@ -51,8 +51,6 @@
             btnDoing = new Button();
             btnDone = new Button();
             bsBoards = new BannerSelector();
-            tlpComingUp = new TableLayoutPanel();
-            bsDateSelector = new BannerSelector();
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -60,7 +58,6 @@
             tlpToDoHoldTL.SuspendLayout();
             tlpHoldButtonsTL.SuspendLayout();
             tlpMoveButtons.SuspendLayout();
-            tlpComingUp.SuspendLayout();
             SuspendLayout();
             // 
             // btnBoard
@@ -169,7 +166,6 @@
             tlpRight.Controls.Add(lblBottomRight, 1, 1);
             tlpRight.Controls.Add(lblBottomLeft, 0, 1);
             tlpRight.Controls.Add(tlpToDoHoldTL, 0, 0);
-            tlpRight.Controls.Add(tlpComingUp, 1, 0);
             tlpRight.Dock = DockStyle.Fill;
             tlpRight.Location = new Point(223, 0);
             tlpRight.Name = "tlpRight";
@@ -336,31 +332,6 @@
             bsBoards.TabIndex = 2;
             bsBoards.Load += bsBoards_Load;
             // 
-            // tlpComingUp
-            // 
-            tlpComingUp.ColumnCount = 1;
-            tlpComingUp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tlpComingUp.Controls.Add(bsDateSelector, 0, 0);
-            tlpComingUp.Dock = DockStyle.Fill;
-            tlpComingUp.Location = new Point(544, 4);
-            tlpComingUp.Margin = new Padding(3, 4, 3, 4);
-            tlpComingUp.Name = "tlpComingUp";
-            tlpComingUp.RowCount = 2;
-            tlpComingUp.RowStyles.Add(new RowStyle(SizeType.Percent, 11.17021F));
-            tlpComingUp.RowStyles.Add(new RowStyle(SizeType.Percent, 82.15063F));
-            tlpComingUp.Size = new Size(535, 374);
-            tlpComingUp.TabIndex = 5;
-            // 
-            // bsDateSelector
-            // 
-            bsDateSelector.BannerText = "FILLTEXT";
-            bsDateSelector.Dock = DockStyle.Fill;
-            bsDateSelector.Location = new Point(3, 4);
-            bsDateSelector.Margin = new Padding(3, 4, 3, 4);
-            bsDateSelector.Name = "bsDateSelector";
-            bsDateSelector.Size = new Size(529, 36);
-            bsDateSelector.TabIndex = 0;
-            // 
             // Homepage_F1_
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -381,7 +352,6 @@
             tlpToDoHoldTL.ResumeLayout(false);
             tlpHoldButtonsTL.ResumeLayout(false);
             tlpMoveButtons.ResumeLayout(false);
-            tlpComingUp.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -398,7 +368,6 @@
         private Button btnNewBoard;
         private Panel plQuickSelect;
         private Label lblUsername;
-        private TableLayoutPanel tlpComingUp;
         private TableLayoutPanel tlpToDoHoldTL;
         private ListBox lbToDoNoteNames;
         private TableLayoutPanel tlpHoldButtonsTL;
@@ -410,6 +379,5 @@
         private Button btnDoing;
         private Button btnDone;
         private BannerSelector bsBoards;
-        private BannerSelector bsDateSelector;
     }
 }
