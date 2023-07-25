@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Constellation.Scripts;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -86,9 +87,9 @@ namespace Constellation
 
         private void LoadPinnedBoards()
         {
-            foreach (DataRow row in Class.DataRowReadBoard.ReadDatabaseRowBoard())
+            foreach (DataRow row in DataRowReadBoard.ReadDatabaseRowBoard())
             {
-                DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowSelectedBoard(row["name"].ToString());
+                DataRow[] rows = DataRowReadNote.ReadDatabaseRowSelectedBoard(row["name"].ToString());
                 try
                 {
                     if (rows[0]["PBoard"].ToString() == "1")
@@ -115,7 +116,7 @@ namespace Constellation
             Button btn = sender as Button;
             string BoardOpening = btn.Text;
             MessageBox.Show("loading the board up now please wait...");
-            Class.UpdateConfig.NewValue(BoardOpening, "BoardToOpen");
+            UpdateConfig.NewValue(BoardOpening, "BoardToOpen");
             Allow = true;
             Open_board(sender, e);
 
@@ -124,7 +125,7 @@ namespace Constellation
         {
             //allows list box scrolling
             //gets all data from the board that is selected
-            DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowNote();
+            DataRow[] rows = DataRowReadNote.ReadDatabaseRowNote();
             bool create = true;
             int i = 0;
             while (create == true)
@@ -254,7 +255,7 @@ namespace Constellation
         private void UpdateLocation(int location)
         {
             //updates the location(todo,doing,done) of the note
-            (DataRow[] rows, int i) = Class.DataRowReadNote.FindInDataRowNote(lbToDoNoteNames.SelectedItem.ToString());
+            (DataRow[] rows, int i) = DataRowReadNote.FindInDataRowNote(lbToDoNoteNames.SelectedItem.ToString());
             SQLiteConnection sqlconnection = new SQLiteConnection();
             SQLiteCommand sqlCommand = new SQLiteCommand();
             sqlCommand.CommandType = CommandType.Text;
@@ -353,7 +354,7 @@ namespace Constellation
         }
         private void bsLeft_Click(object sender, EventArgs e)
         {
-            (DataRow[] rows, int i) = Class.DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
+            (DataRow[] rows, int i) = DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
             try
             {
                 bsBoards.BannerText = rows[i - 1]["name"].ToString();
@@ -363,12 +364,12 @@ namespace Constellation
                 bsBoards.BannerText = rows[i = rows.Length - 1]["name"].ToString();
             }
             lbToDoNoteNames.Items.Clear();
-            Class.UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
+            UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
             GenerateListBoxEntries();
         }
         private void bsRight_Click(object sender, EventArgs e)
         {
-            (DataRow[] rows, int i) = Class.DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
+            (DataRow[] rows, int i) = DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
             try
             {
                 bsBoards.BannerText = rows[i + 1]["name"].ToString();
@@ -378,7 +379,7 @@ namespace Constellation
                 bsBoards.BannerText = rows[0]["name"].ToString();
             }
             lbToDoNoteNames.Items.Clear();
-            Class.UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
+            UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
             GenerateListBoxEntries();
         }
 

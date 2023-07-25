@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace Constellation.Class
+namespace Constellation.Scripts
 {
     internal class DataRowReadNote
     {
@@ -28,7 +28,7 @@ namespace Constellation.Class
             sqlconnection.Close();
             return rows;
         }
-        public static DataRow[] ReadDatabaseRowNoteAll()
+        public static DataRow[] ReadDatabaseRowNoteAll(DataRow[] Boards)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;

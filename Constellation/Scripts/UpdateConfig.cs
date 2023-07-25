@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
-namespace Constellation.Class
+namespace Constellation.Scripts
 {
     internal class UpdateConfig
     {

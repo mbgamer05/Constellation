@@ -9,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Constellation.Scripts;
 
 namespace Constellation.Controls
 {
@@ -35,7 +36,7 @@ namespace Constellation.Controls
         {
             //allows list box scrolling
             //gets all data from the board that is selected
-            DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowNoteAll();
+            DataRow[] rows = DataRowReadNote.ReadDatabaseRowNoteAll(DataRowReadBoard.ReadDatabaseRowBoard());
             bool create = true;
             int i = 0;
             while (create == true)

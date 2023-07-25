@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Constellation.Scripts;
 
 namespace Constellation
 {
@@ -49,7 +50,7 @@ namespace Constellation
 
         private void LoadBoards()
         {
-            DataRow[] rows = Class.DataRowReadBoard.ReadDatabaseRowBoard();
+            DataRow[] rows = DataRowReadBoard.ReadDatabaseRowBoard();
             //creates a entry in the combo box for each of the entries in the datarow
             foreach (DataRow row in rows)
             {
@@ -59,7 +60,7 @@ namespace Constellation
 
         private void LoadNotes()
         {
-            DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowNote();
+            DataRow[] rows = DataRowReadNote.ReadDatabaseRowNote();
             //creates a entry in the combo box for each of the entries in the datarow
             foreach (DataRow row in rows)
             {

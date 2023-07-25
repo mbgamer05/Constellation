@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Constellation.Scripts;
 
 namespace Constellation
 {
@@ -123,7 +124,7 @@ namespace Constellation
             {
                 btnClose.Enabled = false;
                 btnClose.Visible = false;
-                (DataRow[] rows, int i) = Class.DataRowReadNote.FindInDataRowNote(Board_F3_.NoteName);
+                (DataRow[] rows, int i) = DataRowReadNote.FindInDataRowNote(Board_F3_.NoteName);
                 txtName.Text = rows[i]["Name"].ToString();
                 txtPreview.Text = rows[i]["PreviewBody"].ToString();
                 txtBody.Text = rows[i]["FullBody"].ToString();

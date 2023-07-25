@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Constellation.Class
+namespace Constellation.Scripts
 {
     internal class DataRowReadBoard
     {
@@ -24,10 +24,10 @@ namespace Constellation.Class
             DataRow[] rows = table.Select();
             return rows;
         }
-        public static (DataRow[], int) FindBoardInDatabase (string Find)
+        public static (DataRow[], int) FindBoardInDatabase(string Find)
         {
             int i = 0;
-            DataRow[] rows = Class.DataRowReadBoard.ReadDatabaseRowBoard();
+            DataRow[] rows = ReadDatabaseRowBoard();
             bool found = false;
             while (!found)
             {
