@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 
 namespace Constellation
@@ -73,6 +74,7 @@ namespace Constellation
             btnDoing.Visible = false;
             btnDone.Visible = false;
             BoardName = BoardOpened;
+            lbToDoNoteNames.HorizontalScrollbar = true;
             GenerateListBoxEntries();
             btnEdit.Enabled = false;
             btnDelete.Enabled = false;
@@ -86,7 +88,7 @@ namespace Constellation
         {
             foreach (DataRow row in Class.DataRowReadBoard.ReadDatabaseRowBoard())
             {
-                DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowSelectedNote(row["name"].ToString());
+                DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowSelectedBoard(row["name"].ToString());
                 try
                 {
                     if (rows[0]["PBoard"].ToString() == "1")
@@ -122,7 +124,6 @@ namespace Constellation
         {
             //allows list box scrolling
             //gets all data from the board that is selected
-            lbToDoNoteNames.HorizontalScrollbar = true;
             DataRow[] rows = Class.DataRowReadNote.ReadDatabaseRowNote();
             bool create = true;
             int i = 0;
@@ -379,6 +380,10 @@ namespace Constellation
             lbToDoNoteNames.Items.Clear();
             Class.UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
             GenerateListBoxEntries();
+        }
+
+        private void ComingUp_Load(object sender, EventArgs e)
+        {
         }
     }
 }

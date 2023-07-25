@@ -135,7 +135,6 @@ namespace Constellation
                 btnClose.Enabled = false;
                 btnClose.Visible = false;
             }
-            
         }
 
         private void btnClose_Click(object sender, EventArgs e)

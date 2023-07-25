@@ -30,13 +30,13 @@
         {
             components = new System.ComponentModel.Container();
             tlpComingUp = new TableLayoutPanel();
-            bsDateSelector = new BannerSelector();
             tlpBottomComingUp = new TableLayoutPanel();
             lbComingUpNote = new ListBox();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             tlpComingUpInfo = new TableLayoutPanel();
-            textBox1 = new TextBox();
+            txtComingUpBody = new TextBox();
             lblComingUpBoardName = new Label();
+            dtpComingUpDate = new DateTimePicker();
+            contextMenuStrip1 = new ContextMenuStrip(components);
             tlpComingUp.SuspendLayout();
             tlpBottomComingUp.SuspendLayout();
             tlpComingUpInfo.SuspendLayout();
@@ -46,8 +46,8 @@
             // 
             tlpComingUp.ColumnCount = 1;
             tlpComingUp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tlpComingUp.Controls.Add(bsDateSelector, 0, 0);
             tlpComingUp.Controls.Add(tlpBottomComingUp, 0, 1);
+            tlpComingUp.Controls.Add(dtpComingUpDate, 0, 0);
             tlpComingUp.Dock = DockStyle.Fill;
             tlpComingUp.Location = new Point(0, 0);
             tlpComingUp.Margin = new Padding(3, 4, 3, 4);
@@ -57,17 +57,6 @@
             tlpComingUp.RowStyles.Add(new RowStyle(SizeType.Percent, 82.15063F));
             tlpComingUp.Size = new Size(535, 374);
             tlpComingUp.TabIndex = 6;
-            // 
-            // bsDateSelector
-            // 
-            bsDateSelector.BannerText = "FILLTEXT";
-            bsDateSelector.Dock = DockStyle.Fill;
-            bsDateSelector.Location = new Point(3, 4);
-            bsDateSelector.Margin = new Padding(3, 4, 3, 4);
-            bsDateSelector.Name = "bsDateSelector";
-            bsDateSelector.Size = new Size(529, 36);
-            bsDateSelector.TabIndex = 0;
-            bsDateSelector.Load += bsDateSelector_Load;
             // 
             // tlpBottomComingUp
             // 
@@ -94,17 +83,11 @@
             lbComingUpNote.Size = new Size(173, 318);
             lbComingUpNote.TabIndex = 0;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
-            // 
             // tlpComingUpInfo
             // 
             tlpComingUpInfo.ColumnCount = 1;
             tlpComingUpInfo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tlpComingUpInfo.Controls.Add(textBox1, 0, 1);
+            tlpComingUpInfo.Controls.Add(txtComingUpBody, 0, 1);
             tlpComingUpInfo.Controls.Add(lblComingUpBoardName, 0, 0);
             tlpComingUpInfo.Dock = DockStyle.Fill;
             tlpComingUpInfo.Location = new Point(182, 3);
@@ -115,14 +98,15 @@
             tlpComingUpInfo.Size = new Size(344, 318);
             tlpComingUpInfo.TabIndex = 1;
             // 
-            // textBox1
+            // txtComingUpBody
             // 
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(3, 46);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(338, 269);
-            textBox1.TabIndex = 0;
+            txtComingUpBody.Dock = DockStyle.Fill;
+            txtComingUpBody.Location = new Point(3, 46);
+            txtComingUpBody.Multiline = true;
+            txtComingUpBody.Name = "txtComingUpBody";
+            txtComingUpBody.Size = new Size(338, 269);
+            txtComingUpBody.TabIndex = 0;
+            txtComingUpBody.TextChanged += txtComingUpBody_TextChanged;
             // 
             // lblComingUpBoardName
             // 
@@ -132,6 +116,21 @@
             lblComingUpBoardName.Size = new Size(129, 20);
             lblComingUpBoardName.TabIndex = 1;
             lblComingUpBoardName.Text = "BoardName HERE";
+            // 
+            // dtpComingUpDate
+            // 
+            dtpComingUpDate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dtpComingUpDate.Location = new Point(3, 3);
+            dtpComingUpDate.Name = "dtpComingUpDate";
+            dtpComingUpDate.Size = new Size(261, 27);
+            dtpComingUpDate.TabIndex = 2;
+            dtpComingUpDate.CloseUp += dtpComingUpDate_CloseUp;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // ComingUp
             // 
@@ -150,12 +149,12 @@
         #endregion
 
         private TableLayoutPanel tlpComingUp;
-        private BannerSelector bsDateSelector;
         private TableLayoutPanel tlpBottomComingUp;
         private ListBox lbComingUpNote;
         private ContextMenuStrip contextMenuStrip1;
         private TableLayoutPanel tlpComingUpInfo;
-        private TextBox textBox1;
+        private TextBox txtComingUpBody;
         private Label lblComingUpBoardName;
+        private DateTimePicker dtpComingUpDate;
     }
 }

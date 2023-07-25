@@ -38,7 +38,6 @@
             lblUsername = new Label();
             pbUserIcon = new PictureBox();
             tlpRight = new TableLayoutPanel();
-            lblBottomRight = new Label();
             lblBottomLeft = new Label();
             tlpToDoHoldTL = new TableLayoutPanel();
             lbToDoNoteNames = new ListBox();
@@ -51,6 +50,8 @@
             btnDoing = new Button();
             btnDone = new Button();
             bsBoards = new BannerSelector();
+            ComingUp = new Controls.ComingUp();
+            lblBottomRight = new Label();
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -166,6 +167,7 @@
             tlpRight.Controls.Add(lblBottomRight, 1, 1);
             tlpRight.Controls.Add(lblBottomLeft, 0, 1);
             tlpRight.Controls.Add(tlpToDoHoldTL, 0, 0);
+            tlpRight.Controls.Add(ComingUp, 1, 0);
             tlpRight.Dock = DockStyle.Fill;
             tlpRight.Location = new Point(223, 0);
             tlpRight.Name = "tlpRight";
@@ -174,15 +176,6 @@
             tlpRight.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpRight.Size = new Size(1082, 764);
             tlpRight.TabIndex = 8;
-            // 
-            // lblBottomRight
-            // 
-            lblBottomRight.AutoSize = true;
-            lblBottomRight.Location = new Point(544, 382);
-            lblBottomRight.Name = "lblBottomRight";
-            lblBottomRight.Size = new Size(116, 20);
-            lblBottomRight.TabIndex = 0;
-            lblBottomRight.Text = "COMING SOON ";
             // 
             // lblBottomLeft
             // 
@@ -332,6 +325,24 @@
             bsBoards.TabIndex = 2;
             bsBoards.Load += bsBoards_Load;
             // 
+            // ComingUp
+            // 
+            ComingUp.Dock = DockStyle.Fill;
+            ComingUp.Location = new Point(544, 3);
+            ComingUp.Name = "ComingUp";
+            ComingUp.Size = new Size(535, 376);
+            ComingUp.TabIndex = 5;
+            ComingUp.Load += ComingUp_Load;
+            // 
+            // lblBottomRight
+            // 
+            lblBottomRight.AutoSize = true;
+            lblBottomRight.Location = new Point(544, 382);
+            lblBottomRight.Name = "lblBottomRight";
+            lblBottomRight.Size = new Size(116, 20);
+            lblBottomRight.TabIndex = 0;
+            lblBottomRight.Text = "COMING SOON ";
+            // 
             // Homepage_F1_
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -363,7 +374,6 @@
         private Panel PanelIconHold;
         private PictureBox pbUserIcon;
         private TableLayoutPanel tlpRight;
-        private Label lblBottomRight;
         private Label lblBottomLeft;
         private Button btnNewBoard;
         private Panel plQuickSelect;
@@ -378,6 +388,8 @@
         private Button btnToDo;
         private Button btnDoing;
         private Button btnDone;
+        private Controls.ComingUp ComingUp;
         private BannerSelector bsBoards;
+        private Label lblBottomRight;
     }
 }
