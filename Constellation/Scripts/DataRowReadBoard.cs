@@ -10,7 +10,11 @@ namespace Constellation.Scripts
 {
     internal class DataRowReadBoard
     {
-        public static DataRow[] ReadDatabaseBoards()
+        /// <summary>
+        /// gets all the boards(tables) associated with the current user
+        /// </summary>
+        /// <returns>returns the datarow</returns>
+        public static DataRow[] GetAllDatabaseBoards()
         {
             PublicData PD = new PublicData();
             SQLiteConnection sqlconnection = new SQLiteConnection();
@@ -24,10 +28,15 @@ namespace Constellation.Scripts
             DataRow[] rows = table.Select();
             return rows;
         }
+        /// <summary>
+        /// finds the know boards location and returns its location
+        /// </summary>
+        /// <param name="Find">gives a name of what board needs to be found</param>
+        /// <returns>returns the datarows and also the location</returns>
         public static (DataRow[], int) FindBoardInDatabase(string Find)
         {
             int i = 0;
-            DataRow[] rows = ReadDatabaseBoards();
+            DataRow[] rows = GetAllDatabaseBoards();
             bool found = false;
             while (!found)
             {

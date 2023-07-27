@@ -12,9 +12,10 @@ namespace Constellation.Scripts
     {
         public static void NewValue(string Input, string Location)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings[Location].Value = Input;
-            config.Save(ConfigurationSaveMode.Modified);
+
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings[Location].Value = Input;
+                config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
         }
     }

@@ -87,9 +87,9 @@ namespace Constellation
 
         private void LoadPinnedBoards()
         {
-            foreach (DataRow row in DataRowReadBoard.ReadDatabaseBoards())
+            foreach (DataRow row in DataRowReadBoard.GetAllDatabaseBoards())
             {
-                DataRow[] rows = DataRowReadNote.ReadDatabaseRowSelectedBoard(row["name"].ToString());
+                DataRow[] rows = DataRowReadNote.ReadSelectedBoardsNotes(row["name"].ToString());
                 try
                 {
                     if (rows[0]["PBoard"].ToString() == "1")
@@ -125,7 +125,7 @@ namespace Constellation
         {
             //allows list box scrolling
             //gets all data from the board that is selected
-            DataRow[] rows = DataRowReadNote.ReadDatabaseRowNote();
+            DataRow[] rows = DataRowReadNote.ReadCurrentBoardsNotes();
             bool create = true;
             int i = 0;
             while (create == true)
@@ -306,23 +306,8 @@ namespace Constellation
             string BoardName = Interaction.InputBox("Please enter name of the board", "Board Creation", "");
             if (!string.IsNullOrEmpty(BoardName))
             {
-                var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
-                SQLiteConnection CreateTable = new SQLiteConnection();
-                CreateTable.ConnectionString = "DataSource = " + ConfigLocation;
-                SQLiteCommand SetUpCommand = new SQLiteCommand();
-                SetUpCommand.Connection = CreateTable;
-                SetUpCommand.CommandType = CommandType.Text;
-                SetUpCommand.CommandText = "CREATE TABLE '" + BoardName + "'" +
-                "(Name  TEXT NOT NULL," +
-                "PreviewBody   TEXT NOT NULL," +
-                "FullBody  TEXT," +
-                "Date  TEXT," +
-                "Location  INT," +
-                "PBoard    INTEGER," +
-                "PRIMARY KEY(Name))";
-                CreateTable.Open();
-                SetUpCommand.ExecuteNonQuery();
-                CreateTable.Close();
+                string Path = config.AppSettings.Settings["UserLoginLocation"].Value;
+                BoardName = Setups.CreateBoard(BoardName, Path);
             }
             else
             {
@@ -354,6 +339,7 @@ namespace Constellation
         }
         private void bsLeft_Click(object sender, EventArgs e)
         {
+            
             (DataRow[] rows, int i) = DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
             try
             {
@@ -363,9 +349,7 @@ namespace Constellation
             {
                 bsBoards.BannerText = rows[i = rows.Length - 1]["name"].ToString();
             }
-            lbToDoNoteNames.Items.Clear();
-            UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
-            GenerateListBoxEntries();
+            ReloadListbox();
         }
         private void bsRight_Click(object sender, EventArgs e)
         {
@@ -378,11 +362,14 @@ namespace Constellation
             {
                 bsBoards.BannerText = rows[0]["name"].ToString();
             }
+            ReloadListbox();
+        }
+        private void ReloadListbox()
+        {
             lbToDoNoteNames.Items.Clear();
             UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
             GenerateListBoxEntries();
         }
-
         private void ComingUp_Load(object sender, EventArgs e)
         {
         }

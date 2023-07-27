@@ -9,7 +9,7 @@ using Microsoft.VisualBasic;
 using System.Security.Cryptography.X509Certificates;
 using System;
 using System.Runtime.CompilerServices;
-
+using Constellation.Scripts;
 
 namespace Constellation
 {
@@ -162,34 +162,8 @@ namespace Constellation
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
             this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
-            foreach (Control cn in this.Controls)
-            {
-                foreach (Button bn in this.Controls.OfType<Button>())
-                {
-                    if (bn.Tag.Equals("Primary"))
-                    {
-                        bn.BackColor = Color.FromArgb(PrimaryButtonARGB[1], PrimaryButtonARGB[2], PrimaryButtonARGB[3]);
-                        bn.FlatStyle = FlatStyle.Popup;
-                        bn.FlatAppearance.BorderSize = 0;
-                        bn.FlatAppearance.BorderColor = Color.FromArgb(PrimaryButtonARGB[1], PrimaryButtonARGB[2], PrimaryButtonARGB[3]);
-                        bn.ForeColor = this.ForeColor;
-                    }
-                    else
-                    {
-                        bn.BackColor = Color.FromArgb(SecondaryButtonARGB[0], SecondaryButtonARGB[1], SecondaryButtonARGB[2], SecondaryButtonARGB[3]);
-                        bn.FlatStyle = FlatStyle.Popup;
-                        bn.FlatAppearance.BorderSize = 0;
-                        bn.FlatAppearance.BorderColor = Color.FromArgb(SecondaryButtonARGB[1], SecondaryButtonARGB[2], SecondaryButtonARGB[3]);
-                        bn.ForeColor = this.ForeColor;
-                    }
-                }
-                foreach (TextBox tb in this.Controls.OfType<TextBox>())
-                {
-                    tb.BackColor = Color.FromArgb(TextBoxBackgroundARGB[0], TextBoxBackgroundARGB[1], TextBoxBackgroundARGB[2], TextBoxBackgroundARGB[3]);
-                    tb.ForeColor = this.ForeColor;
-                }
-            }
-            
+            Control cn = this;
+            cn = Class.LoadColours.SetColours(cn, this);
         }
 
         private void Settings_F2__Load(object sender, EventArgs e)
@@ -199,64 +173,51 @@ namespace Constellation
 
         private void btnSend_Click(object sender, EventArgs e)
         {
+            
             string[] Userdata = new string[2];
             Userdata[0] = txtUsername.Text;
             Userdata[1] = txtPassword.Text;
-            SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + UserLocation;
-            SQLiteCommand sqlCommand = new SQLiteCommand();
-            sqlCommand.Connection = sqlconnection;
-            sqlCommand.CommandType = CommandType.Text;
-            sqlCommand.CommandText = "INSERT INTO Users (Username,Password) Values (@Username, @Password)";
-            sqlCommand.Parameters.AddWithValue("@Username", Userdata[0]);
-            sqlCommand.Parameters.AddWithValue("@Password", Userdata[1]);
-            sqlconnection.Open();
-            sqlCommand.ExecuteNonQuery();
-            sqlconnection.Close();
+            //try to create a new user
+            //if an error is thrown because the username is already taken let the user know
+            try
+            {
+                SQLiteConnection sqlconnection = new SQLiteConnection();
+                sqlconnection.ConnectionString = "DataSource = " + UserLocation;
+                SQLiteCommand sqlCommand = new SQLiteCommand();
+                sqlCommand.Connection = sqlconnection;
+                sqlCommand.CommandType = CommandType.Text;
+                sqlCommand.CommandText = "INSERT INTO Users (Username,Password) Values (@Username, @Password)";
+                sqlCommand.Parameters.AddWithValue("@Username", Userdata[0]);
+                sqlCommand.Parameters.AddWithValue("@Password", Userdata[1]);
+                sqlconnection.Open();
+                sqlCommand.ExecuteNonQuery();
+                sqlconnection.Close();
+            }
+            catch 
+            {
+                MessageBox.Show("hmm seems like the user already exists please login");
+            }
 
-            //Gets the user ID and encrypts the data
+            //Gets the user ID and encrypts the data and logs the user in 
             string IDFind = ReadDataID(Userdata);
             string encodedFileName = Convert.ToBase64String(Encoding.UTF8.GetBytes(Userdata[0]));
             string encodedFileNameFull = encodedFileName.Replace('/', '-');
             string fileName = IDFind + encodedFileNameFull;
             string[] paths = new string[2] { FileCreatePath, fileName };
             string DatabasePath = Path.Combine(paths) + ".db";
-
-            //checks if password exists
-            if (File.Exists(DatabasePath))
-            {
-                MessageBox.Show("hmm seems like the user already exists please login");
-                return;
-            }
-            else
-            {
-                CreateDatabase(DatabasePath);
-                AllowUserIn(DatabasePath);
-            }
-        }
+            CreateDatabase(DatabasePath);
+            AllowUserIn(DatabasePath);
+         }
 
         private static void CreateDatabase(string DatabasePath)
         {
-            //creates database
-            SQLiteConnection.CreateFile(DatabasePath);
+            string BoardName = "Board1";
+            BoardName = Setups.CreateBoard(BoardName, DatabasePath);
+            //checks if database exists 
             SQLiteConnection NewDatabaseConnection = new SQLiteConnection();
-            NewDatabaseConnection.ConnectionString = "DataSource = " + DatabasePath;
             SQLiteCommand SetUpCommand = new SQLiteCommand();
             SetUpCommand.Connection = NewDatabaseConnection;
-            SetUpCommand.CommandType = CommandType.Text;
-            //creates sample table
-            SetUpCommand.CommandText = "CREATE TABLE Board1" +
-                "(Name TEXT NOT NULL," +
-                "PreviewBody TEXT NOT NULL," +
-                "FullBody TEXT," +
-                "Date TEXT," +
-                "Location INT," +
-                "PBoard INT" +
-                "PRIMARY KEY (Name))";
-            NewDatabaseConnection.Open();
-            SetUpCommand.ExecuteNonQuery();
-            NewDatabaseConnection.Close();
-            //checks if database exists 
+            NewDatabaseConnection.ConnectionString = "DataSource = " + DatabasePath;
             if (File.Exists(DatabasePath))
             {
                 MessageBox.Show("Database created");
@@ -379,7 +340,6 @@ namespace Constellation
             else if (Userdata[1] == PasswordToFind)
             {
                 //logs user in
-                MessageBox.Show("we found your data please wait");
                 //encrypts user data
                 string IDFind = ReadDataID(Userdata);
                 string encodedFileName = Convert.ToBase64String(Encoding.UTF8.GetBytes(Userdata[0]));
@@ -403,11 +363,11 @@ namespace Constellation
 
         private void AllowUserIn(string DatabasePath)
         {
-            MessageBox.Show("checking you in now");
             //logs the user into the app config(encrypted username)
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings["UserLoginLocation"].Value = DatabasePath;
             config.Save(ConfigurationSaveMode.Modified);
+            UpdateConfig.NewValue("Board1", "BoardToOpen");
             ConfigurationManager.RefreshSection("appSettings");
             this.Hide();
             Homepage_F1_ homepage = new Homepage_F1_();

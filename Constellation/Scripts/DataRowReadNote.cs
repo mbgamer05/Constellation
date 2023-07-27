@@ -12,7 +12,7 @@ namespace Constellation.Scripts
 {
     internal class DataRowReadNote
     {
-        public static DataRow[] ReadDatabaseRowNote()
+        public static DataRow[] ReadCurrentBoardsNotes()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
@@ -29,9 +29,13 @@ namespace Constellation.Scripts
             sqlconnection.Close();
             return rows;
         }
-        public static List<DataRow> ReadDatabaseRowNoteAll(DataRow[] Boards)
+        /// <summary>
+        /// reads all the databases notes
+        /// </summary>
+        /// <param name="Boards">the current selected board</param>
+        /// <returns>datarow containing all the notes</returns>
+        public static List<DataRow> ReadAllBoardsNotes(DataRow[] Boards)
         {
-            int passes = 0;
             int i = 0;
             bool end = false;
             List<DataRow> rows = new List<DataRow>();
@@ -43,7 +47,7 @@ namespace Constellation.Scripts
                     string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
                     string UserDataLocaion = config.AppSettings.Settings["UserLoginLocation"].Value;
                     SQLiteConnection sqlconnection = new SQLiteConnection();
-                    DataRow[] boards = DataRowReadBoard.ReadDatabaseBoards();
+                    DataRow[] boards = DataRowReadBoard.GetAllDatabaseBoards();
                     sqlconnection.ConnectionString = "DataSource = " + UserDataLocaion;
                     string commandText = "SELECT * FROM '" + boards[i]["name"] + "'";
                     DataTable table = new DataTable();
@@ -51,7 +55,7 @@ namespace Constellation.Scripts
                     sqlconnection.Open();
                     myDataAdapter.Fill(table);
                     sqlconnection.Close();
-                    (rows, passes) = AddRow(table, passes, rows);
+                    rows = AddRow(table, rows);
                     i++;
                 }
                 catch
@@ -62,20 +66,25 @@ namespace Constellation.Scripts
             return rows;
            
         }
-        public static (List<DataRow>, int) AddRow(DataTable table, int pass, List<DataRow> input)
+        /// <summary>
+        /// adds a new datarow to the database
+        /// </summary>
+        /// <param name="table">the datatable that holds the current data</param>
+        /// <param name="input">the current input which contains the list of datarows</param>
+        /// <returns></returns>
+        public static List<DataRow> AddRow(DataTable table, List<DataRow> input)
         {
             List<DataRow> rows = input;
-            int i = 0 + pass;
             foreach (DataRow row in table.Rows)
             {
                 rows.Add(row);
             }
-            return (rows, i);
+            return rows;
         }
 
         public static (DataRow[], int) FindInDataRowNote(string Find)
         {
-            DataRow[] rows = ReadDatabaseRowNote();
+            DataRow[] rows = ReadCurrentBoardsNotes();
             int i = 0;
             bool found = false;
             while (!found)
@@ -91,7 +100,12 @@ namespace Constellation.Scripts
             }
             return (rows, i);
         }
-        public static DataRow[] ReadDatabaseRowSelectedBoard(string Selected)
+        /// <summary>
+        /// gets all the selected boards notes
+        /// </summary>
+        /// <param name="Selected">gets the selected boards and there </param>
+        /// <returns>a datarow with all the selected boards</returns>
+        public static DataRow[] ReadSelectedBoardsNotes(string Selected)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;

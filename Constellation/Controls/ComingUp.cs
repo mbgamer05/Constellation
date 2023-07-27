@@ -36,7 +36,7 @@ namespace Constellation.Controls
         {
             //allows list box scrolling
             //gets all data from all boards that have notes where the dates are equal
-            List<DataRow> rows = DataRowReadNote.ReadDatabaseRowNoteAll(DataRowReadBoard.ReadDatabaseBoards());
+            List<DataRow> rows = DataRowReadNote.ReadAllBoardsNotes(DataRowReadBoard.GetAllDatabaseBoards());
             foreach (DataRow row in rows)
             {
                 lbComingUpNote.Items.Add(row["Name"]);

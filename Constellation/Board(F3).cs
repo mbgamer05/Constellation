@@ -63,7 +63,7 @@ namespace Constellation
         }
         private void GenerateNotes()
         {
-            DataRow[] rows = DataRowReadNote.ReadDatabaseRowNote();
+            DataRow[] rows = DataRowReadNote.ReadCurrentBoardsNotes();
             bool create = true;
             int i = 0;
             NoteGrid ng = new NoteGrid();
@@ -293,7 +293,7 @@ namespace Constellation
 
         private void btnPinBoard_Click(object sender, EventArgs e)
         {
-            DataRow[] rows = DataRowReadNote.ReadDatabaseRowNote();
+            DataRow[] rows = DataRowReadNote.ReadCurrentBoardsNotes();
             if (rows[0]["PBoard"].ToString() == "0")
             {
                 DialogResult dr = MessageBox.Show("Do you want to pin this board?", "Pin Board", MessageBoxButtons.YesNo);
