@@ -32,27 +32,14 @@ namespace Constellation.Controls
             set { lblComingUpBoardName = value; }
         }
 
-        private void GenerateListBoxEntries()
+        private void GenerateListBoxEntries(string SeletedDate)
         {
             //allows list box scrolling
-            //gets all data from the board that is selected
-            DataRow[] rows = DataRowReadNote.ReadDatabaseRowNoteAll(DataRowReadBoard.ReadDatabaseRowBoard());
-            bool create = true;
-            int i = 0;
-            while (create == true)
+            //gets all data from all boards that have notes where the dates are equal
+            List<DataRow> rows = DataRowReadNote.ReadDatabaseRowNoteAll(DataRowReadBoard.ReadDatabaseBoards());
+            foreach (DataRow row in rows)
             {
-                if (i >= rows.Length)
-                {
-                    create = false;
-                }
-                else
-                {
-                    if (rows[i]["Date"] == SeletedDate)
-                    {
-                        lbComingUpNote.Items.Add(rows[i]["Name"].ToString());
-                    }
-                    i++;
-                }
+                lbComingUpNote.Items.Add(row["Name"]);
             }
         }
         private void txtComingUpBody_TextChanged(object sender, EventArgs e)
@@ -61,10 +48,12 @@ namespace Constellation.Controls
         }
         private void dtpComingUpDate_CloseUp(object sender, EventArgs e)
         {
+            //gets the current date and converts it into a string that is readable for the software
             DateTime current = dtpComingUpDate.Value;
             SeletedDate = current.ToString("dddd, dd MMMM yyyy");
+            //clears the listbox and generates the new entires for it
             lbComingUpNote.Items.Clear();
-            GenerateListBoxEntries();
+            GenerateListBoxEntries(SeletedDate);
         }
     }
 }

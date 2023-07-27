@@ -10,7 +10,7 @@ namespace Constellation.Scripts
 {
     internal class DataRowReadBoard
     {
-        public static DataRow[] ReadDatabaseRowBoard()
+        public static DataRow[] ReadDatabaseBoards()
         {
             PublicData PD = new PublicData();
             SQLiteConnection sqlconnection = new SQLiteConnection();
@@ -27,7 +27,7 @@ namespace Constellation.Scripts
         public static (DataRow[], int) FindBoardInDatabase(string Find)
         {
             int i = 0;
-            DataRow[] rows = ReadDatabaseRowBoard();
+            DataRow[] rows = ReadDatabaseBoards();
             bool found = false;
             while (!found)
             {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Net.Sockets;
 
 namespace Constellation.Scripts
 {
@@ -28,22 +29,48 @@ namespace Constellation.Scripts
             sqlconnection.Close();
             return rows;
         }
-        public static DataRow[] ReadDatabaseRowNoteAll(DataRow[] Boards)
+        public static List<DataRow> ReadDatabaseRowNoteAll(DataRow[] Boards)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
-            string UserDataLocaion = config.AppSettings.Settings["UserLoginLocation"].Value;
-            SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + UserDataLocaion;
-            string commandText = "SELECT * FROM *";
-            DataTable table = new DataTable();
-            SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
-            sqlconnection.Open();
-            myDataAdapter.Fill(table);
-            //put all data from the database into datarow
-            DataRow[] rows = table.Select();
-            sqlconnection.Close();
+            int passes = 0;
+            int i = 0;
+            bool end = false;
+            List<DataRow> rows = new List<DataRow>();
+            while (end == false)
+            {
+                try
+                {
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
+                    string UserDataLocaion = config.AppSettings.Settings["UserLoginLocation"].Value;
+                    SQLiteConnection sqlconnection = new SQLiteConnection();
+                    DataRow[] boards = DataRowReadBoard.ReadDatabaseBoards();
+                    sqlconnection.ConnectionString = "DataSource = " + UserDataLocaion;
+                    string commandText = "SELECT * FROM '" + boards[i]["name"] + "'";
+                    DataTable table = new DataTable();
+                    SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
+                    sqlconnection.Open();
+                    myDataAdapter.Fill(table);
+                    sqlconnection.Close();
+                    (rows, passes) = AddRow(table, passes, rows);
+                    i++;
+                }
+                catch
+                {
+                    end = true; break;
+                }
+            }
             return rows;
+           
+        }
+        public static (List<DataRow>, int) AddRow(DataTable table, int pass, List<DataRow> input)
+        {
+            List<DataRow> rows = input;
+            int i = 0 + pass;
+            foreach (DataRow row in table.Rows)
+            {
+                rows.Add(row);
+            }
+            return (rows, i);
         }
 
         public static (DataRow[], int) FindInDataRowNote(string Find)

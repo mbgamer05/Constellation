@@ -87,7 +87,7 @@ namespace Constellation
 
         private void LoadPinnedBoards()
         {
-            foreach (DataRow row in DataRowReadBoard.ReadDatabaseRowBoard())
+            foreach (DataRow row in DataRowReadBoard.ReadDatabaseBoards())
             {
                 DataRow[] rows = DataRowReadNote.ReadDatabaseRowSelectedBoard(row["name"].ToString());
                 try
