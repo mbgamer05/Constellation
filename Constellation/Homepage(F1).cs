@@ -220,7 +220,6 @@ namespace Constellation
                 {
                     case DialogResult.Yes:
 
-                        MessageBox.Show("Deleting note...");
                         var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
                         //connects to the database to remove Data
                         SQLiteConnection sqlconnection = new SQLiteConnection();
@@ -234,10 +233,6 @@ namespace Constellation
                         sqlconnection.Close();
                         lbToDoNoteNames.Items.Clear();
                         GenerateListBoxEntries();
-                        break;
-
-                    case DialogResult.No:
-                        MessageBox.Show("ok canceling action");
                         break;
                 }
             }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             tlpComingUp = new TableLayoutPanel();
             tlpBottomComingUp = new TableLayoutPanel();
             lbComingUpNote = new ListBox();
@@ -36,7 +35,6 @@
             txtComingUpBody = new TextBox();
             lblComingUpBoardName = new Label();
             dtpComingUpDate = new DateTimePicker();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             tlpComingUp.SuspendLayout();
             tlpBottomComingUp.SuspendLayout();
             tlpComingUpInfo.SuspendLayout();
@@ -82,6 +80,7 @@
             lbComingUpNote.Name = "lbComingUpNote";
             lbComingUpNote.Size = new Size(173, 318);
             lbComingUpNote.TabIndex = 0;
+            lbComingUpNote.SelectedIndexChanged += lbComingUpNote_SelectedIndexChanged;
             // 
             // tlpComingUpInfo
             // 
@@ -104,6 +103,7 @@
             txtComingUpBody.Location = new Point(3, 46);
             txtComingUpBody.Multiline = true;
             txtComingUpBody.Name = "txtComingUpBody";
+            txtComingUpBody.ReadOnly = true;
             txtComingUpBody.Size = new Size(338, 269);
             txtComingUpBody.TabIndex = 0;
             txtComingUpBody.TextChanged += txtComingUpBody_TextChanged;
@@ -126,12 +126,6 @@
             dtpComingUpDate.TabIndex = 2;
             dtpComingUpDate.CloseUp += dtpComingUpDate_CloseUp;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
-            // 
             // ComingUp
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -151,7 +145,6 @@
         private TableLayoutPanel tlpComingUp;
         private TableLayoutPanel tlpBottomComingUp;
         private ListBox lbComingUpNote;
-        private ContextMenuStrip contextMenuStrip1;
         private TableLayoutPanel tlpComingUpInfo;
         private TextBox txtComingUpBody;
         private Label lblComingUpBoardName;
