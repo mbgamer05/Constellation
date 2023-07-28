@@ -57,7 +57,7 @@ namespace Constellation.Controls
             SeletedDate = current.ToString("dddd dd MMMM yyyy");
             //clears the listbox and generates the new entires for it
             lbComingUpNote.Items.Clear();
-            GenerateListBoxEntries(SeletedDate);
+            GenerateListBoxEntries(SeletedDate)
         }
 
         private void lbComingUpNote_SelectedIndexChanged(object sender, EventArgs e)
