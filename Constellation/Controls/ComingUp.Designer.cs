@@ -113,9 +113,8 @@
             lblComingUpBoardName.AutoSize = true;
             lblComingUpBoardName.Location = new Point(3, 0);
             lblComingUpBoardName.Name = "lblComingUpBoardName";
-            lblComingUpBoardName.Size = new Size(129, 20);
+            lblComingUpBoardName.Size = new Size(0, 20);
             lblComingUpBoardName.TabIndex = 1;
-            lblComingUpBoardName.Text = "BoardName HERE";
             // 
             // dtpComingUpDate
             // 

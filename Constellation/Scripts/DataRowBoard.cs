@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Constellation.Scripts
 {
-    internal class DataRowReadBoard
+    internal class DataRowBoard
     {
         /// <summary>
         /// gets all the boards(tables) associated with the current user

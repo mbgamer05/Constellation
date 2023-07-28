@@ -50,7 +50,7 @@ namespace Constellation
 
         private void LoadBoards()
         {
-            DataRow[] rows = DataRowReadBoard.GetAllDatabaseBoards();
+            DataRow[] rows = DataRowBoard.GetAllDatabaseBoards();
             //creates a entry in the combo box for each of the entries in the datarow
             foreach (DataRow row in rows)
             {
@@ -60,7 +60,7 @@ namespace Constellation
 
         private void LoadNotes()
         {
-            DataRow[] rows = DataRowReadNote.ReadCurrentBoardsNotes();
+            DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
             //creates a entry in the combo box for each of the entries in the datarow
             foreach (DataRow row in rows)
             {

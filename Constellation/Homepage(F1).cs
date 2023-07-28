@@ -87,9 +87,9 @@ namespace Constellation
 
         private void LoadPinnedBoards()
         {
-            foreach (DataRow row in DataRowReadBoard.GetAllDatabaseBoards())
+            foreach (DataRow row in DataRowBoard.GetAllDatabaseBoards())
             {
-                DataRow[] rows = DataRowReadNote.ReadSelectedBoardsNotes(row["name"].ToString());
+                DataRow[] rows = DataRowNote.ReadSelectedBoardsNotes(row["name"].ToString());
                 try
                 {
                     if (rows[0]["PBoard"].ToString() == "1")
@@ -125,7 +125,7 @@ namespace Constellation
         {
             //allows list box scrolling
             //gets all data from the board that is selected
-            DataRow[] rows = DataRowReadNote.ReadCurrentBoardsNotes();
+            DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
             bool create = true;
             int i = 0;
             while (create == true)
@@ -250,7 +250,7 @@ namespace Constellation
         private void UpdateLocation(int location)
         {
             //updates the location(todo,doing,done) of the note
-            (DataRow[] rows, int i) = DataRowReadNote.FindInDataRowNote(lbToDoNoteNames.SelectedItem.ToString());
+            (DataRow[] rows, int i) = DataRowNote.FindInDataRowNote(lbToDoNoteNames.SelectedItem.ToString());
             SQLiteConnection sqlconnection = new SQLiteConnection();
             SQLiteCommand sqlCommand = new SQLiteCommand();
             sqlCommand.CommandType = CommandType.Text;
@@ -335,7 +335,7 @@ namespace Constellation
         private void bsLeft_Click(object sender, EventArgs e)
         {
             
-            (DataRow[] rows, int i) = DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
+            (DataRow[] rows, int i) = DataRowBoard.FindBoardInDatabase(bsBoards.BannerText);
             try
             {
                 bsBoards.BannerText = rows[i - 1]["name"].ToString();
@@ -348,7 +348,7 @@ namespace Constellation
         }
         private void bsRight_Click(object sender, EventArgs e)
         {
-            (DataRow[] rows, int i) = DataRowReadBoard.FindBoardInDatabase(bsBoards.BannerText);
+            (DataRow[] rows, int i) = DataRowBoard.FindBoardInDatabase(bsBoards.BannerText);
             try
             {
                 bsBoards.BannerText = rows[i + 1]["name"].ToString();

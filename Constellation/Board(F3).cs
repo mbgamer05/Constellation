@@ -63,7 +63,7 @@ namespace Constellation
         }
         private void GenerateNotes()
         {
-            DataRow[] rows = DataRowReadNote.ReadCurrentBoardsNotes();
+            DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
             bool create = true;
             int i = 0;
             NoteGrid ng = new NoteGrid();
@@ -214,7 +214,7 @@ namespace Constellation
         {
             //updates the Database location where the name is equal to the note name
             //the update changes where the Note is stored on the board
-            (DataRow[] rows, int i) = DataRowReadNote.FindInDataRowNote(nt.NoteName);
+            (DataRow[] rows, int i) = DataRowNote.FindInDataRowNote(nt.NoteName);
             SQLiteConnection sqlconnection = new SQLiteConnection();
             SQLiteCommand sqlCommand = new SQLiteCommand();
             sqlconnection.ConnectionString = "DataSource = " + DataLocation.UserDataLocation;
@@ -293,7 +293,7 @@ namespace Constellation
 
         private void btnPinBoard_Click(object sender, EventArgs e)
         {
-            DataRow[] rows = DataRowReadNote.ReadCurrentBoardsNotes();
+            DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
             if (rows[0]["PBoard"].ToString() == "0")
             {
                 DialogResult dr = MessageBox.Show("Do you want to pin this board?", "Pin Board", MessageBoxButtons.YesNo);

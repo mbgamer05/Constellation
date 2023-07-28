@@ -10,7 +10,7 @@ using System.Net.Sockets;
 
 namespace Constellation.Scripts
 {
-    internal class DataRowReadNote
+    internal class DataRowNote
     {
         public static DataRow[] ReadCurrentBoardsNotes()
         {
@@ -47,7 +47,7 @@ namespace Constellation.Scripts
                     string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
                     string UserDataLocaion = config.AppSettings.Settings["UserLoginLocation"].Value;
                     SQLiteConnection sqlconnection = new SQLiteConnection();
-                    DataRow[] boards = DataRowReadBoard.GetAllDatabaseBoards();
+                    DataRow[] boards = DataRowBoard.GetAllDatabaseBoards();
                     sqlconnection.ConnectionString = "DataSource = " + UserDataLocaion;
                     string commandText = "SELECT * FROM '" + boards[i]["name"] + "'";
                     DataTable table = new DataTable();
@@ -55,7 +55,8 @@ namespace Constellation.Scripts
                     sqlconnection.Open();
                     myDataAdapter.Fill(table);
                     sqlconnection.Close();
-                    rows = AddRow(table, rows);
+                    table.Columns.Add("Board", typeof(string));
+                    rows = AddRow(table, rows, Boards[i]["name"].ToString());
                     i++;
                 }
                 catch
@@ -72,11 +73,12 @@ namespace Constellation.Scripts
         /// <param name="table">the datatable that holds the current data</param>
         /// <param name="input">the current input which contains the list of datarows</param>
         /// <returns></returns>
-        public static List<DataRow> AddRow(DataTable table, List<DataRow> input)
+        public static List<DataRow> AddRow(DataTable table, List<DataRow> input, string Board)
         {
             List<DataRow> rows = input;
             foreach (DataRow row in table.Rows)
             {
+                row["Board"] = Board;
                 rows.Add(row);
             }
             return rows;
