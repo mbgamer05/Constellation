@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Constellation.UI;
 
 namespace Constellation.Class
 {
@@ -23,7 +24,7 @@ namespace Constellation.Class
         /// <returns>returns the parent control and all control data associated with it</returns>
         public static Control SetColours (Control Control, Form form)
         {
-            (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = MoreSettings.ReadStringData(MoreSettings.ReadData());
+            (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = GetColours.ReadStringData(GetColours.ReadData());
             foreach (Control cn in Class.LoadColours.GetAllChildrens(Control))
             {
                 if (cn != null)

@@ -10,6 +10,8 @@ using System.Security.Cryptography.X509Certificates;
 using System;
 using System.Runtime.CompilerServices;
 using Constellation.Scripts;
+using Constellation.UI;
+using Constellation.Properties;
 
 namespace Constellation
 {
@@ -31,6 +33,8 @@ namespace Constellation
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsNetworkDeployed"), out bool isNetworkDeployed);
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsFirstRun"), out bool IsFirstRun);
             if (isNetworkDeployed == true && IsFirstRun == true)
@@ -44,7 +48,7 @@ namespace Constellation
                     ConfigurationManager.RefreshSection("appSettings");
                     Application.Restart();
                 }
-                
+
             }
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
             string ColourPath = Path.Combine(colourpathFind) + ".db";
@@ -55,68 +59,68 @@ namespace Constellation
             }
             if (!File.Exists(ColourPath))
             {
-                    SQLiteConnection.CreateFile(ColourPath);
-                    for (int i = 1; i < 4; i++)
-                    {
-                        SQLiteConnection NewDatabaseConnection = new SQLiteConnection();
-                        NewDatabaseConnection.ConnectionString = "DataSource = " + ColourPath;
-                        SQLiteCommand SetUpCommand = new SQLiteCommand();
-                        SetUpCommand.Connection = NewDatabaseConnection;
-                        SetUpCommand.CommandType = CommandType.Text;
-                        SetUpCommand.CommandText = "CREATE TABLE Preview" + i +
-                        "(PrimaryButton TEXT," +
-                        " SecondaryButton TEXT," +
-                        " BackgroundColour TEXT," +
-                        " TextColour TEXT," +
-                        "TextboxBackgroundColour TEXT)";
-                        NewDatabaseConnection.Open();
-                        SetUpCommand.ExecuteNonQuery();
-                        NewDatabaseConnection.Close();
-                    }
-                    if (File.Exists(ColourPath))
-                    {
-                        MessageBox.Show("Preview Colours made");
-                        SQLiteConnection NewDatabaseConnection = new SQLiteConnection();
-                        NewDatabaseConnection.ConnectionString = "DataSource = " + ColourPath;
-                        SQLiteCommand SetUpCommand = new SQLiteCommand();
-                        SetUpCommand.Connection = NewDatabaseConnection;
-                        SetUpCommand.CommandText = "INSERT INTO Preview1 " +
-                        "(PrimaryButton, SecondaryButton, BackgroundColour, TextColour,TextboxBackgroundColour)" +
-                        " Values (@PB, @SB, @BC, @TC, @TBC)";
-                        SetUpCommand.Parameters.AddWithValue("@PB", "255, 219, 80, 6");
-                        SetUpCommand.Parameters.AddWithValue("@SB", "255, 180, 228, 253");
-                        SetUpCommand.Parameters.AddWithValue("@BC", "255, 210, 239, 254");
-                        SetUpCommand.Parameters.AddWithValue("@TC", "255, 1, 16, 25");
-                        SetUpCommand.Parameters.AddWithValue("@TBC", "255, 199, 228, 242");
-                        NewDatabaseConnection.Open();
-                        SetUpCommand.ExecuteNonQuery();
-                        NewDatabaseConnection.Close();
+                SQLiteConnection.CreateFile(ColourPath);
+                for (int i = 1; i < 4; i++)
+                {
+                    SQLiteConnection NewDatabaseConnection = new SQLiteConnection();
+                    NewDatabaseConnection.ConnectionString = "DataSource = " + ColourPath;
+                    SQLiteCommand SetUpCommand = new SQLiteCommand();
+                    SetUpCommand.Connection = NewDatabaseConnection;
+                    SetUpCommand.CommandType = CommandType.Text;
+                    SetUpCommand.CommandText = "CREATE TABLE Preview" + i +
+                    "(PrimaryButton TEXT," +
+                    " SecondaryButton TEXT," +
+                    " BackgroundColour TEXT," +
+                    " TextColour TEXT," +
+                    "TextboxBackgroundColour TEXT)";
+                    NewDatabaseConnection.Open();
+                    SetUpCommand.ExecuteNonQuery();
+                    NewDatabaseConnection.Close();
+                }
+                if (File.Exists(ColourPath))
+                {
+                    MessageBox.Show("Preview Colours made");
+                    SQLiteConnection NewDatabaseConnection = new SQLiteConnection();
+                    NewDatabaseConnection.ConnectionString = "DataSource = " + ColourPath;
+                    SQLiteCommand SetUpCommand = new SQLiteCommand();
+                    SetUpCommand.Connection = NewDatabaseConnection;
+                    SetUpCommand.CommandText = "INSERT INTO Preview1 " +
+                    "(PrimaryButton, SecondaryButton, BackgroundColour, TextColour,TextboxBackgroundColour)" +
+                    " Values (@PB, @SB, @BC, @TC, @TBC)";
+                    SetUpCommand.Parameters.AddWithValue("@PB", "255, 219, 80, 6");
+                    SetUpCommand.Parameters.AddWithValue("@SB", "255, 180, 228, 253");
+                    SetUpCommand.Parameters.AddWithValue("@BC", "255, 210, 239, 254");
+                    SetUpCommand.Parameters.AddWithValue("@TC", "255, 1, 16, 25");
+                    SetUpCommand.Parameters.AddWithValue("@TBC", "255, 199, 228, 242");
+                    NewDatabaseConnection.Open();
+                    SetUpCommand.ExecuteNonQuery();
+                    NewDatabaseConnection.Close();
 
-                        SetUpCommand.CommandText = "INSERT INTO Preview2 " +
-                        "(PrimaryButton, SecondaryButton, BackgroundColour, TextColour,TextboxBackgroundColour)" +
-                        " Values (@PB, @SB, @BC, @TC, @TBC)";
-                        SetUpCommand.Parameters.AddWithValue("@PB", "255, 108, 140, 105");
-                        SetUpCommand.Parameters.AddWithValue("@SB", "255, 251, 249, 251");
-                        SetUpCommand.Parameters.AddWithValue("@BC", "255, 242, 238, 242");
-                        SetUpCommand.Parameters.AddWithValue("@TC", "255, 6, 4, 6");
-                        SetUpCommand.Parameters.AddWithValue("@TBC", "255, 230, 226, 230");
-                        NewDatabaseConnection.Open();
-                        SetUpCommand.ExecuteNonQuery();
-                        NewDatabaseConnection.Close();
+                    SetUpCommand.CommandText = "INSERT INTO Preview2 " +
+                    "(PrimaryButton, SecondaryButton, BackgroundColour, TextColour,TextboxBackgroundColour)" +
+                    " Values (@PB, @SB, @BC, @TC, @TBC)";
+                    SetUpCommand.Parameters.AddWithValue("@PB", "255, 108, 140, 105");
+                    SetUpCommand.Parameters.AddWithValue("@SB", "255, 251, 249, 251");
+                    SetUpCommand.Parameters.AddWithValue("@BC", "255, 242, 238, 242");
+                    SetUpCommand.Parameters.AddWithValue("@TC", "255, 6, 4, 6");
+                    SetUpCommand.Parameters.AddWithValue("@TBC", "255, 230, 226, 230");
+                    NewDatabaseConnection.Open();
+                    SetUpCommand.ExecuteNonQuery();
+                    NewDatabaseConnection.Close();
 
-                        SetUpCommand.CommandText = "INSERT INTO Preview3 " +
-                        "(PrimaryButton, SecondaryButton, BackgroundColour, TextColour,TextboxBackgroundColour)" +
-                        " Values (@PB, @SB, @BC, @TC, @TBC)";
-                        SetUpCommand.Parameters.AddWithValue("@PB", "255, 204, 197, 133");
-                        SetUpCommand.Parameters.AddWithValue("@SB", "255, 44, 20, 47");
-                        SetUpCommand.Parameters.AddWithValue("@BC", "255, 24, 11, 25");
-                        SetUpCommand.Parameters.AddWithValue("@TC", "255, 240, 223, 241");
-                        SetUpCommand.Parameters.AddWithValue("@TBC", "255, 35, 21, 36");
-                        NewDatabaseConnection.Open();
-                        SetUpCommand.ExecuteNonQuery();
-                        NewDatabaseConnection.Close();
-                    }
-                
+                    SetUpCommand.CommandText = "INSERT INTO Preview3 " +
+                    "(PrimaryButton, SecondaryButton, BackgroundColour, TextColour,TextboxBackgroundColour)" +
+                    " Values (@PB, @SB, @BC, @TC, @TBC)";
+                    SetUpCommand.Parameters.AddWithValue("@PB", "255, 204, 197, 133");
+                    SetUpCommand.Parameters.AddWithValue("@SB", "255, 44, 20, 47");
+                    SetUpCommand.Parameters.AddWithValue("@BC", "255, 24, 11, 25");
+                    SetUpCommand.Parameters.AddWithValue("@TC", "255, 240, 223, 241");
+                    SetUpCommand.Parameters.AddWithValue("@TBC", "255, 35, 21, 36");
+                    NewDatabaseConnection.Open();
+                    SetUpCommand.ExecuteNonQuery();
+                    NewDatabaseConnection.Close();
+                }
+
             }
             if (File.Exists(ColourPath))
             {
@@ -126,7 +130,6 @@ namespace Constellation
                     config.AppSettings.Settings["ColourScheme"].Value = "Preview1";
                     config.Save(ConfigurationSaveMode.Modified);
                     ConfigurationManager.RefreshSection("appSettings");
-
                 }
                 LoadColours();
             }
@@ -154,16 +157,39 @@ namespace Constellation
             config.AppSettings.Settings["UserLocation"].Value = comPaths;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
+            LoadImages();
         }
+        private void LoadImages()
+        {
+            TimeSpan Now = DateTime.Now.TimeOfDay;
+            TimeSpan Morning = new TimeSpan(0, 0, 0);
+            TimeSpan Midday = new TimeSpan(11, 0, 0);
+            TimeSpan Night = new TimeSpan(17,30, 0);
+            
+            List<Bitmap> images = new List<Bitmap>();
+            images.Add(Resources.Moring_LoginPage);
+            images.Add(Resources.Midday_LoginPage);
+            images.Add(Resources.Nighttime_LoginPage);
 
+            if ((Now >= Morning) && (Now <= Midday))
+            {
+                this.BackgroundImage = images[0];
+            }
+            else if (Now >= Midday && Now <= Night)
+            {
+                this.BackgroundImage = images[1];
+            }
+            else
+            {
+                this.BackgroundImage = images[2];
+            }
+        }
         private void LoadColours()
         {
-            (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = MoreSettings.ReadStringData(MoreSettings.ReadData());
+            (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = GetColours.ReadStringData(GetColours.ReadData());
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
             this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
-            Control cn = this;
-            cn = Class.LoadColours.SetColours(cn, this);
         }
 
         private void Settings_F2__Load(object sender, EventArgs e)
@@ -173,7 +199,7 @@ namespace Constellation
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            
+
             string[] Userdata = new string[2];
             Userdata[0] = txtUsername.Text;
             Userdata[1] = txtPassword.Text;
@@ -193,7 +219,7 @@ namespace Constellation
                 sqlCommand.ExecuteNonQuery();
                 sqlconnection.Close();
             }
-            catch 
+            catch
             {
                 MessageBox.Show("hmm seems like the user already exists please login");
             }
@@ -207,7 +233,7 @@ namespace Constellation
             string DatabasePath = Path.Combine(paths) + ".db";
             CreateDatabase(DatabasePath);
             AllowUserIn(DatabasePath);
-         }
+        }
 
         private static void CreateDatabase(string DatabasePath)
         {
@@ -374,7 +400,7 @@ namespace Constellation
             homepage.Username = txtUsername.Text;
             homepage.Show();
             homepage.FormClosed += Homepage_F1__FormClosed;
-            
+
         }
 
         private void Homepage_F1__FormClosed(object sender, EventArgs e)

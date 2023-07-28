@@ -1,13 +1,13 @@
 ﻿using System.Data;
 using System.Data.SQLite;
 
-namespace Constellation
+namespace Constellation.UI
 {
 
-    public class MoreSettings
+    public class GetColours
     {
         static PublicData PD = new PublicData();
-        
+
         static string[] colourpathFind = new string[2] { PD.FileCreatePath, "Colour" };
         static string ColourPath = Path.Combine(colourpathFind) + ".db";
 

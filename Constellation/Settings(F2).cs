@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Constellation.UI;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +27,7 @@ namespace Constellation
 
         public Settings_F2_()
         {
-            MoreSettings MS = new MoreSettings();
+            GetColours MS = new GetColours();
             InitializeComponent();
             InstalledFontCollection foundfonts = new InstalledFontCollection();
             FontFamily[] font = foundfonts.Families.ToArray();
@@ -133,7 +134,7 @@ namespace Constellation
         }
         public void LoadColours()
         {
-            (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = MoreSettings.ReadStringData(MoreSettings.ReadData());
+            (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = GetColours.ReadStringData(GetColours.ReadData());
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
             this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
