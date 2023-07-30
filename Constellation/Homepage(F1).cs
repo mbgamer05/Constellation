@@ -72,15 +72,7 @@ namespace Constellation
         private void Homepage_F1__Load(object sender, EventArgs e)
         {
             //form set up
-            btnToDo.Visible = false;
-            btnDoing.Visible = false;
-            btnDone.Visible = false;
             BoardName = BoardOpened;
-            lbToDoNoteNames.HorizontalScrollbar = true;
-            GenerateListBoxEntries();
-            btnEdit.Enabled = false;
-            btnDelete.Enabled = false;
-            btnMove.Enabled = false;
             lblUsername.Text = Username;
             LoadPinnedBoards();
             LoadColours();
@@ -122,29 +114,7 @@ namespace Constellation
             Open_board(sender, e);
 
         }
-        private void GenerateListBoxEntries()
-        {
-            //allows list box scrolling
-            //gets all data from the board that is selected
-            DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
-            bool create = true;
-            int i = 0;
-            while (create == true)
-            {
-                if (i >= rows.Length)
-                {
-                    create = false;
-                }
-                else
-                {
-                    if (rows[i]["Location"].ToString() == "0")
-                    {
-                        lbToDoNoteNames.Items.Add(rows[i]["Name"].ToString());
-                    }
-                    i++;
-                }
-            }
-        }
+
         /// <summary>
         /// loads colours onto form controls
         /// </summary>
@@ -162,123 +132,6 @@ namespace Constellation
         private void pbUserIcon_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnMove_Click(object sender, EventArgs e)
-        {
-            //checks that there is a selected note
-            //if nothing is selected display error message
-            //if something is selected make movement buttons visable
-            if (lbToDoNoteNames.SelectedIndex == -1)
-            {
-                MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
-            }
-            else
-            {
-                btnToDo.Visible = true;
-                btnDoing.Visible = true;
-                btnDone.Visible = true;
-            }
-
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            //checks if there is a note selected
-            //if something is selected open the note editor and edit the selected note
-            if (lbToDoNoteNames.SelectedIndex == -1)
-            {
-                MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
-            }
-            else
-            {
-                Board_F3_.NoteName = lbToDoNoteNames.SelectedItem.ToString();
-                Board_F3_.Create = 1;
-                NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
-                NoteExpanded.Show();
-                NoteExpanded.FormClosed += Form_Reload;
-            }
-
-        }
-        private void Form_Reload(object sender, EventArgs e)
-        {
-            lbToDoNoteNames.Items.Clear();
-            GenerateListBoxEntries();
-
-        }
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            //cofirms that the user wants to delete the note
-            //if yes deletes the selected note
-            if (lbToDoNoteNames.SelectedIndex == -1)
-            {
-                MessageBox.Show("please select an item first\n you can do this by clicking on the names on the left");
-            }
-            else
-            {
-                DialogResult dr = MessageBox.Show("Are you sure you want to delete this from the board\n this action cannot be undone", "conformation", MessageBoxButtons.YesNo);
-                switch (dr)
-                {
-                    case DialogResult.Yes:
-
-                        var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
-                        //connects to the database to remove Data
-                        SQLiteConnection sqlconnection = new SQLiteConnection();
-                        sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
-                        SQLiteCommand sqlCommand = new SQLiteCommand();
-                        sqlCommand.Connection = sqlconnection;
-                        sqlCommand.CommandType = CommandType.Text;
-                        sqlCommand.CommandText = "DELETE FROM '" + BoardName + "' WHERE Name = '" + lbToDoNoteNames.SelectedItem.ToString() + "'";
-                        sqlconnection.Open();
-                        sqlCommand.ExecuteNonQuery();
-                        sqlconnection.Close();
-                        lbToDoNoteNames.Items.Clear();
-                        GenerateListBoxEntries();
-                        break;
-                }
-            }
-
-        }
-
-        private void btnToDo_Click(object sender, EventArgs e)
-        {
-            btnToDo.Visible = false;
-            btnDoing.Visible = false;
-            btnDone.Visible = false;
-            UpdateLocation(0);
-        }
-
-        private void UpdateLocation(int location)
-        {
-            //updates the location(todo,doing,done) of the note
-            (DataRow[] rows, int i) = DataRowNote.FindInDataRowNote(lbToDoNoteNames.SelectedItem.ToString());
-            SQLiteConnection sqlconnection = new SQLiteConnection();
-            SQLiteCommand sqlCommand = new SQLiteCommand();
-            sqlCommand.CommandType = CommandType.Text;
-            sqlCommand.Connection = sqlconnection;
-            sqlCommand.CommandText = "UPDATE '" + BoardOpened + "'" +
-                " SET Location = " + location +
-                " WHERE Name = " + "'" + rows[i]["Name"].ToString() + "'";
-
-            sqlconnection.Open();
-            sqlCommand.ExecuteNonQuery();
-            sqlconnection.Close();
-        }
-
-        private void btnDoing_Click(object sender, EventArgs e)
-        {
-            btnToDo.Visible = false;
-            btnDoing.Visible = false;
-            btnDone.Visible = false;
-            UpdateLocation(1);
-        }
-
-        private void btnDone_Click(object sender, EventArgs e)
-        {
-            btnToDo.Visible = false;
-            btnDoing.Visible = false;
-            btnDone.Visible = false;
-            UpdateLocation(2);
         }
 
         private void Homepage_F1__FormClosing(object sender, FormClosingEventArgs e)
@@ -311,61 +164,6 @@ namespace Constellation
             }
         }
 
-        private void lbToDoNoteNames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lbToDoNoteNames.SelectedIndex == -1)
-            {
-                btnEdit.Enabled = false;
-                btnDelete.Enabled = false;
-                btnMove.Enabled = false;
-            }
-            else
-            {
-                btnEdit.Enabled = true;
-                btnDelete.Enabled = true;
-                btnMove.Enabled = true;
-            }
-        }
-
-        private void bsBoards_Load(object sender, EventArgs e)
-        {
-            bsBoards.Left.Click += bsLeft_Click;
-            bsBoards.Right.Click += bsRight_Click;
-            bsBoards.BannerText = BoardOpened;
-        }
-        private void bsLeft_Click(object sender, EventArgs e)
-        {
-            
-            (DataRow[] rows, int i) = DataRowBoard.FindBoardInDatabase(bsBoards.BannerText);
-            try
-            {
-                bsBoards.BannerText = rows[i - 1]["name"].ToString();
-            }
-            catch
-            {
-                bsBoards.BannerText = rows[i = rows.Length - 1]["name"].ToString();
-            }
-            ReloadListbox();
-        }
-        private void bsRight_Click(object sender, EventArgs e)
-        {
-            (DataRow[] rows, int i) = DataRowBoard.FindBoardInDatabase(bsBoards.BannerText);
-            try
-            {
-                bsBoards.BannerText = rows[i + 1]["name"].ToString();
-            }
-            catch
-            {
-                bsBoards.BannerText = rows[0]["name"].ToString();
-            }
-            ReloadListbox();
-        }
-        private void ReloadListbox()
-        {
-            lbToDoNoteNames.Items.Clear();
-            UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
-            GenerateListBoxEntries();
-        }
         private void ComingUp_Load(object sender, EventArgs e)
         {
         }

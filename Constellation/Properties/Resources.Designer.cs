@@ -73,36 +73,6 @@ namespace Constellation.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Midday_LoginPage {
-            get {
-                object obj = ResourceManager.GetObject("Midday_LoginPage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Moring_LoginPage {
-            get {
-                object obj = ResourceManager.GetObject("Moring_LoginPage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Nighttime_LoginPage {
-            get {
-                object obj = ResourceManager.GetObject("Nighttime_LoginPage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Screenshot_2023_04_28_185923 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot 2023-04-28 185923", resourceCulture);

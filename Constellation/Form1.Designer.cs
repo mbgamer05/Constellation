@@ -32,6 +32,8 @@
             txtPassword = new TextBox();
             btnSend = new Button();
             btnLogin = new Button();
+            lblHello = new Label();
+            lblHelloSplash = new Label();
             SuspendLayout();
             // 
             // txtUsername
@@ -41,6 +43,8 @@
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(168, 23);
             txtUsername.TabIndex = 0;
+            txtUsername.Text = "Username";
+            txtUsername.Click += TextSelected;
             // 
             // txtPassword
             // 
@@ -49,6 +53,8 @@
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(168, 23);
             txtPassword.TabIndex = 1;
+            txtPassword.Text = "Password";
+            txtPassword.Click += TextSelected;
             // 
             // btnSend
             // 
@@ -73,18 +79,41 @@
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
+            // lblHello
+            // 
+            lblHello.AutoSize = true;
+            lblHello.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            lblHello.Location = new Point(76, 9);
+            lblHello.Name = "lblHello";
+            lblHello.Size = new Size(58, 28);
+            lblHello.TabIndex = 6;
+            lblHello.Text = "Hello";
+            // 
+            // lblHelloSplash
+            // 
+            lblHelloSplash.AutoSize = true;
+            lblHelloSplash.Location = new Point(76, 37);
+            lblHelloSplash.Name = "lblHelloSplash";
+            lblHelloSplash.Size = new Size(41, 15);
+            lblHelloSplash.TabIndex = 7;
+            lblHelloSplash.Text = "Splash";
+            lblHelloSplash.Click += lblHelloSplash_Click;
+            // 
             // Form1
             // 
             AllowDrop = true;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(334, 311);
+            Controls.Add(lblHelloSplash);
+            Controls.Add(lblHello);
             Controls.Add(btnLogin);
             Controls.Add(btnSend);
             Controls.Add(txtPassword);
             Controls.Add(txtUsername);
+            MaximizeBox = false;
             Name = "Form1";
-            Text = "Form1";
+            Text = "Login";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -96,7 +125,7 @@
         private TextBox txtPassword;
         private Button btnSend;
         private Button btnLogin;
-
-
+        private Label lblHello;
+        private Label lblHelloSplash;
     }
 }

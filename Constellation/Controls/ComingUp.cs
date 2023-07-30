@@ -63,6 +63,7 @@ namespace Constellation.Controls
 
         private void lbComingUpNote_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             string SelectedNote = lbComingUpNote.SelectedItem.ToString();
             foreach (DataRow row in rows)
             {

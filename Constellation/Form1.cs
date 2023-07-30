@@ -1,17 +1,9 @@
-using System.Configuration;
-using System.Data;
-using System.IO;
-using System.Text;
-using System.Windows.Forms;
-using System.Data.SQLite;
-using System.Linq.Expressions;
-using Microsoft.VisualBasic;
-using System.Security.Cryptography.X509Certificates;
-using System;
-using System.Runtime.CompilerServices;
 using Constellation.Scripts;
 using Constellation.UI;
-using Constellation.Properties;
+using System.Configuration;
+using System.Data;
+using System.Data.SQLite;
+using System.Text;
 
 namespace Constellation
 {
@@ -33,8 +25,6 @@ namespace Constellation
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsNetworkDeployed"), out bool isNetworkDeployed);
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsFirstRun"), out bool IsFirstRun);
             if (isNetworkDeployed == true && IsFirstRun == true)
@@ -48,13 +38,11 @@ namespace Constellation
                     ConfigurationManager.RefreshSection("appSettings");
                     Application.Restart();
                 }
-
             }
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
             string ColourPath = Path.Combine(colourpathFind) + ".db";
             if (!File.Exists(FileCreatePath))
             {
-                MessageBox.Show("Creating directory for application");
                 Directory.CreateDirectory(FileCreatePath);
             }
             if (!File.Exists(ColourPath))
@@ -152,36 +140,34 @@ namespace Constellation
                 SetUpCommand.ExecuteNonQuery();
                 NewDatabaseConnection.Close();
                 MessageBox.Show("created user database");
-
             }
             config.AppSettings.Settings["UserLocation"].Value = comPaths;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
-            LoadImages();
+            LoadBackground();
         }
-        private void LoadImages()
+        private void LoadBackground()
         {
             TimeSpan Now = DateTime.Now.TimeOfDay;
             TimeSpan Morning = new TimeSpan(0, 0, 0);
             TimeSpan Midday = new TimeSpan(11, 0, 0);
-            TimeSpan Night = new TimeSpan(17,30, 0);
-            
-            List<Bitmap> images = new List<Bitmap>();
-            images.Add(Resources.Moring_LoginPage);
-            images.Add(Resources.Midday_LoginPage);
-            images.Add(Resources.Nighttime_LoginPage);
+            TimeSpan Night = new TimeSpan(17, 30, 0);
+
 
             if ((Now >= Morning) && (Now <= Midday))
             {
-                this.BackgroundImage = images[0];
+                lblHello.Text = "Good Morning!";
+                lblHelloSplash.Text = "Hope you had a good sleep";
             }
             else if (Now >= Midday && Now <= Night)
             {
-                this.BackgroundImage = images[1];
+                lblHello.Text = "Good Afternoon!";
+                lblHelloSplash.Text = "Productive day I see";
             }
             else
             {
-                this.BackgroundImage = images[2];
+                lblHello.Text = "Good Night";
+                lblHelloSplash.Text = "Perfect night to get some more work done";
             }
         }
         private void LoadColours()
@@ -190,6 +176,8 @@ namespace Constellation
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);
             this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
+            Control cn = this;
+            cn = Class.LoadColours.SetColours(cn, this);
         }
 
         private void Settings_F2__Load(object sender, EventArgs e)
@@ -408,5 +396,16 @@ namespace Constellation
             this.Show();
         }
 
+        private void lblHelloSplash_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextSelected(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            tb.SelectionStart = 0;
+            tb.SelectionLength = tb.Text.Length;
+        }
     }
 }
