@@ -46,13 +46,13 @@ namespace Constellation.Scripts
         /// <param name="lb">the list box to be reloaded</param>
         /// <param name="Location"> where the location is to be reloaded</param>
         /// <returns></returns>
-        public static ListBox ReloadListbox (ListBox lb, int Location)
+        public static ListBox ReloadListbox(ListBox lb, int Location)
         {
             lb.Items.Clear();
             GenerateEntires(lb, Location);
             return lb;
         }
-        public static bool CheckSelected (ListBox lb)
+        public static bool CheckSelected(ListBox lb)
         {
             if (lb.SelectedIndex == -1)
             {

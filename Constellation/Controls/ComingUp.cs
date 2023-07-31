@@ -15,8 +15,8 @@ namespace Constellation.Controls
 {
     public partial class ComingUp : UserControl
     {
-        public List<DataRow> rows = new List<DataRow>();
-        public string SeletedDate;
+        private List<DataRow> rows = new List<DataRow>();
+        public string SelectedDate;
         public ComingUp()
         {
             InitializeComponent();
@@ -32,7 +32,10 @@ namespace Constellation.Controls
             get { return lblComingUpBoardName; }
             set { lblComingUpBoardName = value; }
         }
+        private void txtComingUpBody_TextChanged(object sender, EventArgs e)
+        {
 
+        }
         private void GenerateListBoxEntries(string SelectedDate)
         {
             //allows list box scrolling
@@ -47,27 +50,22 @@ namespace Constellation.Controls
                 }
             }
         }
-        private void txtComingUpBody_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         private void dtpComingUpDate_CloseUp(object sender, EventArgs e)
         {
             //gets the current date and converts it into a string that is readable for the software
             DateTime current = dtpComingUpDate.Value;
-            SeletedDate = current.ToString("dddd dd MMMM yyyy");
-            //clears the listbox and generates the new entires for it
+            SelectedDate = current.ToString("dddd dd MMMM yyyy");
             lbComingUpNote.Items.Clear();
-            GenerateListBoxEntries(SeletedDate);
+            GenerateListBoxEntries(SelectedDate);
+
         }
 
         private void lbComingUpNote_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             string SelectedNote = lbComingUpNote.SelectedItem.ToString();
             foreach (DataRow row in rows)
             {
-                if (row["Name"] == SelectedNote)
+                if (row["Name"].ToString() == SelectedNote)
                 {
                     lblComingUpBoardName.Text = row["Board"].ToString();
                     txtComingUpBody.Text = row["FullBody"].ToString();

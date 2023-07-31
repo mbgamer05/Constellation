@@ -164,8 +164,6 @@ namespace Constellation
             }
         }
 
-        private void ComingUp_Load(object sender, EventArgs e)
-        {
-        }
+
     }
 }

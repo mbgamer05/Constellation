@@ -144,20 +144,18 @@ namespace Constellation
             config.AppSettings.Settings["UserLocation"].Value = comPaths;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
-            LoadBackground();
+            LoadSplash();
         }
-        private void LoadBackground()
+        private void LoadSplash()
         {
             TimeSpan Now = DateTime.Now.TimeOfDay;
             TimeSpan Morning = new TimeSpan(0, 0, 0);
             TimeSpan Midday = new TimeSpan(11, 0, 0);
             TimeSpan Night = new TimeSpan(17, 30, 0);
-
-
             if ((Now >= Morning) && (Now <= Midday))
             {
                 lblHello.Text = "Good Morning!";
-                lblHelloSplash.Text = "Hope you had a good sleep";
+                lblHelloSplash.Text = "Ready for a day of work!";
             }
             else if (Now >= Midday && Now <= Night)
             {

@@ -91,7 +91,7 @@ namespace Constellation.Controls
                     btnMove.Enabled = false;
                     break;
             }
-            
+
         }
 
         private void btnMove_Click(object sender, EventArgs e)
