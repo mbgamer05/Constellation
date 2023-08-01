@@ -16,10 +16,10 @@ namespace Constellation.Controls
 {
     public partial class ToDo : UserControl
     {
-        public string BoardName;
         public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         public static string UserDataLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
+        public string BoardName = BoardOpened;
 
 
         public ToDo()
@@ -29,14 +29,7 @@ namespace Constellation.Controls
 
         private void bsBoards_Load(object sender, EventArgs e)
         {
-            bsBoards.Left.Click += bsLeft_Click;
-            bsBoards.Right.Click += bsRight_Click;
-            bsBoards.BannerText = BoardOpened;
-            ReloadListbox();
-            VisabilityDisable();
-            btnEdit.Enabled = false;
-            btnDelete.Enabled = false;
-            btnMove.Enabled = false;
+            
         }
         private void bsLeft_Click(object sender, EventArgs e)
         {
@@ -199,6 +192,18 @@ namespace Constellation.Controls
             btnToDo.Visible = false;
             btnDoing.Visible = false;
             btnDone.Visible = false;
+        }
+
+        private void ToDo_Load(object sender, EventArgs e)
+        {
+            bsBoards.Left.Click += bsLeft_Click;
+            bsBoards.Right.Click += bsRight_Click;
+            bsBoards.BannerText = BoardOpened;
+            ReloadListbox();
+            VisabilityDisable();
+            btnEdit.Enabled = false;
+            btnDelete.Enabled = false;
+            btnMove.Enabled = false;
         }
     }
 }

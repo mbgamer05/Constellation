@@ -40,7 +40,6 @@
             tlpRight = new TableLayoutPanel();
             lblBottomRight = new Label();
             lblBottomLeft = new Label();
-            comingUp1 = new Controls.ComingUp();
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -152,7 +151,6 @@
             tlpRight.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpRight.Controls.Add(lblBottomRight, 1, 1);
             tlpRight.Controls.Add(lblBottomLeft, 0, 1);
-            tlpRight.Controls.Add(comingUp1, 1, 0);
             tlpRight.Dock = DockStyle.Fill;
             tlpRight.Location = new Point(223, 0);
             tlpRight.Name = "tlpRight";
@@ -179,13 +177,6 @@
             lblBottomLeft.Size = new Size(112, 20);
             lblBottomLeft.TabIndex = 3;
             lblBottomLeft.Text = "COMING SOON";
-            // 
-            // comingUp1
-            // 
-            comingUp1.Location = new Point(559, 3);
-            comingUp1.Name = "comingUp1";
-            comingUp1.Size = new Size(550, 394);
-            comingUp1.TabIndex = 4;
             // 
             // Homepage_F1_
             // 
@@ -220,6 +211,5 @@
         private Panel plQuickSelect;
         private Label lblUsername;
         private Label lblBottomRight;
-        private Controls.ComingUp comingUp1;
     }
 }

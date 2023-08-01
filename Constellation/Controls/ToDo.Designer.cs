@@ -54,24 +54,22 @@
             tlpToDoHoldTL.Controls.Add(bsBoards, 0, 0);
             tlpToDoHoldTL.Dock = DockStyle.Fill;
             tlpToDoHoldTL.Location = new Point(0, 0);
-            tlpToDoHoldTL.Margin = new Padding(3, 2, 3, 2);
             tlpToDoHoldTL.Name = "tlpToDoHoldTL";
             tlpToDoHoldTL.RowCount = 2;
             tlpToDoHoldTL.RowStyles.Add(new RowStyle(SizeType.Percent, 11.17021F));
             tlpToDoHoldTL.RowStyles.Add(new RowStyle(SizeType.Percent, 88.82979F));
-            tlpToDoHoldTL.Size = new Size(468, 280);
+            tlpToDoHoldTL.Size = new Size(535, 373);
             tlpToDoHoldTL.TabIndex = 5;
             // 
             // lbToDoNoteNames
             // 
             lbToDoNoteNames.Dock = DockStyle.Fill;
             lbToDoNoteNames.FormattingEnabled = true;
-            lbToDoNoteNames.ItemHeight = 15;
-            lbToDoNoteNames.Location = new Point(3, 33);
-            lbToDoNoteNames.Margin = new Padding(3, 2, 3, 2);
+            lbToDoNoteNames.ItemHeight = 20;
+            lbToDoNoteNames.Location = new Point(3, 44);
             lbToDoNoteNames.Name = "lbToDoNoteNames";
             lbToDoNoteNames.ScrollAlwaysVisible = true;
-            lbToDoNoteNames.Size = new Size(220, 245);
+            lbToDoNoteNames.Size = new Size(253, 326);
             lbToDoNoteNames.TabIndex = 0;
             lbToDoNoteNames.SelectedIndexChanged += lbToDoNoteNames_SelectedIndexChanged;
             // 
@@ -85,22 +83,20 @@
             tlpHoldButtonsTL.Controls.Add(btnEdit, 0, 1);
             tlpHoldButtonsTL.Controls.Add(tlpMoveButtons, 1, 0);
             tlpHoldButtonsTL.Dock = DockStyle.Fill;
-            tlpHoldButtonsTL.Location = new Point(229, 33);
-            tlpHoldButtonsTL.Margin = new Padding(3, 2, 3, 2);
+            tlpHoldButtonsTL.Location = new Point(262, 44);
             tlpHoldButtonsTL.Name = "tlpHoldButtonsTL";
             tlpHoldButtonsTL.RowCount = 3;
             tlpHoldButtonsTL.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
             tlpHoldButtonsTL.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
-            tlpHoldButtonsTL.RowStyles.Add(new RowStyle(SizeType.Absolute, 110F));
-            tlpHoldButtonsTL.Size = new Size(236, 245);
+            tlpHoldButtonsTL.RowStyles.Add(new RowStyle(SizeType.Absolute, 147F));
+            tlpHoldButtonsTL.Size = new Size(270, 326);
             tlpHoldButtonsTL.TabIndex = 1;
             // 
             // btnMove
             // 
-            btnMove.Location = new Point(3, 2);
-            btnMove.Margin = new Padding(3, 2, 3, 2);
+            btnMove.Location = new Point(3, 3);
             btnMove.Name = "btnMove";
-            btnMove.Size = new Size(82, 22);
+            btnMove.Size = new Size(94, 29);
             btnMove.TabIndex = 0;
             btnMove.Text = "Move";
             btnMove.UseVisualStyleBackColor = true;
@@ -108,10 +104,9 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(3, 137);
-            btnDelete.Margin = new Padding(3, 2, 3, 2);
+            btnDelete.Location = new Point(3, 181);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(82, 22);
+            btnDelete.Size = new Size(94, 29);
             btnDelete.TabIndex = 1;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -119,10 +114,9 @@
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(3, 83);
-            btnEdit.Margin = new Padding(3, 2, 3, 2);
+            btnEdit.Location = new Point(3, 110);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(82, 22);
+            btnEdit.Size = new Size(94, 29);
             btnEdit.TabIndex = 2;
             btnEdit.Text = "Edit";
             btnEdit.UseVisualStyleBackColor = true;
@@ -136,23 +130,21 @@
             tlpMoveButtons.Controls.Add(btnDoing, 0, 1);
             tlpMoveButtons.Controls.Add(btnDone, 0, 2);
             tlpMoveButtons.Dock = DockStyle.Fill;
-            tlpMoveButtons.Location = new Point(121, 2);
-            tlpMoveButtons.Margin = new Padding(3, 2, 3, 2);
+            tlpMoveButtons.Location = new Point(138, 3);
             tlpMoveButtons.Name = "tlpMoveButtons";
             tlpMoveButtons.RowCount = 3;
             tlpMoveButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
             tlpMoveButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
             tlpMoveButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 33F));
-            tlpMoveButtons.Size = new Size(112, 77);
+            tlpMoveButtons.Size = new Size(129, 101);
             tlpMoveButtons.TabIndex = 3;
             // 
             // btnToDo
             // 
             btnToDo.Dock = DockStyle.Fill;
-            btnToDo.Location = new Point(3, 2);
-            btnToDo.Margin = new Padding(3, 2, 3, 2);
+            btnToDo.Location = new Point(3, 3);
             btnToDo.Name = "btnToDo";
-            btnToDo.Size = new Size(106, 21);
+            btnToDo.Size = new Size(123, 27);
             btnToDo.TabIndex = 0;
             btnToDo.Text = "ToDo";
             btnToDo.UseVisualStyleBackColor = true;
@@ -161,10 +153,9 @@
             // btnDoing
             // 
             btnDoing.Dock = DockStyle.Fill;
-            btnDoing.Location = new Point(3, 27);
-            btnDoing.Margin = new Padding(3, 2, 3, 2);
+            btnDoing.Location = new Point(3, 36);
             btnDoing.Name = "btnDoing";
-            btnDoing.Size = new Size(106, 21);
+            btnDoing.Size = new Size(123, 27);
             btnDoing.TabIndex = 1;
             btnDoing.Text = "Doing";
             btnDoing.UseVisualStyleBackColor = true;
@@ -173,10 +164,9 @@
             // btnDone
             // 
             btnDone.Dock = DockStyle.Fill;
-            btnDone.Location = new Point(3, 52);
-            btnDone.Margin = new Padding(3, 2, 3, 2);
+            btnDone.Location = new Point(3, 69);
             btnDone.Name = "btnDone";
-            btnDone.Size = new Size(106, 23);
+            btnDone.Size = new Size(123, 29);
             btnDone.TabIndex = 2;
             btnDone.Text = "Done";
             btnDone.UseVisualStyleBackColor = true;
@@ -186,20 +176,22 @@
             // 
             bsBoards.BannerText = "FILLTEXT";
             bsBoards.Dock = DockStyle.Fill;
-            bsBoards.Location = new Point(3, 4);
-            bsBoards.Margin = new Padding(3, 4, 3, 4);
+            bsBoards.Location = new Point(3, 5);
+            bsBoards.Margin = new Padding(3, 5, 3, 5);
             bsBoards.Name = "bsBoards";
-            bsBoards.Size = new Size(220, 23);
+            bsBoards.Size = new Size(253, 31);
             bsBoards.TabIndex = 2;
             bsBoards.Load += bsBoards_Load;
             // 
             // ToDo
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tlpToDoHoldTL);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ToDo";
-            Size = new Size(468, 280);
+            Size = new Size(535, 373);
+            Load += ToDo_Load;
             tlpToDoHoldTL.ResumeLayout(false);
             tlpHoldButtonsTL.ResumeLayout(false);
             tlpMoveButtons.ResumeLayout(false);

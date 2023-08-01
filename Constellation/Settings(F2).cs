@@ -235,6 +235,7 @@ namespace Constellation
 
         private void btnApply_Click(object sender, EventArgs e)
         {
+
             DialogResult dr = MessageBox.Show("are you sure you want to do this", "Confirmation", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
             {
@@ -251,9 +252,6 @@ namespace Constellation
                 MessageBox.Show("The application will restart soon");
                 //restarts application
                 Application.Restart();
-
-
-
             }
             else
             {
@@ -262,11 +260,6 @@ namespace Constellation
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("You have unsaved changes you sure you want to close", "Closing", MessageBoxButtons.YesNo);
 
@@ -278,6 +271,11 @@ namespace Constellation
             {
 
             }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void cbQuickClose_CheckedChanged(object sender, EventArgs e)

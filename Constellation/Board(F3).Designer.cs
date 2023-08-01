@@ -70,7 +70,6 @@
             ng.Size = new Size(1117, 553);
             ng.TabIndex = 0;
             ng.ToDoColor = SystemColors.Control;
-            ng.Load += ng_Load;
             // 
             // tlpTopBar
             // 

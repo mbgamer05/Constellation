@@ -49,7 +49,6 @@
             txtPreview.Name = "txtPreview";
             txtPreview.Size = new Size(244, 82);
             txtPreview.TabIndex = 4;
-            txtPreview.TextChanged += txtPreview_TextChanged;
             // 
             // lblNoteName
             // 
@@ -69,7 +68,6 @@
             Controls.Add(txtPreview);
             Name = "Note";
             Size = new Size(250, 125);
-            Load += Note_Load;
             ResumeLayout(false);
             PerformLayout();
         }

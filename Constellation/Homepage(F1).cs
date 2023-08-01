@@ -1,4 +1,5 @@
-﻿using Constellation.Scripts;
+﻿using Constellation.Controls;
+using Constellation.Scripts;
 using Constellation.UI;
 using Microsoft.VisualBasic;
 using System;
@@ -25,7 +26,6 @@ namespace Constellation
         {
             InitializeComponent();
         }
-        public string BoardName;
         public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         public string Username;
@@ -60,6 +60,7 @@ namespace Constellation
         }
         private void Settings_F2__FormClosed(object sender, EventArgs e)
         {
+            LoadColours();
             this.Show();
         }
         private void Board_F3__FormClosed(object sender, EventArgs e)
@@ -71,8 +72,11 @@ namespace Constellation
 
         private void Homepage_F1__Load(object sender, EventArgs e)
         {
+            ToDo todo = new ToDo();
+            ComingUp comingUp = new ComingUp();
+            tlpRight.Controls.Add(todo);
+            tlpRight.Controls.Add(comingUp);
             //form set up
-            BoardName = BoardOpened;
             lblUsername.Text = Username;
             LoadPinnedBoards();
             LoadColours();
@@ -89,7 +93,7 @@ namespace Constellation
                     {
                         Button btn = new Button();
                         btn.Text = row["name"].ToString();
-                        btn.Height = 23;
+                        btn.Height = 31;
                         btn.Tag = "Secondary";
                         plQuickSelect.Controls.Add(btn);
                         btn.Dock = DockStyle.Top;

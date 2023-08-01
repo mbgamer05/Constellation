@@ -117,22 +117,6 @@ namespace Constellation
             }
         }
 
-        private void TLPDragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void TLPDragDrop(object sender, DragEventArgs e)
-        {
-
-        }
-
-
-
-        private void Panel_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
         private void Note_DoubleClick(object sender, EventArgs e)
         {
             //when the note is double clicked make sure that
@@ -227,31 +211,6 @@ namespace Constellation
             sqlconnection.Open();
             sqlCommand.ExecuteNonQuery();
             sqlconnection.Close();
-        }
-
-        public void AddNoteToNoteGrid(Note nt, NoteGrid ng)
-        {
-
-        }
-        private void tlpBoard1_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void ng_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void btnAddNote_Click(object sender, EventArgs e)

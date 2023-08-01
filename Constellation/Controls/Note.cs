@@ -18,20 +18,6 @@ namespace Constellation
         {
             InitializeComponent();
         }
-        private void Note_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tlpTopBar_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void txtPreview_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         public string TextPreview
         {
