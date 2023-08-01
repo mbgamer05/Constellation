@@ -62,7 +62,7 @@ namespace Constellation.Controls
         private void ReloadListbox()
         {
             UpdateConfig.NewValue(bsBoards.BannerText, "BoardToOpen");
-            ListboxActions.ReloadListbox(lbToDoNoteNames, 0);
+            ListboxActions.ReloadListbox(lbToDoNoteNames, "0", "Location");
         }
         private void ReloadListboxEvent(object sender, EventArgs e)
         {

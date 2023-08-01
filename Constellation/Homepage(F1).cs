@@ -73,7 +73,9 @@ namespace Constellation
         private void Homepage_F1__Load(object sender, EventArgs e)
         {
             ToDo todo = new ToDo();
+            todo.Dock = DockStyle.Fill;
             ComingUp comingUp = new ComingUp();
+            comingUp.Dock = DockStyle.Fill;
             tlpRight.Controls.Add(todo);
             tlpRight.Controls.Add(comingUp);
             //form set up
@@ -124,7 +126,6 @@ namespace Constellation
         /// </summary>
         private void LoadColours()
         {
-
             (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = GetColours.ReadStringData(GetColours.ReadData());
             this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             this.BackColor = Color.FromArgb(BackgroundARGB[0], BackgroundARGB[1], BackgroundARGB[2], BackgroundARGB[3]);

@@ -43,7 +43,7 @@
             btnSecondary = new Button();
             btnPrimary = new Button();
             lblCustomSchemes = new Label();
-            comboBox1 = new ComboBox();
+            cbColourScheme = new ComboBox();
             rbSchemeThree = new RadioButton();
             rbSchemeTwo = new RadioButton();
             rbSchemeOne = new RadioButton();
@@ -56,9 +56,9 @@
             combFont = new ComboBox();
             lblFont = new Label();
             tabPage2 = new TabPage();
+            cbQuickClose = new CheckBox();
             cbStartUp = new CheckBox();
             ColourD = new ColorDialog();
-            cbQuickClose = new CheckBox();
             tcSettings.SuspendLayout();
             Graphics.SuspendLayout();
             panelPreview.SuspendLayout();
@@ -90,7 +90,7 @@
             Graphics.Controls.Add(btnPrimaryColour);
             Graphics.Controls.Add(panelPreview);
             Graphics.Controls.Add(lblCustomSchemes);
-            Graphics.Controls.Add(comboBox1);
+            Graphics.Controls.Add(cbColourScheme);
             Graphics.Controls.Add(rbSchemeThree);
             Graphics.Controls.Add(rbSchemeTwo);
             Graphics.Controls.Add(rbSchemeOne);
@@ -245,13 +245,14 @@
             lblCustomSchemes.TabIndex = 16;
             lblCustomSchemes.Text = "Custom Schemes";
             // 
-            // comboBox1
+            // cbColourScheme
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(52, 483);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 15;
+            cbColourScheme.FormattingEnabled = true;
+            cbColourScheme.Location = new Point(52, 483);
+            cbColourScheme.Name = "cbColourScheme";
+            cbColourScheme.Size = new Size(151, 28);
+            cbColourScheme.TabIndex = 15;
+            cbColourScheme.SelectedIndexChanged += cbColourScheme_SelectedIndexChanged;
             // 
             // rbSchemeThree
             // 
@@ -378,18 +379,6 @@
             tabPage2.Text = "Advanced";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // cbStartUp
-            // 
-            cbStartUp.AutoSize = true;
-            cbStartUp.Location = new Point(9, 8);
-            cbStartUp.Margin = new Padding(3, 4, 3, 4);
-            cbStartUp.Name = "cbStartUp";
-            cbStartUp.Size = new Size(152, 24);
-            cbStartUp.TabIndex = 0;
-            cbStartUp.Text = "Launch on start up";
-            cbStartUp.UseVisualStyleBackColor = true;
-            cbStartUp.CheckedChanged += cbStartUp_CheckedChanged;
-            // 
             // cbQuickClose
             // 
             cbQuickClose.AutoSize = true;
@@ -401,6 +390,18 @@
             cbQuickClose.Text = "Quick Close";
             cbQuickClose.UseVisualStyleBackColor = true;
             cbQuickClose.CheckedChanged += cbQuickClose_CheckedChanged;
+            // 
+            // cbStartUp
+            // 
+            cbStartUp.AutoSize = true;
+            cbStartUp.Location = new Point(9, 8);
+            cbStartUp.Margin = new Padding(3, 4, 3, 4);
+            cbStartUp.Name = "cbStartUp";
+            cbStartUp.Size = new Size(152, 24);
+            cbStartUp.TabIndex = 0;
+            cbStartUp.Text = "Launch on start up";
+            cbStartUp.UseVisualStyleBackColor = true;
+            cbStartUp.CheckedChanged += cbStartUp_CheckedChanged;
             // 
             // Settings_F2_
             // 
@@ -445,7 +446,7 @@
         private Button btnSecondary;
         private Button btnPrimary;
         private Label lblCustomSchemes;
-        private ComboBox comboBox1;
+        private ComboBox cbColourScheme;
         private Button btnTextboxBackgroundColour;
         private Button btnBackgroundColour;
         private Button btnSecondaryColour;

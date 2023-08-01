@@ -1,4 +1,6 @@
-﻿using Constellation.UI;
+﻿using Constellation.Scripts;
+using Constellation.UI;
+using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -20,8 +22,9 @@ namespace Constellation
     {
         static string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
         static string OptionsPath = FolderPath + "\\Constellation\\\\Options.ini";
+        private string FileCreatePath = FolderPath + "\\Constellation";
         Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        public string PreviewFont = "Preview1";
+        public string ColourSelected = "Preview1";
         List<string> ColourList = new List<string>();
 
 
@@ -70,6 +73,11 @@ namespace Constellation
 
         private void Settings_F2__Load(object sender, EventArgs e)
         {
+            DataRow[] rows = DataRowBoard.GetAllDatabaseColours();
+            foreach (DataRow row in rows)
+            {
+                cbColourScheme.Items.Add(row["name"]);
+            }
             LoadColours();
             string documents = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string[] paths = new string[2] { documents, "Constellation" };
@@ -119,6 +127,11 @@ namespace Constellation
                 case "Preview3":
                     rbSchemeThree.Checked = true;
                     break;
+
+                default:
+                    cbColourScheme.Text = colour;
+                    break;
+            
             }
             string QuickClose = ConfigurationManager.AppSettings["QuickClose"];
             switch (QuickClose)
@@ -150,10 +163,8 @@ namespace Constellation
         {
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
-
-
                 string PrimaryButtonColour = FindARGBValues();
-                ColourList.Add(PrimaryButtonColour);
+                ColourList.Insert(0, PrimaryButtonColour);
             }
         }
 
@@ -174,7 +185,7 @@ namespace Constellation
                 ARGBValues = ARGBValues + temp[i] + ",";
                 i++;
             }
-
+            ARGBValues = ARGBValues.Remove( ARGBValues.Length -1);
             return ARGBValues;
 
         }
@@ -184,7 +195,7 @@ namespace Constellation
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
                 string SecondaryButtonColour = FindARGBValues();
-                ColourList.Add(SecondaryButtonColour);
+                ColourList.Insert(1, SecondaryButtonColour);
 
             }
         }
@@ -194,7 +205,7 @@ namespace Constellation
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
                 string BackgroundColour = FindARGBValues();
-                ColourList.Add(BackgroundColour);
+                ColourList.Insert(2, BackgroundColour);
             }
         }
 
@@ -203,7 +214,7 @@ namespace Constellation
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
                 string TextColourColour = FindARGBValues();
-                ColourList.Add(TextColourColour);
+                ColourList.Insert(3, TextColourColour);
             }
         }
 
@@ -212,30 +223,67 @@ namespace Constellation
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
                 string TextBoxBackgroundColour = FindARGBValues();
-                ColourList.Add(TextBoxBackgroundColour);
+                ColourList.Insert(4, TextBoxBackgroundColour);
             }
         }
 
         private void rbSchemeOne_CheckedChanged(object sender, EventArgs e)
         {
-            PreviewFont = "Preview1";
+            ColourSelected = "Preview1";
 
         }
 
         private void rbSchemeTwo_CheckedChanged(object sender, EventArgs e)
         {
-            PreviewFont = "Preview2";
+            ColourSelected = "Preview2";
         }
 
         private void rbSchemeThree_CheckedChanged(object sender, EventArgs e)
         {
-            PreviewFont = "Preview3";
-
+            ColourSelected = "Preview3";
         }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-
+            int clear = 0;
+            foreach (var item in ColourList)
+            {
+                if (item != string.Empty)
+                {
+                    clear++;
+                }
+            }
+            if (clear == 5)
+            {
+                string ColourName = Interaction.InputBox("please enter name for colour scheme", "scheme creation", "");
+                string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
+                string ColourPath = Path.Combine(colourpathFind) + ".db";
+                SQLiteConnection ColourConnection = new SQLiteConnection();
+                ColourConnection.ConnectionString = "DataSource = " + ColourPath;
+                SQLiteCommand ColourAddCommand = new SQLiteCommand();
+                ColourAddCommand.Connection = ColourConnection;
+                ColourAddCommand.CommandType = CommandType.Text;
+                ColourAddCommand.CommandText = "CREATE TABLE '" + ColourName +
+                    "' (PrimaryButton TEXT," +
+                    " SecondaryButton TEXT," +
+                    " BackgroundColour TEXT," +
+                    " TextColour TEXT," +
+                    "TextboxBackgroundColour TEXT)";
+                ColourConnection.Open();
+                ColourAddCommand.ExecuteNonQuery();
+                ColourConnection.Close();
+                ColourAddCommand.CommandText = "INSERT INTO '" + ColourName +
+                    "' (PrimaryButton, SecondaryButton, BackgroundColour, TextColour,TextboxBackgroundColour)" +
+                    " Values (@PB, @SB, @BC, @TC, @TBC)";
+                ColourAddCommand.Parameters.AddWithValue("@PB", ColourList[0]);
+                ColourAddCommand.Parameters.AddWithValue("@SB", ColourList[1]);
+                ColourAddCommand.Parameters.AddWithValue("@BC", ColourList[2]);
+                ColourAddCommand.Parameters.AddWithValue("@TC", ColourList[3]);
+                ColourAddCommand.Parameters.AddWithValue("@TBC", ColourList[4]);
+                ColourConnection.Open();
+                ColourAddCommand.ExecuteNonQuery();
+                ColourConnection.Close();
+            }
             DialogResult dr = MessageBox.Show("are you sure you want to do this", "Confirmation", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
             {
@@ -245,7 +293,7 @@ namespace Constellation
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
                 //sets colour scheme
-                config.AppSettings.Settings["ColourScheme"].Value = PreviewFont;
+                config.AppSettings.Settings["ColourScheme"].Value = ColourSelected;
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
                 //writes the current user into the config file
@@ -284,6 +332,15 @@ namespace Constellation
             config.AppSettings.Settings["QuickClose"].Value = cbQuickClose.Checked.ToString();
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        private void cbColourScheme_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (RadioButton rb in Graphics.Controls.OfType<RadioButton>())
+            {
+                rb.Checked = false;
+            }
+            ColourSelected = cbColourScheme.SelectedItem.ToString();
         }
     }
 }

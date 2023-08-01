@@ -16,7 +16,7 @@ namespace Constellation.Scripts
         /// <param name="lb">the list box to generate entires for</param>
         /// <param name="Location">the location that need notes need to be pulled from</param>
         /// <returns></returns>
-        public static ListBox GenerateEntires(ListBox lb, int Location)
+        public static ListBox GenerateEntires(ListBox lb, string Location, string RowID)
         {
             //allows list box scrolling
             //gets all data from the board that is selected
@@ -31,7 +31,7 @@ namespace Constellation.Scripts
                 }
                 else
                 {
-                    if (int.Parse(rows[i]["Location"].ToString()) == Location)
+                    if (rows[i][RowID].ToString() == Location)
                     {
                         lb.Items.Add(rows[i]["Name"].ToString());
                     }
@@ -46,10 +46,10 @@ namespace Constellation.Scripts
         /// <param name="lb">the list box to be reloaded</param>
         /// <param name="Location"> where the location is to be reloaded</param>
         /// <returns></returns>
-        public static ListBox ReloadListbox(ListBox lb, int Location)
+        public static ListBox ReloadListbox(ListBox lb, string Location, string RowID)
         {
             lb.Items.Clear();
-            GenerateEntires(lb, Location);
+            GenerateEntires(lb, Location, RowID);
             return lb;
         }
         public static bool CheckSelected(ListBox lb)

@@ -38,8 +38,8 @@ namespace Constellation.Controls
         }
         private void GenerateListBoxEntries(string SelectedDate)
         {
-            //allows list box scrolling
             //gets all data from all boards that have notes where the dates are equal
+            //adds the note to the listbox
             rows = DataRowNote.ReadAllBoardsNotes(DataRowBoard.GetAllDatabaseBoards());
             foreach (DataRow row in rows)
             {
@@ -55,22 +55,25 @@ namespace Constellation.Controls
             //gets the current date and converts it into a string that is readable for the software
             DateTime current = dtpComingUpDate.Value;
             SelectedDate = current.ToString("dddd dd MMMM yyyy");
-            lbComingUpNote.Items.Clear();
             GenerateListBoxEntries(SelectedDate);
 
         }
 
         private void lbComingUpNote_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string SelectedNote = lbComingUpNote.SelectedItem.ToString();
-            foreach (DataRow row in rows)
+            if (lbComingUpNote.SelectedIndex >= 0) 
             {
-                if (row["Name"].ToString() == SelectedNote)
+                string SelectedNote = lbComingUpNote.SelectedItem.ToString();
+                foreach (DataRow row in rows)
                 {
-                    lblComingUpBoardName.Text = row["Board"].ToString();
-                    txtComingUpBody.Text = row["FullBody"].ToString();
+                    if (row["Name"].ToString() == SelectedNote)
+                    {
+                        lblComingUpBoardName.Text = row["Board"].ToString();
+                        txtComingUpBody.Text = row["FullBody"].ToString();
+                    }
                 }
             }
+            
         }
     }
 }
