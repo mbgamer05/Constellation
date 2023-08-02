@@ -27,7 +27,6 @@ namespace Constellation
             InitializeComponent();
         }
         public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         public string Username;
         public bool Allow;
         private void btnSettings_Click(object sender, EventArgs e)
@@ -60,8 +59,9 @@ namespace Constellation
         }
         private void Settings_F2__FormClosed(object sender, EventArgs e)
         {
-            LoadColours();
             this.Show();
+            LoadColours();
+
         }
         private void Board_F3__FormClosed(object sender, EventArgs e)
         {

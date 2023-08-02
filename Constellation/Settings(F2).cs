@@ -297,16 +297,13 @@ namespace Constellation
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
                 //writes the current user into the config file
-                MessageBox.Show("The application will restart soon");
-                //restarts application
-                Application.Restart();
+                MessageBox.Show("Applying changes");
+                LoadColours();
             }
             else
             {
-                MessageBox.Show("ok");
             }
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("You have unsaved changes you sure you want to close", "Closing", MessageBoxButtons.YesNo);

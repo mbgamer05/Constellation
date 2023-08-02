@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
 using System.Data.SQLite;
 
 namespace Constellation.UI
@@ -6,17 +7,19 @@ namespace Constellation.UI
 
     public class GetColours
     {
-        static PublicData PD = new PublicData();
-
-        static string[] colourpathFind = new string[2] { PD.FileCreatePath, "Colour" };
-        static string ColourPath = Path.Combine(colourpathFind) + ".db";
+        private static string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        public static string FileCreatePath = FolderPath + "\\Constellation";
+        public static string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
+        public static string ColourPath = Path.Combine(colourpathFind) + ".db";
 
 
         public static DataRow[] ReadData()
         {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            string ColourScheme = config.AppSettings.Settings["ColourScheme"].Value;
             SQLiteConnection sqlconnection = new SQLiteConnection();
             sqlconnection.ConnectionString = "DataSource = " + ColourPath;
-            string commandText = "SELECT * FROM " + PD.ColourScheme;
+            string commandText = "SELECT * FROM " + ColourScheme;
             DataTable table = new DataTable();
             SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
             sqlconnection.Open();
