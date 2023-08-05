@@ -105,7 +105,7 @@
             btnAddNote.Size = new Size(82, 29);
             btnAddNote.TabIndex = 0;
             btnAddNote.Tag = "Primary";
-            btnAddNote.Text = "Add note";
+            btnAddNote.Text = "Add Note";
             btnAddNote.UseVisualStyleBackColor = true;
             btnAddNote.Click += btnAddNote_Click;
             // 

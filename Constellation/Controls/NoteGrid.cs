@@ -85,20 +85,18 @@ namespace Constellation
             get { return Done; }
             set { Done = value; }
         }
-        public Panel[] AllPanels 
+        public Panel[] AllPanels
         {
-            get 
+            get
             {
                 return this.tlpStation.Controls.OfType<Panel>().ToArray();
 
             }
             set
             {
-             
-            }
-            
-        }
 
-        
+            }
+
+        }
     }
 }

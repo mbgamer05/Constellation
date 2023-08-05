@@ -25,7 +25,7 @@ namespace Constellation.Class
         public static Control SetColours (Control Control, Form form)
         {
             (int[] PrimaryButtonARGB, int[] SecondaryButtonARGB, int[] TextARGB, int[] BackgroundARGB, int[] TextBoxBackgroundARGB) = GetColours.ReadStringData(GetColours.ReadData());
-            foreach (Control cn in Class.LoadColours.GetAllChildrens(Control))
+            foreach (Control cn in LoadColours.GetAllChildrens(Control))
             {
                 if (cn != null)
                 {

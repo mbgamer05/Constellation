@@ -18,7 +18,7 @@ namespace Constellation
     public partial class NoteExpanded_F4_ : Form
     {
         static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
+        public string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         public NoteExpanded_F4_()
         {
             InitializeComponent();
@@ -76,8 +76,8 @@ namespace Constellation
                 switch(Board_F3_.Create)
                 {
                     case 0:
-                        sqlCommand.CommandText = "INSERT INTO' " + BoardOpened +"'"+
-                   "(Name, PreviewBody, FullBody, Date, Location, PBoard)" +
+                        sqlCommand.CommandText = "INSERT INTO '" + BoardOpened +"'"+
+                   " (Name, PreviewBody, FullBody, Date, Location, PBoard)" +
                    " Values (@Name, @PreviewBody, @FullBody, @Date, @Location, @PBoard)";
                         sqlCommand.Parameters.AddWithValue("@Name", data[0]);
                         sqlCommand.Parameters.AddWithValue("@PreviewBody", data[1]);
@@ -88,7 +88,7 @@ namespace Constellation
                         sqlconnection.Open();
                         sqlCommand.ExecuteNonQuery();
                         sqlconnection.Close();
-                        MessageBox.Show("New note made");
+                        Board_F3_.Create = 1;
                         break;
 
                     case 1:
@@ -104,8 +104,6 @@ namespace Constellation
                         MessageBox.Show("Changes applied");
                         break;
                 }
-
-
                 btnClose.Visible = true;
                 btnClose.Enabled = true;
             }

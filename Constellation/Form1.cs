@@ -244,7 +244,7 @@ namespace Constellation
                     SetUpCommand.Parameters.AddWithValue("@FullBody", "data shown here is bigger and larger than the preview message, this is great for large projects where you need to write down what you need to do,\n also the date stamp is when the idea/work needs to be done by");
                     SetUpCommand.Parameters.AddWithValue("@Date", DateTime.Today.AddDays(7).ToString("dddd, dd MMMM yyyy"));
                     SetUpCommand.Parameters.AddWithValue("@Location", i);
-                    SetUpCommand.Parameters.AddWithValue("@PBoard", 0);
+                    SetUpCommand.Parameters.AddWithValue("@PBoard", 1);
                     NewDatabaseConnection.Open();
                     SetUpCommand.ExecuteNonQuery();
                     NewDatabaseConnection.Close();

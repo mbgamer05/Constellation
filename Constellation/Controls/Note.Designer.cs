@@ -28,34 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnSettings = new Button();
             txtPreview = new TextBox();
+            btnSettings = new Button();
             lblNoteName = new Label();
             SuspendLayout();
             // 
+            // txtPreview
+            // 
+            txtPreview.Location = new Point(0, 45);
+            txtPreview.Multiline = true;
+            txtPreview.Name = "txtPreview";
+            txtPreview.Size = new Size(282, 80);
+            txtPreview.TabIndex = 4;
+            txtPreview.MouseDown += MouseDownNote;
+            // 
             // btnSettings
             // 
-            btnSettings.Location = new Point(228, 0);
+            btnSettings.Location = new Point(260, 0);
             btnSettings.Name = "btnSettings";
             btnSettings.Size = new Size(22, 25);
             btnSettings.TabIndex = 0;
             btnSettings.Text = "Settings";
             btnSettings.UseVisualStyleBackColor = true;
-            // 
-            // txtPreview
-            // 
-            txtPreview.Location = new Point(3, 40);
-            txtPreview.Multiline = true;
-            txtPreview.Name = "txtPreview";
-            txtPreview.Size = new Size(244, 82);
-            txtPreview.TabIndex = 4;
+            btnSettings.MouseDown += MouseDownNote;
             // 
             // lblNoteName
             // 
             lblNoteName.AutoSize = true;
-            lblNoteName.Location = new Point(0, 0);
+            lblNoteName.Location = new Point(3, 5);
             lblNoteName.Name = "lblNoteName";
-            lblNoteName.Size = new Size(0, 20);
+            lblNoteName.Size = new Size(0, 15);
             lblNoteName.TabIndex = 5;
             // 
             // Note
@@ -64,18 +66,18 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.ActiveCaption;
             Controls.Add(lblNoteName);
-            Controls.Add(btnSettings);
             Controls.Add(txtPreview);
+            Controls.Add(btnSettings);
             Name = "Note";
-            Size = new Size(250, 125);
+            Size = new Size(282, 125);
+            Load += Note_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button btnSettings;
         private TextBox txtPreview;
+        private Button btnSettings;
         private Label lblNoteName;
     }
 }

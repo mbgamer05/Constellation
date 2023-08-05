@@ -131,7 +131,7 @@ namespace Constellation
                 default:
                     cbColourScheme.Text = colour;
                     break;
-            
+
             }
             string QuickClose = ConfigurationManager.AppSettings["QuickClose"];
             switch (QuickClose)
@@ -185,7 +185,7 @@ namespace Constellation
                 ARGBValues = ARGBValues + temp[i] + ",";
                 i++;
             }
-            ARGBValues = ARGBValues.Remove( ARGBValues.Length -1);
+            ARGBValues = ARGBValues.Remove(ARGBValues.Length - 1);
             return ARGBValues;
 
         }

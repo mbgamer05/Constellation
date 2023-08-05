@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Constellation.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,6 +29,15 @@ namespace Constellation
         {
             get { return lblNoteName.Text; }
             set { lblNoteName.Text = value; }
+        }
+        private void Note_Load(object sender, EventArgs e)
+        {
+        }
+        protected virtual void MouseDownProc(EventArgs e)
+        {
+        }
+        public void MouseDownNote(object sender, MouseEventArgs e)
+        {
         }
     }
 }

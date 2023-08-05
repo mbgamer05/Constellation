@@ -55,6 +55,7 @@ namespace Constellation
             foreach (DataRow row in rows)
             {
                 cbSelector.Items.Add(row["name"].ToString());
+                cbSelector.SelectedIndex = 0;
             }
         }
 

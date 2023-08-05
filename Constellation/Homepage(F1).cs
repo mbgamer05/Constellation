@@ -72,6 +72,7 @@ namespace Constellation
 
         private void Homepage_F1__Load(object sender, EventArgs e)
         {
+            this.Text = "Homepage";
             ToDo todo = new ToDo();
             todo.Dock = DockStyle.Fill;
             ComingUp comingUp = new ComingUp();
@@ -114,7 +115,6 @@ namespace Constellation
         {
             Button btn = sender as Button;
             string BoardOpening = btn.Text;
-            MessageBox.Show("loading the board up now please wait...");
             UpdateConfig.NewValue(BoardOpening, "BoardToOpen");
             Allow = true;
             Open_board(sender, e);
@@ -157,11 +157,13 @@ namespace Constellation
 
         private void btnNewBoard_Click(object sender, EventArgs e)
         {
-            string BoardName = Interaction.InputBox("Please enter name of the board", "Board Creation", "");
+            string BoardName = Interaction.InputBox("Please enter name of the board you wish to create", "Board Creation", "");
             if (!string.IsNullOrEmpty(BoardName))
             {
                 string Path = config.AppSettings.Settings["UserLoginLocation"].Value;
                 BoardName = Setups.CreateBoard(BoardName, Path);
+                Board_F3_ board_F3 = new Board_F3_();
+
             }
             else
             {

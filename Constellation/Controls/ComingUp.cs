@@ -44,7 +44,7 @@ namespace Constellation.Controls
             foreach (DataRow row in rows)
             {
 
-                if (SelectedDate == row["date"].ToString())
+                if (SelectedDate == row["Date"].ToString())
                 {
                     lbComingUpNote.Items.Add(row["Name"]);
                 }
@@ -54,7 +54,7 @@ namespace Constellation.Controls
         {
             //gets the current date and converts it into a string that is readable for the software
             DateTime current = dtpComingUpDate.Value;
-            SelectedDate = current.ToString("dddd dd MMMM yyyy");
+            SelectedDate = current.ToString("dddd, dd MMMM yyyy");
             GenerateListBoxEntries(SelectedDate);
 
         }

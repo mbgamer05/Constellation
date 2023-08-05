@@ -19,6 +19,9 @@ using Microsoft.VisualBasic.Devices;
 using System.Net.NetworkInformation;
 using Constellation.Scripts;
 using Constellation.UI;
+using Microsoft.VisualBasic;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Constellation
 {
@@ -85,7 +88,7 @@ namespace Constellation
                     nt.BackColor = SystemColors.ActiveCaption;
                     nt.Location = new Point(0, 0);
                     nt.Name = "Note" + i;
-                    nt.Size = new Size(250, 125);
+                    nt.Size = new Size(282, 125);
                     nt.Dock = DockStyle.Top;
                     nt.MouseDown += Note_MouseDown;
                     nt.MouseMove += Note_MouseMove_1;
@@ -152,6 +155,8 @@ namespace Constellation
             //when the mouse is pressed down it removes the note from all controls and adds it back to the form
             //while the mouse is down the note will follow the cursor 
             Note nt = (Note)sender;
+            
+
             nt.Dock = DockStyle.None;
             foreach (Panel pl in ng.AllPanels)
             {
@@ -244,10 +249,31 @@ namespace Constellation
 
         private void btnDeleteNote_Click(object sender, EventArgs e)
         {
-            SelectorForm_F5_ Selector = new SelectorForm_F5_();
-            Selector.Action = "Delete";
-            Selector.FormClosing += Form_Reload;
-            Selector.Show();
+            string NoteName = Interaction.InputBox("Please enter name of the Note you wish to Delete\nThis action cannot be reverse", "Note Deletion", "");
+            foreach (Panel pl in ng.AllPanels)
+            {
+                foreach (Note nt in pl.Controls.OfType<Note>())
+                {
+                    if (NoteName == nt.NoteName)
+                    {
+                        PublicData PD = new PublicData();
+                        MessageBox.Show("Deleting entry...");
+                        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                        var ConfigLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
+                        //connects to the database to remove Data
+                        SQLiteConnection sqlconnection = new SQLiteConnection();
+                        sqlconnection.ConnectionString = "DataSource = " + ConfigLocation;
+                        SQLiteCommand sqlCommand = new SQLiteCommand();
+                        sqlCommand.Connection = sqlconnection;
+                        sqlCommand.CommandType = CommandType.Text;
+                        sqlCommand.CommandText = "DELETE FROM '" + PD.BoardOpened + "' WHERE Name = '" + NoteName + "'";
+                        sqlconnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                        sqlconnection.Close();
+                    }
+                }
+            }
+            Form_Reload(sender, e);
 
         }
 
