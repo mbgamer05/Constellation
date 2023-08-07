@@ -27,13 +27,13 @@ namespace Constellation
 {
     public partial class Board_F3_ : Form
     {
-        public string SelectedNote;
         static class DataLocation
         {
             public static Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             public static string UserDataLocation = config.AppSettings.Settings["UserLoginLocation"].Value;
             public static string BoardOpened = config.AppSettings.Settings["BoardToOpen"].Value;
         }
+        public string SelectedNote;
         public static string NoteName;
         public static int Create;
         public static string Action;
@@ -91,9 +91,12 @@ namespace Constellation
                     nt.Size = new Size(282, 125);
                     nt.Dock = DockStyle.Top;
                     nt.MouseDown += Note_MouseDown;
+                    nt.btnExpand.Click += Note_DoubleClick;
+                    nt.btnExpand.Tag = nt.NoteName;
                     nt.MouseMove += Note_MouseMove_1;
                     nt.MouseUp += Note_MouseUp;
                     nt.DoubleClick += Note_DoubleClick;
+
                     switch (rows[i]["Location"].ToString())
                     {
                         case "0":
@@ -125,7 +128,9 @@ namespace Constellation
             //when the note is double clicked make sure that
             //create = 1 so that form 4 knows that the note already has data
             //put note name into variale so that form 4 knows what note is being opened
-            Note nt = (Note)sender;
+            Control cl = (Control)sender;
+            Note nt = new Note();
+            nt.NoteName = cl.Tag.ToString();
             SelectedNote = nt.Name;
             Create = 1;
             NoteName = nt.NoteName.ToString();
@@ -133,7 +138,7 @@ namespace Constellation
             NoteExpanded.Show();
             NoteExpanded.FormClosed += Form_Reload;
         }
-        private void Form_Reload(object sender, EventArgs e)
+        public void Form_Reload(object sender, EventArgs e)
         {
             //reloads the form by removing all notes and recreating them 
             ClearNotes();
@@ -155,8 +160,6 @@ namespace Constellation
             //when the mouse is pressed down it removes the note from all controls and adds it back to the form
             //while the mouse is down the note will follow the cursor 
             Note nt = (Note)sender;
-            
-
             nt.Dock = DockStyle.None;
             foreach (Panel pl in ng.AllPanels)
             {
@@ -168,7 +171,6 @@ namespace Constellation
                 MouseDownLocation = e.Location;
             }
         }
-
         private void Note_MouseUp(object sender, EventArgs e)
         {
             //if the note is touching any of the boards panels add the control to panel that the note is most over

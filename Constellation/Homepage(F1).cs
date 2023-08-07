@@ -52,7 +52,7 @@ namespace Constellation
             if (SelectorForm_F5_.allow == true || Allow == true)
             {
                 Board_F3_ Board = new Board_F3_();
-                Board.FormClosed += Board_F3__FormClosed;
+                Board.FormClosed += Homepage_F1__Load;
                 this.Hide();
                 Board.Show();
             }
@@ -63,23 +63,18 @@ namespace Constellation
             LoadColours();
 
         }
-        private void Board_F3__FormClosed(object sender, EventArgs e)
-        {
-            plQuickSelect.Controls.Clear();
-            LoadPinnedBoards();
-            this.Show();
-        }
-
         private void Homepage_F1__Load(object sender, EventArgs e)
         {
+            //form set up
+            this.Show();
             this.Text = "Homepage";
             ToDo todo = new ToDo();
             todo.Dock = DockStyle.Fill;
             ComingUp comingUp = new ComingUp();
             comingUp.Dock = DockStyle.Fill;
+            tlpRight.Controls.Clear();
             tlpRight.Controls.Add(todo);
             tlpRight.Controls.Add(comingUp);
-            //form set up
             lblUsername.Text = Username;
             LoadPinnedBoards();
             LoadColours();
@@ -87,6 +82,7 @@ namespace Constellation
 
         private void LoadPinnedBoards()
         {
+            plQuickSelect.Controls.Clear();
             foreach (DataRow row in DataRowBoard.GetAllDatabaseBoards())
             {
                 DataRow[] rows = DataRowNote.ReadSelectedBoardsNotes(row["name"].ToString());

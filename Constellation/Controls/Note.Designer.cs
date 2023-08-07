@@ -35,10 +35,10 @@
             // 
             // txtPreview
             // 
-            txtPreview.Location = new Point(0, 45);
+            txtPreview.Location = new Point(0, 50);
             txtPreview.Multiline = true;
             txtPreview.Name = "txtPreview";
-            txtPreview.Size = new Size(282, 80);
+            txtPreview.Size = new Size(282, 75);
             txtPreview.TabIndex = 4;
             txtPreview.MouseDown += MouseDownNote;
             // 
@@ -50,6 +50,7 @@
             btnSettings.TabIndex = 0;
             btnSettings.Text = "Settings";
             btnSettings.UseVisualStyleBackColor = true;
+            btnSettings.Click += btnSettings_Click;
             btnSettings.MouseDown += MouseDownNote;
             // 
             // lblNoteName
@@ -71,6 +72,7 @@
             Name = "Note";
             Size = new Size(282, 125);
             Load += Note_Load;
+            MouseDown += MouseDownNote;
             ResumeLayout(false);
             PerformLayout();
         }

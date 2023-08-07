@@ -1,8 +1,11 @@
 ﻿using Constellation.Class;
+using Constellation.Scripts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -19,7 +22,6 @@ namespace Constellation
         {
             InitializeComponent();
         }
-
         public string TextPreview
         {
             get { return txtPreview.Text; }
@@ -36,7 +38,20 @@ namespace Constellation
         protected virtual void MouseDownProc(EventArgs e)
         {
         }
-        public void MouseDownNote(object sender, MouseEventArgs e)
+        private void MouseDownNote(object sender, MouseEventArgs e)
+        {
+
+        }
+        public void MouseMoveNote(object sender, MouseEventArgs e)
+        {
+
+        }
+        public System.Windows.Forms.Button btnExpand
+        {
+            get { return btnSettings; }
+            set { btnSettings = value; }
+        }
+        private void btnSettings_Click(object sender, EventArgs e)
         {
         }
     }
