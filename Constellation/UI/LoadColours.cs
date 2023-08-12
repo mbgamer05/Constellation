@@ -16,7 +16,7 @@ namespace Constellation.Class
             return controls.SelectMany(c => GetAllChildrens(c)).Concat(controls);
         }
         /// <summary>
-        /// sets each of the controls in the form to their selected colours
+        /// Sets each of the controls in the form to their selected colours
         /// goes through each of the controls provided through the parent control
         /// </summary>
         /// <param name="Control">The parent control selected</param>

@@ -38,9 +38,9 @@
             btnCancel = new Button();
             txtName = new TextBox();
             dtpDate = new DateTimePicker();
+            tableLayoutPanel1 = new TableLayoutPanel();
             btnApply = new Button();
             btnClose = new Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
             tlpBody.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -69,25 +69,26 @@
             tlpBody.RowStyles.Add(new RowStyle(SizeType.Percent, 16F));
             tlpBody.RowStyles.Add(new RowStyle(SizeType.Percent, 16F));
             tlpBody.RowStyles.Add(new RowStyle(SizeType.Percent, 16F));
-            tlpBody.Size = new Size(384, 373);
+            tlpBody.Size = new Size(583, 414);
             tlpBody.TabIndex = 0;
             // 
             // txtBody
             // 
             txtBody.Dock = DockStyle.Fill;
-            txtBody.Location = new Point(195, 151);
+            txtBody.Location = new Point(294, 167);
             txtBody.Multiline = true;
             txtBody.Name = "txtBody";
-            txtBody.Size = new Size(186, 68);
+            txtBody.ScrollBars = ScrollBars.Vertical;
+            txtBody.Size = new Size(286, 76);
             txtBody.TabIndex = 8;
             // 
             // txtPreview
             // 
             txtPreview.Dock = DockStyle.Fill;
-            txtPreview.Location = new Point(195, 77);
+            txtPreview.Location = new Point(294, 85);
             txtPreview.Multiline = true;
             txtPreview.Name = "txtPreview";
-            txtPreview.Size = new Size(186, 68);
+            txtPreview.Size = new Size(286, 76);
             txtPreview.TabIndex = 7;
             // 
             // lblName
@@ -102,25 +103,25 @@
             // lblPreview
             // 
             lblPreview.AutoSize = true;
-            lblPreview.Location = new Point(3, 74);
+            lblPreview.Location = new Point(3, 82);
             lblPreview.Name = "lblPreview";
-            lblPreview.Size = new Size(60, 20);
+            lblPreview.Size = new Size(44, 20);
             lblPreview.TabIndex = 3;
-            lblPreview.Text = "Preview";
+            lblPreview.Text = "Blurb";
             // 
             // lblBody
             // 
             lblBody.AutoSize = true;
-            lblBody.Location = new Point(3, 148);
+            lblBody.Location = new Point(3, 164);
             lblBody.Name = "lblBody";
-            lblBody.Size = new Size(43, 20);
+            lblBody.Size = new Size(87, 20);
             lblBody.TabIndex = 5;
-            lblBody.Text = "Body";
+            lblBody.Text = "Information";
             // 
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(3, 222);
+            lblDate.Location = new Point(3, 246);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(41, 20);
             lblDate.TabIndex = 4;
@@ -128,7 +129,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(3, 299);
+            btnCancel.Location = new Point(3, 331);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(94, 29);
             btnCancel.TabIndex = 0;
@@ -139,18 +140,33 @@
             // txtName
             // 
             txtName.Dock = DockStyle.Fill;
-            txtName.Location = new Point(195, 3);
+            txtName.Location = new Point(294, 3);
             txtName.Multiline = true;
             txtName.Name = "txtName";
-            txtName.Size = new Size(186, 68);
+            txtName.Size = new Size(286, 76);
             txtName.TabIndex = 6;
             // 
             // dtpDate
             // 
-            dtpDate.Location = new Point(195, 225);
+            dtpDate.Location = new Point(294, 249);
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new Size(186, 27);
             dtpDate.TabIndex = 9;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(btnApply, 0, 0);
+            tableLayoutPanel1.Controls.Add(btnClose, 0, 1);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(294, 331);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(286, 80);
+            tableLayoutPanel1.TabIndex = 12;
             // 
             // btnApply
             // 
@@ -164,7 +180,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(3, 38);
+            btnClose.Location = new Point(3, 43);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(94, 27);
             btnClose.TabIndex = 11;
@@ -173,26 +189,11 @@
             btnClose.Visible = false;
             btnClose.Click += btnClose_Click;
             // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(btnApply, 0, 0);
-            tableLayoutPanel1.Controls.Add(btnClose, 0, 1);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(195, 299);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(186, 71);
-            tableLayoutPanel1.TabIndex = 12;
-            // 
             // NoteExpanded_F4_
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(384, 373);
+            ClientSize = new Size(583, 414);
             ControlBox = false;
             Controls.Add(tlpBody);
             Name = "NoteExpanded_F4_";

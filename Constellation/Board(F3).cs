@@ -45,7 +45,7 @@ namespace Constellation
         Point ptOriginal = Point.Empty;
         private void Board_F3__Load(object sender, EventArgs e)
         {
-            GenerateNotes();
+            GenerateNotes(true);
             LoadColours();
         }
         private void LoadColours()
@@ -65,62 +65,82 @@ namespace Constellation
                 pl.Controls.Clear();
             }
         }
-        private void GenerateNotes()
+        private void GenerateNotes(bool UA)
         {
-            DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
-            bool create = true;
-            int i = 0;
-            NoteGrid ng = new NoteGrid();
-            while (create == true)
+            if (UA == true)
             {
-                if (i >= rows.Length)
+                DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
+                bool create = true;
+                int i = 0;
+                NoteGrid ng = new NoteGrid();
+                while (create == true)
                 {
-                    create = false;
+                    if (i >= rows.Length)
+                    {
+                        create = false;
+                    }
+                    else
+                    {
+                        //generates note data and puts in appropriate panel
+                        Note nt = new Note();
+                        nt.NoteName = rows[i]["Name"].ToString();
+                        nt.TextPreview = rows[i]["PreviewBody"].ToString();
+                        nt.AutoSize = true;
+                        nt.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                        nt.BackColor = SystemColors.ActiveCaption;
+                        nt.Location = new Point(0, 0);
+                        nt.Name = "Note" + i;
+                        nt.Size = new Size(282, 125);
+                        nt.Dock = DockStyle.Top;
+                        nt.MouseDown += Note_MouseDown;
+                        nt.btnExpand.Click += Note_ButtonClick;
+                        nt.btnExpand.Tag = nt.NoteName;
+                        nt.MouseMove += Note_MouseMove_1;
+                        nt.MouseUp += Note_MouseUp;
+                        nt.DoubleClick += Note_DoubleClick;
+
+                        switch (rows[i]["Location"].ToString())
+                        {
+                            case "0":
+                                this.ng.ToDoPanel.Controls.Add(nt);
+                                break;
+                            case "1":
+                                this.ng.DoingPanel.Controls.Add(nt);
+                                break;
+                            case "2":
+                                this.ng.DonePanel.Controls.Add(nt);
+                                break;
+                        }
+                        i++;
+                        nt.Show();
+                    }
+                }
+                if (i == 0)
+                {
+                    btnPinBoard.Enabled = false;
                 }
                 else
                 {
-                    //generates note data and puts in appropriate panel
-                    Note nt = new Note();
-                    nt.NoteName = rows[i]["Name"].ToString();
-                    nt.TextPreview = rows[i]["PreviewBody"].ToString();
-                    nt.AutoSize = true;
-                    nt.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                    nt.BackColor = SystemColors.ActiveCaption;
-                    nt.Location = new Point(0, 0);
-                    nt.Name = "Note" + i;
-                    nt.Size = new Size(282, 125);
-                    nt.Dock = DockStyle.Top;
-                    nt.MouseDown += Note_MouseDown;
-                    nt.btnExpand.Click += Note_DoubleClick;
-                    nt.btnExpand.Tag = nt.NoteName;
-                    nt.MouseMove += Note_MouseMove_1;
-                    nt.MouseUp += Note_MouseUp;
-                    nt.DoubleClick += Note_DoubleClick;
-
-                    switch (rows[i]["Location"].ToString())
-                    {
-                        case "0":
-                            this.ng.ToDoPanel.Controls.Add(nt);
-                            break;
-                        case "1":
-                            this.ng.DoingPanel.Controls.Add(nt);
-                            break;
-                        case "2":
-                            this.ng.DonePanel.Controls.Add(nt);
-                            break;
-                    }
-                    i++;
-                    nt.Show();
+                    btnPinBoard.Enabled = true;
                 }
             }
-            if (i == 0)
+            else if (UA == false)
             {
-                btnPinBoard.Enabled = false;
+
+                foreach (Panel pl in ng.AllPanels) 
+                {
+                    foreach (Note nt in pl.Controls)
+                    {
+                        if (nt.NoteName == NoteName)
+                        {
+                            (DataRow[] rows, int i) = DataRowNote.FindInDataRowNote(NoteName);
+                            nt.NoteName = rows[i]["Name"].ToString();
+                            nt.TextPreview = rows[i]["PreviewBody"].ToString();
+                        }
+                    }
+                }
             }
-            else
-            {
-                btnPinBoard.Enabled = true;
-            }
+            
         }
 
         private void Note_DoubleClick(object sender, EventArgs e)
@@ -128,9 +148,7 @@ namespace Constellation
             //when the note is double clicked make sure that
             //create = 1 so that form 4 knows that the note already has data
             //put note name into variale so that form 4 knows what note is being opened
-            Control cl = (Control)sender;
-            Note nt = new Note();
-            nt.NoteName = cl.Tag.ToString();
+            Note nt = (Note)sender;
             SelectedNote = nt.Name;
             Create = 1;
             NoteName = nt.NoteName.ToString();
@@ -138,11 +156,23 @@ namespace Constellation
             NoteExpanded.Show();
             NoteExpanded.FormClosed += Form_Reload;
         }
+        private void Note_ButtonClick(object sender, EventArgs e)
+        {
+            //when the note is double clicked make sure that
+            //create = 1 so that form 4 knows that the note already has data
+            //put note name into variale so that form 4 knows what note is being opened
+            Button bt = (Button)sender;
+            SelectedNote = bt.Parent.ToString();
+            Create = 1;
+            NoteName = bt.Tag.ToString();
+            NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
+            NoteExpanded.Show();
+            NoteExpanded.FormClosed += Form_Reload;
+        }
         public void Form_Reload(object sender, EventArgs e)
         {
             //reloads the form by removing all notes and recreating them 
-            ClearNotes();
-            GenerateNotes();
+            GenerateNotes(false);
         }
 
         private void Note_MouseMove_1(object sender, MouseEventArgs e)

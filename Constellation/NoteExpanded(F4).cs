@@ -73,10 +73,10 @@ namespace Constellation
                 SQLiteCommand sqlCommand = new SQLiteCommand();
                 sqlCommand.Connection = sqlconnection;
                 sqlCommand.CommandType = CommandType.Text;
-                switch(Board_F3_.Create)
+                switch (Board_F3_.Create)
                 {
                     case 0:
-                        sqlCommand.CommandText = "INSERT INTO '" + BoardOpened +"'"+
+                        sqlCommand.CommandText = "INSERT INTO '" + BoardOpened + "'" +
                    " (Name, PreviewBody, FullBody, Date, Location, PBoard)" +
                    " Values (@Name, @PreviewBody, @FullBody, @Date, @Location, @PBoard)";
                         sqlCommand.Parameters.AddWithValue("@Name", data[0]);
@@ -92,7 +92,7 @@ namespace Constellation
                         break;
 
                     case 1:
-                        sqlCommand.CommandText = sqlCommand.CommandText = "UPDATE '"+ BoardOpened +"'"+
+                        sqlCommand.CommandText = sqlCommand.CommandText = "UPDATE '" + BoardOpened + "'" +
                                         " SET Name = '" + data[0] + "'," +
                                         " PreviewBody = '" + data[1] + "'," +
                                         " FullBody = '" + data[2] + "'," +
@@ -107,7 +107,7 @@ namespace Constellation
                 btnClose.Visible = true;
                 btnClose.Enabled = true;
             }
-            
+
         }
 
         private void NoteExpanded_F4__Load(object sender, EventArgs e)
@@ -118,7 +118,7 @@ namespace Constellation
             this.ForeColor = Color.FromArgb(TextARGB[0], TextARGB[1], TextARGB[2], TextARGB[3]);
             Control cn = this;
             cn = Class.LoadColours.SetColours(cn, this);
-            
+
             if (Board_F3_.Create != 0)
             {
                 btnClose.Enabled = false;
@@ -127,7 +127,6 @@ namespace Constellation
                 txtName.Text = rows[i]["Name"].ToString();
                 txtPreview.Text = rows[i]["PreviewBody"].ToString();
                 txtBody.Text = rows[i]["FullBody"].ToString();
-                
                 dtpDate.Value = DateTime.Parse(rows[i]["date"].ToString());
             }
             else if (Board_F3_.Create == 0)
@@ -139,6 +138,7 @@ namespace Constellation
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            Board_F3_.NoteName = txtName.Text;
             this.Close();
         }
     }

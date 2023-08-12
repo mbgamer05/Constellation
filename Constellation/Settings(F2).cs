@@ -11,6 +11,7 @@ using System.Data.SQLite;
 using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,6 @@ namespace Constellation
 
         public Settings_F2_()
         {
-            GetColours MS = new GetColours();
             InitializeComponent();
             InstalledFontCollection foundfonts = new InstalledFontCollection();
             FontFamily[] font = foundfonts.Families.ToArray();
@@ -158,13 +158,27 @@ namespace Constellation
         {
 
         }
-
+        private int[] ChangeColor(string input)
+        {
+            string temp = input;
+            int[] output = new int[4];
+            int j = 0;
+            foreach (string r in temp.Split(","))
+            {
+                output[j] = int.Parse(r);
+                j++;
+            }
+            return output;
+        }
         private void btnPrimaryColour_Click(object sender, EventArgs e)
         {
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
-                string PrimaryButtonColour = FindARGBValues();
-                ColourList.Insert(0, PrimaryButtonColour);
+                string PrimaryButtonColour =FindARGBValues();
+                ColourList.Insert(0,PrimaryButtonColour);
+                ChangeColor(FindARGBValues());
+                int[] NewColour = ChangeColor(FindARGBValues());
+                btnPrimary.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
             }
         }
 
@@ -196,7 +210,8 @@ namespace Constellation
             {
                 string SecondaryButtonColour = FindARGBValues();
                 ColourList.Insert(1, SecondaryButtonColour);
-
+                int[] NewColour = ChangeColor(SecondaryButtonColour);
+                btnSecondary.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
             }
         }
 
@@ -206,6 +221,8 @@ namespace Constellation
             {
                 string BackgroundColour = FindARGBValues();
                 ColourList.Insert(2, BackgroundColour);
+                int[] NewColour = ChangeColor(BackgroundColour);
+                panelPreview.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
             }
         }
 
@@ -215,6 +232,8 @@ namespace Constellation
             {
                 string TextColourColour = FindARGBValues();
                 ColourList.Insert(3, TextColourColour);
+                int[] NewColour = ChangeColor(TextColourColour);
+                txtPreview.ForeColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
             }
         }
 
@@ -224,6 +243,8 @@ namespace Constellation
             {
                 string TextBoxBackgroundColour = FindARGBValues();
                 ColourList.Insert(4, TextBoxBackgroundColour);
+                int[] NewColour = ChangeColor(TextBoxBackgroundColour);
+                txtPreview.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
             }
         }
 

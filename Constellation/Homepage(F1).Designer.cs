@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Homepage_F1_));
             btnBoard = new Button();
             btnSettings = new Button();
@@ -40,6 +41,7 @@
             tlpRight = new TableLayoutPanel();
             lblBottomRight = new Label();
             lblBottomLeft = new Label();
+            NI = new NotifyIcon(components);
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
@@ -49,9 +51,10 @@
             // btnBoard
             // 
             btnBoard.Dock = DockStyle.Top;
-            btnBoard.Location = new Point(0, 100);
+            btnBoard.Location = new Point(0, 133);
+            btnBoard.Margin = new Padding(3, 4, 3, 4);
             btnBoard.Name = "btnBoard";
-            btnBoard.Size = new Size(195, 23);
+            btnBoard.Size = new Size(223, 31);
             btnBoard.TabIndex = 6;
             btnBoard.Tag = "Primary";
             btnBoard.Text = "Open Board";
@@ -63,9 +66,10 @@
             btnSettings.Dock = DockStyle.Bottom;
             btnSettings.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnSettings.Image = (Image)resources.GetObject("btnSettings.Image");
-            btnSettings.Location = new Point(0, 579);
+            btnSettings.Location = new Point(0, 772);
+            btnSettings.Margin = new Padding(3, 4, 3, 4);
             btnSettings.Name = "btnSettings";
-            btnSettings.Size = new Size(195, 22);
+            btnSettings.Size = new Size(223, 29);
             btnSettings.TabIndex = 5;
             btnSettings.Tag = "Primary";
             btnSettings.Text = "Settings";
@@ -83,26 +87,27 @@
             panelRightBarHold.Controls.Add(btnSettings);
             panelRightBarHold.Dock = DockStyle.Left;
             panelRightBarHold.Location = new Point(0, 0);
-            panelRightBarHold.Margin = new Padding(3, 2, 3, 2);
             panelRightBarHold.Name = "panelRightBarHold";
-            panelRightBarHold.Size = new Size(195, 601);
+            panelRightBarHold.Size = new Size(223, 801);
             panelRightBarHold.TabIndex = 7;
             // 
             // plQuickSelect
             // 
             plQuickSelect.AutoScroll = true;
             plQuickSelect.Dock = DockStyle.Fill;
-            plQuickSelect.Location = new Point(0, 123);
+            plQuickSelect.Location = new Point(0, 164);
+            plQuickSelect.Margin = new Padding(3, 4, 3, 4);
             plQuickSelect.Name = "plQuickSelect";
-            plQuickSelect.Size = new Size(195, 433);
+            plQuickSelect.Size = new Size(223, 577);
             plQuickSelect.TabIndex = 8;
             // 
             // btnNewBoard
             // 
             btnNewBoard.Dock = DockStyle.Bottom;
-            btnNewBoard.Location = new Point(0, 556);
+            btnNewBoard.Location = new Point(0, 741);
+            btnNewBoard.Margin = new Padding(3, 4, 3, 4);
             btnNewBoard.Name = "btnNewBoard";
-            btnNewBoard.Size = new Size(195, 23);
+            btnNewBoard.Size = new Size(223, 31);
             btnNewBoard.TabIndex = 7;
             btnNewBoard.Tag = "Primary";
             btnNewBoard.Text = "Create Board";
@@ -116,27 +121,25 @@
             PanelIconHold.Controls.Add(pbUserIcon);
             PanelIconHold.Dock = DockStyle.Top;
             PanelIconHold.Location = new Point(0, 0);
-            PanelIconHold.Margin = new Padding(3, 2, 3, 2);
             PanelIconHold.Name = "PanelIconHold";
-            PanelIconHold.Size = new Size(195, 100);
+            PanelIconHold.Size = new Size(223, 133);
             PanelIconHold.TabIndex = 0;
             // 
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(75, 5);
+            lblUsername.Location = new Point(86, 7);
             lblUsername.Name = "lblUsername";
-            lblUsername.Size = new Size(60, 15);
+            lblUsername.Size = new Size(75, 20);
             lblUsername.TabIndex = 1;
             lblUsername.Text = "Username";
             // 
             // pbUserIcon
             // 
             pbUserIcon.Image = (Image)resources.GetObject("pbUserIcon.Image");
-            pbUserIcon.Location = new Point(3, 5);
-            pbUserIcon.Margin = new Padding(3, 2, 3, 2);
+            pbUserIcon.Location = new Point(3, 7);
             pbUserIcon.Name = "pbUserIcon";
-            pbUserIcon.Size = new Size(66, 56);
+            pbUserIcon.Size = new Size(75, 75);
             pbUserIcon.SizeMode = PictureBoxSizeMode.Zoom;
             pbUserIcon.TabIndex = 0;
             pbUserIcon.TabStop = false;
@@ -151,45 +154,49 @@
             tlpRight.Controls.Add(lblBottomRight, 1, 1);
             tlpRight.Controls.Add(lblBottomLeft, 0, 1);
             tlpRight.Dock = DockStyle.Fill;
-            tlpRight.Location = new Point(195, 0);
-            tlpRight.Margin = new Padding(3, 2, 3, 2);
+            tlpRight.Location = new Point(223, 0);
             tlpRight.Name = "tlpRight";
             tlpRight.RowCount = 2;
             tlpRight.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpRight.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlpRight.Size = new Size(973, 601);
+            tlpRight.Size = new Size(1112, 801);
             tlpRight.TabIndex = 8;
             // 
             // lblBottomRight
             // 
             lblBottomRight.AutoSize = true;
-            lblBottomRight.Location = new Point(489, 300);
+            lblBottomRight.Location = new Point(559, 400);
             lblBottomRight.Name = "lblBottomRight";
-            lblBottomRight.Size = new Size(94, 15);
+            lblBottomRight.Size = new Size(116, 20);
             lblBottomRight.TabIndex = 0;
             lblBottomRight.Text = "COMING SOON ";
             // 
             // lblBottomLeft
             // 
             lblBottomLeft.AutoSize = true;
-            lblBottomLeft.Location = new Point(3, 300);
+            lblBottomLeft.Location = new Point(3, 400);
             lblBottomLeft.Name = "lblBottomLeft";
-            lblBottomLeft.Size = new Size(91, 15);
+            lblBottomLeft.Size = new Size(112, 20);
             lblBottomLeft.TabIndex = 3;
             lblBottomLeft.Text = "COMING SOON";
             // 
+            // NI
+            // 
+            NI.Text = "notifyIcon1";
+            NI.Visible = true;
+            // 
             // Homepage_F1_
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1168, 601);
+            ClientSize = new Size(1335, 801);
             Controls.Add(tlpRight);
             Controls.Add(panelRightBarHold);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Homepage_F1_";
             Text = "Homepage_F1_";
             FormClosing += Homepage_F1__FormClosing;
             Load += Homepage_F1__Load;
+            Resize += Homepage_F1__Resize;
             panelRightBarHold.ResumeLayout(false);
             PanelIconHold.ResumeLayout(false);
             PanelIconHold.PerformLayout();
@@ -212,5 +219,6 @@
         private Panel plQuickSelect;
         private Label lblUsername;
         private Label lblBottomRight;
+        private NotifyIcon NI;
     }
 }
