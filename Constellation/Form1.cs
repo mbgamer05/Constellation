@@ -204,21 +204,22 @@ namespace Constellation
                 sqlconnection.Open();
                 sqlCommand.ExecuteNonQuery();
                 sqlconnection.Close();
+
+                //Gets the user ID and encrypts the data and logs the user in 
+                string IDFind = ReadDataID(Userdata);
+                string encodedFileName = Convert.ToBase64String(Encoding.UTF8.GetBytes(Userdata[0]));
+                string encodedFileNameFull = encodedFileName.Replace('/', '-');
+                string fileName = IDFind + encodedFileNameFull;
+                string[] paths = new string[2] { FileCreatePath, fileName };
+                string DatabasePath = Path.Combine(paths) + ".db";
+                CreateDatabase(DatabasePath);
+                AllowUserIn(DatabasePath);
             }
             catch
             {
                 MessageBox.Show("hmm seems like the user already exists please login");
             }
 
-            //Gets the user ID and encrypts the data and logs the user in 
-            string IDFind = ReadDataID(Userdata);
-            string encodedFileName = Convert.ToBase64String(Encoding.UTF8.GetBytes(Userdata[0]));
-            string encodedFileNameFull = encodedFileName.Replace('/', '-');
-            string fileName = IDFind + encodedFileNameFull;
-            string[] paths = new string[2] { FileCreatePath, fileName };
-            string DatabasePath = Path.Combine(paths) + ".db";
-            CreateDatabase(DatabasePath);
-            AllowUserIn(DatabasePath);
         }
 
         private static void CreateDatabase(string DatabasePath)

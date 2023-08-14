@@ -40,7 +40,7 @@ namespace Constellation
                 combFont.Items.Add(font[i].Name);
                 i++;
             }
-
+            combFont.SelectedIndex = 0;
             var ConfigFont = config.AppSettings.Settings["FontType"].Value;
             this.Font = new Font(ConfigFont, this.Font.Size);
 
@@ -143,7 +143,7 @@ namespace Constellation
                     cbQuickClose.Checked = false;
                     break;
             }
-
+            
         }
         public void LoadColours()
         {

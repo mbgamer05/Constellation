@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Constellation.Scripts
 {
@@ -16,9 +17,9 @@ namespace Constellation.Scripts
         /// <returns>returns the datarow</returns>
         public static DataRow[] GetAllDatabaseBoards()
         {
-            PublicData PD = new PublicData();
-            SQLiteConnection sqlconnection = new SQLiteConnection();
-            sqlconnection.ConnectionString = "DataSource = " + PD.UserDataLocaion;
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            string UserDataLocaion = config.AppSettings.Settings["UserLoginLocation"].Value; SQLiteConnection sqlconnection = new SQLiteConnection();
+            sqlconnection.ConnectionString = "DataSource = " + UserDataLocaion;
             string commandText = "SELECT * FROM sqlite_master WHERE type = 'table'";
             DataTable table = new DataTable();
             SQLiteDataAdapter myDataAdapter = new SQLiteDataAdapter(commandText, sqlconnection);
