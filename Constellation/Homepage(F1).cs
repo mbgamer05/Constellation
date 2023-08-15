@@ -78,6 +78,7 @@ namespace Constellation
             lblUsername.Text = Username;
             LoadPinnedBoards();
             LoadColours();
+
         }
 
         private void LoadPinnedBoards()

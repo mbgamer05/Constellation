@@ -26,7 +26,14 @@ namespace Constellation
         private string FileCreatePath = FolderPath + "\\Constellation";
         Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         public string ColourSelected = "Preview1";
-        List<string> ColourList = new List<string>();
+        List<string> ColourList = new List<string>()
+        {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+        };
 
 
         public Settings_F2_()
@@ -40,9 +47,9 @@ namespace Constellation
                 combFont.Items.Add(font[i].Name);
                 i++;
             }
-            combFont.SelectedIndex = 0;
             var ConfigFont = config.AppSettings.Settings["FontType"].Value;
             this.Font = new Font(ConfigFont, this.Font.Size);
+            combFont.Text = ConfigFont;
 
         }
 
@@ -143,7 +150,7 @@ namespace Constellation
                     cbQuickClose.Checked = false;
                     break;
             }
-            
+
         }
         public void LoadColours()
         {
@@ -174,11 +181,13 @@ namespace Constellation
         {
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
-                string PrimaryButtonColour =FindARGBValues();
-                ColourList.Insert(0,PrimaryButtonColour);
+                string PrimaryButtonColour = FindARGBValues();
+                ColourList[0] = PrimaryButtonColour;
                 ChangeColor(FindARGBValues());
                 int[] NewColour = ChangeColor(FindARGBValues());
                 btnPrimary.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
+                Button btn = sender as Button;
+                btn.BackColor = Color.Green;
             }
         }
 
@@ -209,9 +218,12 @@ namespace Constellation
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
                 string SecondaryButtonColour = FindARGBValues();
-                ColourList.Insert(1, SecondaryButtonColour);
+                ColourList[1] = SecondaryButtonColour;
                 int[] NewColour = ChangeColor(SecondaryButtonColour);
                 btnSecondary.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
+                Button btn = sender as Button;
+                btn.BackColor = Color.Green;
+
             }
         }
 
@@ -220,9 +232,11 @@ namespace Constellation
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
                 string BackgroundColour = FindARGBValues();
-                ColourList.Insert(2, BackgroundColour);
+                ColourList[2] = BackgroundColour;
                 int[] NewColour = ChangeColor(BackgroundColour);
                 panelPreview.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
+                Button btn = sender as Button;
+                btn.BackColor = Color.Green;
             }
         }
 
@@ -231,9 +245,11 @@ namespace Constellation
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
                 string TextColourColour = FindARGBValues();
-                ColourList.Insert(3, TextColourColour);
+                ColourList[3] = TextColourColour;
                 int[] NewColour = ChangeColor(TextColourColour);
                 txtPreview.ForeColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
+                Button btn = sender as Button;
+                btn.BackColor = Color.Green;
             }
         }
 
@@ -242,9 +258,11 @@ namespace Constellation
             if (ColourD.ShowDialog() == DialogResult.OK)
             {
                 string TextBoxBackgroundColour = FindARGBValues();
-                ColourList.Insert(4, TextBoxBackgroundColour);
+                ColourList[4] = TextBoxBackgroundColour;
                 int[] NewColour = ChangeColor(TextBoxBackgroundColour);
                 txtPreview.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
+                Button btn = sender as Button;
+                btn.BackColor = Color.Green;
             }
         }
 
@@ -267,14 +285,20 @@ namespace Constellation
         private void btnApply_Click(object sender, EventArgs e)
         {
             int clear = 0;
+            int allow =0;
             foreach (var item in ColourList)
             {
-                if (item != string.Empty)
+                if (item != clear.ToString())
+                {
+                    clear++;
+                    allow++;
+                }
+                else
                 {
                     clear++;
                 }
             }
-            if (clear == 5)
+            if (allow == 5)
             {
                 string ColourName = Interaction.InputBox("please enter name for colour scheme", "scheme creation", "");
                 string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };

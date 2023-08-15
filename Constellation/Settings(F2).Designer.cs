@@ -190,6 +190,7 @@
             // 
             // btnPrimaryColour
             // 
+            btnPrimaryColour.ImageAlign = ContentAlignment.MiddleRight;
             btnPrimaryColour.Location = new Point(52, 62);
             btnPrimaryColour.Name = "btnPrimaryColour";
             btnPrimaryColour.Size = new Size(151, 28);

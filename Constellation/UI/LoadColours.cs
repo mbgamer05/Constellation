@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +58,10 @@ namespace Constellation.Class
                 }
 
             }
+            string newfont = ConfigurationManager.AppSettings["FontType"];
+            Font font = (form.Font = new Font(newfont, 9f));
             return Control;
+            
         }
     }
 }
