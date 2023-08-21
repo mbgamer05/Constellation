@@ -51,12 +51,11 @@
             tlpBody.Controls.Add(tlpTopBar, 0, 0);
             tlpBody.Dock = DockStyle.Fill;
             tlpBody.Location = new Point(0, 0);
-            tlpBody.Margin = new Padding(3, 2, 3, 2);
             tlpBody.Name = "tlpBody";
             tlpBody.RowCount = 2;
             tlpBody.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpBody.RowStyles.Add(new RowStyle(SizeType.Percent, 749F));
-            tlpBody.Size = new Size(1123, 594);
+            tlpBody.Size = new Size(1283, 792);
             tlpBody.TabIndex = 0;
             // 
             // ng
@@ -64,10 +63,9 @@
             ng.Dock = DockStyle.Fill;
             ng.DoingColor = SystemColors.Control;
             ng.DoneColor = SystemColors.Control;
-            ng.Location = new Point(3, 39);
-            ng.Margin = new Padding(3, 2, 3, 2);
+            ng.Location = new Point(3, 52);
             ng.Name = "ng";
-            ng.Size = new Size(1117, 553);
+            ng.Size = new Size(1277, 737);
             ng.TabIndex = 0;
             ng.ToDoColor = SystemColors.Control;
             // 
@@ -75,34 +73,31 @@
             // 
             tlpTopBar.BackColor = Color.Transparent;
             tlpTopBar.ColumnCount = 7;
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88F));
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 94F));
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 678F));
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88F));
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88F));
-            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 101F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 107F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 91F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 775F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 101F));
+            tlpTopBar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 101F));
             tlpTopBar.Controls.Add(btnAddNote, 0, 0);
             tlpTopBar.Controls.Add(btnBack, 5, 0);
             tlpTopBar.Controls.Add(btnClose, 4, 0);
             tlpTopBar.Controls.Add(btnDeleteNote, 1, 0);
             tlpTopBar.Controls.Add(btnPinBoard, 2, 0);
             tlpTopBar.Dock = DockStyle.Fill;
-            tlpTopBar.Location = new Point(3, 2);
-            tlpTopBar.Margin = new Padding(3, 2, 3, 2);
+            tlpTopBar.Location = new Point(3, 3);
             tlpTopBar.Name = "tlpTopBar";
             tlpTopBar.RowCount = 1;
             tlpTopBar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlpTopBar.Size = new Size(1117, 33);
+            tlpTopBar.Size = new Size(1277, 43);
             tlpTopBar.TabIndex = 1;
             // 
             // btnAddNote
             // 
             btnAddNote.Dock = DockStyle.Fill;
-            btnAddNote.Location = new Point(3, 2);
-            btnAddNote.Margin = new Padding(3, 2, 3, 2);
+            btnAddNote.Location = new Point(3, 3);
             btnAddNote.Name = "btnAddNote";
-            btnAddNote.Size = new Size(82, 29);
+            btnAddNote.Size = new Size(95, 37);
             btnAddNote.TabIndex = 0;
             btnAddNote.Tag = "Primary";
             btnAddNote.Text = "Add Note";
@@ -112,10 +107,9 @@
             // btnBack
             // 
             btnBack.Dock = DockStyle.Fill;
-            btnBack.Location = new Point(1031, 2);
-            btnBack.Margin = new Padding(3, 2, 3, 2);
+            btnBack.Location = new Point(1178, 3);
             btnBack.Name = "btnBack";
-            btnBack.Size = new Size(82, 29);
+            btnBack.Size = new Size(95, 37);
             btnBack.TabIndex = 1;
             btnBack.Tag = "Primary";
             btnBack.Text = "Back";
@@ -125,10 +119,9 @@
             // btnClose
             // 
             btnClose.Dock = DockStyle.Fill;
-            btnClose.Location = new Point(943, 2);
-            btnClose.Margin = new Padding(3, 2, 3, 2);
+            btnClose.Location = new Point(1077, 3);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(82, 29);
+            btnClose.Size = new Size(95, 37);
             btnClose.TabIndex = 2;
             btnClose.Tag = "Primary";
             btnClose.Text = "Close";
@@ -138,10 +131,9 @@
             // btnDeleteNote
             // 
             btnDeleteNote.Dock = DockStyle.Fill;
-            btnDeleteNote.Location = new Point(91, 2);
-            btnDeleteNote.Margin = new Padding(3, 2, 3, 2);
+            btnDeleteNote.Location = new Point(104, 3);
             btnDeleteNote.Name = "btnDeleteNote";
-            btnDeleteNote.Size = new Size(88, 29);
+            btnDeleteNote.Size = new Size(101, 37);
             btnDeleteNote.TabIndex = 3;
             btnDeleteNote.Tag = "Primary";
             btnDeleteNote.Text = "Delete Note";
@@ -151,9 +143,10 @@
             // btnPinBoard
             // 
             btnPinBoard.Dock = DockStyle.Fill;
-            btnPinBoard.Location = new Point(185, 3);
+            btnPinBoard.Location = new Point(211, 4);
+            btnPinBoard.Margin = new Padding(3, 4, 3, 4);
             btnPinBoard.Name = "btnPinBoard";
-            btnPinBoard.Size = new Size(74, 27);
+            btnPinBoard.Size = new Size(85, 35);
             btnPinBoard.TabIndex = 4;
             btnPinBoard.Tag = "Primary";
             btnPinBoard.Text = "Pin Board";
@@ -162,11 +155,10 @@
             // 
             // Board_F3_
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1123, 594);
+            ClientSize = new Size(1283, 792);
             Controls.Add(tlpBody);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Board_F3_";
             Text = "Board_F3_";
             Load += Board_F3__Load;

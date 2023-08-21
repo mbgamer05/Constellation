@@ -103,7 +103,6 @@ namespace Constellation
                         nt.MouseMove += Note_MouseMove_1;
                         nt.MouseUp += Note_MouseUp;
                         nt.DoubleClick += Note_DoubleClick;
-
                         switch (rows[i]["Location"].ToString())
                         {
                             case "0":
@@ -132,7 +131,7 @@ namespace Constellation
             else if (UA == false)
             {
 
-                foreach (Panel pl in ng.AllPanels) 
+                foreach (Panel pl in ng.AllPanels)
                 {
                     foreach (Note nt in pl.Controls)
                     {
@@ -145,7 +144,7 @@ namespace Constellation
                     }
                 }
             }
-            
+
         }
 
         private void Note_DoubleClick(object sender, EventArgs e)
@@ -261,7 +260,7 @@ namespace Constellation
             Create = 0;
             NoteExpanded.FormClosed += Form_Reload;
             NoteExpanded.Show();
-            
+
 
         }
 
@@ -276,7 +275,6 @@ namespace Constellation
             switch (dr)
             {
                 case DialogResult.Yes:
-                    MessageBox.Show("Closing...");
                     Application.Exit();
                     break;
 
