@@ -39,13 +39,10 @@
             lblUsername = new Label();
             pbUserIcon = new PictureBox();
             tlpRight = new TableLayoutPanel();
-            lblBottomRight = new Label();
-            lblBottomLeft = new Label();
             NI = new NotifyIcon(components);
             panelRightBarHold.SuspendLayout();
             PanelIconHold.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).BeginInit();
-            tlpRight.SuspendLayout();
             SuspendLayout();
             // 
             // btnBoard
@@ -151,8 +148,6 @@
             tlpRight.ColumnCount = 2;
             tlpRight.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpRight.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tlpRight.Controls.Add(lblBottomRight, 1, 1);
-            tlpRight.Controls.Add(lblBottomLeft, 0, 1);
             tlpRight.Dock = DockStyle.Fill;
             tlpRight.Location = new Point(223, 0);
             tlpRight.Name = "tlpRight";
@@ -161,24 +156,6 @@
             tlpRight.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpRight.Size = new Size(1112, 801);
             tlpRight.TabIndex = 8;
-            // 
-            // lblBottomRight
-            // 
-            lblBottomRight.AutoSize = true;
-            lblBottomRight.Location = new Point(559, 400);
-            lblBottomRight.Name = "lblBottomRight";
-            lblBottomRight.Size = new Size(116, 20);
-            lblBottomRight.TabIndex = 0;
-            lblBottomRight.Text = "COMING SOON ";
-            // 
-            // lblBottomLeft
-            // 
-            lblBottomLeft.AutoSize = true;
-            lblBottomLeft.Location = new Point(3, 400);
-            lblBottomLeft.Name = "lblBottomLeft";
-            lblBottomLeft.Size = new Size(112, 20);
-            lblBottomLeft.TabIndex = 3;
-            lblBottomLeft.Text = "COMING SOON";
             // 
             // NI
             // 
@@ -201,8 +178,6 @@
             PanelIconHold.ResumeLayout(false);
             PanelIconHold.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbUserIcon).EndInit();
-            tlpRight.ResumeLayout(false);
-            tlpRight.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -214,11 +189,9 @@
         private Panel PanelIconHold;
         private PictureBox pbUserIcon;
         private TableLayoutPanel tlpRight;
-        private Label lblBottomLeft;
         private Button btnNewBoard;
         private Panel plQuickSelect;
         private Label lblUsername;
-        private Label lblBottomRight;
         private NotifyIcon NI;
     }
 }

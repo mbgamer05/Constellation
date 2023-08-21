@@ -188,6 +188,7 @@ namespace Constellation
                 btnPrimary.BackColor = Color.FromArgb(NewColour[0], NewColour[1], NewColour[2], NewColour[3]);
                 Button btn = sender as Button;
                 btn.BackColor = Color.Green;
+                 
             }
         }
 

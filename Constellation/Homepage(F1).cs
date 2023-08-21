@@ -170,7 +170,7 @@ namespace Constellation
 
         private void Homepage_F1__Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized) 
+            if (this.WindowState == FormWindowState.Minimized)
             {
                 NI.Visible = true;
             }

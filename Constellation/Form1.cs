@@ -25,6 +25,7 @@ namespace Constellation
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //checks if it is the applications first run and restarts to allow the database and files to adjust
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsNetworkDeployed"), out bool isNetworkDeployed);
             bool.TryParse(Environment.GetEnvironmentVariable("ClickOnce_IsFirstRun"), out bool IsFirstRun);
             if (isNetworkDeployed == true && IsFirstRun == true)
@@ -39,6 +40,7 @@ namespace Constellation
                     Application.Restart();
                 }
             }
+            //creats a file path to where the application files are saved
             string[] colourpathFind = new string[2] { FileCreatePath, "Colour" };
             string ColourPath = Path.Combine(colourpathFind) + ".db";
             if (!File.Exists(FileCreatePath))
@@ -47,6 +49,7 @@ namespace Constellation
             }
             if (!File.Exists(ColourPath))
             {
+                //adds preview colours
                 SQLiteConnection.CreateFile(ColourPath);
                 for (int i = 1; i < 4; i++)
                 {
@@ -344,7 +347,7 @@ namespace Constellation
                 }
             }
             //attempts login by check username and password
-            string PasswordToFind = ReadDataPass(Userdata);
+            string PasswordToFind = ReadDataPass (Userdata);
             if (PasswordToFind.Contains("failed"))
             {
                 MessageBox.Show("couldn't find a username or password are you sure you have made an account?\n" +

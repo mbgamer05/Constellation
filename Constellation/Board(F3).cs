@@ -67,6 +67,11 @@ namespace Constellation
         }
         private void GenerateNotes(bool UA)
         {
+            foreach (Panel pl in ng.AllPanels)
+            {
+                pl.Controls.Clear();
+
+            }
             if (UA == true)
             {
                 DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
@@ -172,7 +177,7 @@ namespace Constellation
         public void Form_Reload(object sender, EventArgs e)
         {
             //reloads the form by removing all notes and recreating them 
-            GenerateNotes(false);
+            GenerateNotes(true);
         }
 
         private void Note_MouseMove_1(object sender, MouseEventArgs e)
@@ -256,6 +261,7 @@ namespace Constellation
             Create = 0;
             NoteExpanded.FormClosed += Form_Reload;
             NoteExpanded.Show();
+            
 
         }
 
