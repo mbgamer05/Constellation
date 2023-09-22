@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vertTEY8zrJFrnsl46OuU0cxa0cUEnA6gQ0AbDQwOZltdLAlCx8vR0YGwaHH2XAlDmcLBk0B6Mcf7VScW/306w==",
+  "dgSpecHash": "/GxVpn2TCT2U3nAPw0CjHeGNtSc/2+aBicQUhIkQEcGOisW6TrN7EMRKOw4AgrCmDejL3DFCtch4UXUhCjK0ow==",
   "success": true,
-  "projectFilePath": "C:\\Users\\matth\\Desktop\\Constellation\\Constellation\\Constellation\\Constellation.csproj",
+  "projectFilePath": "C:\\Users\\matth\\Source\\Repos\\mbgamer05\\Constellation\\Constellation\\Constellation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\matth\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.117\\stub.system.data.sqlite.core.netstandard.1.0.117.nupkg.sha512",
     "C:\\Users\\matth\\.nuget\\packages\\system.data.sqlite.core\\1.0.117\\system.data.sqlite.core.1.0.117.nupkg.sha512"

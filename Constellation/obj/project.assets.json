@@ -81,24 +81,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\matth\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\matth\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\matth\\Desktop\\Constellation\\Constellation\\Constellation\\Constellation.csproj",
+      "projectUniqueName": "C:\\Users\\matth\\Source\\Repos\\mbgamer05\\Constellation\\Constellation\\Constellation.csproj",
       "projectName": "Constellation",
-      "projectPath": "C:\\Users\\matth\\Desktop\\Constellation\\Constellation\\Constellation\\Constellation.csproj",
+      "projectPath": "C:\\Users\\matth\\Source\\Repos\\mbgamer05\\Constellation\\Constellation\\Constellation.csproj",
       "packagesPath": "C:\\Users\\matth\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\matth\\Desktop\\Constellation\\Constellation\\Constellation\\obj\\",
+      "outputPath": "C:\\Users\\matth\\Source\\Repos\\mbgamer05\\Constellation\\Constellation\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\matth\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -148,7 +143,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
