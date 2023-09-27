@@ -140,15 +140,10 @@ namespace Constellation
         {
             //if quick close is true then close the application on the homepage and don't go back to the login screen
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            string QuickClose = config.AppSettings.Settings["QuickClose"].Value;
-            switch (QuickClose)
+            bool QuickClose = bool.Parse(config.AppSettings.Settings["QuickClose"].Value);
+            if (QuickClose == true)
             {
-                case "True":
-                    Application.Exit();
-                    break;
-                case "False":
-                    this.Close();
-                    break;
+                Application.Exit();
             }
         }
 

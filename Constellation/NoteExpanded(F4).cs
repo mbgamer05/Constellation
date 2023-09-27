@@ -35,8 +35,7 @@ namespace Constellation
             data[0] = txtName.Text;
             data[1] = txtPreview.Text;
             data[2] = txtBody.Text;
-            data[3] = dtpDate.Text;
-            data[3] = data[3].Replace(",", "");
+            data[3] = dtpDate.Text.Replace(",", "");
             int i = 0;
             bool allow = false;
             foreach (string s in data)
@@ -139,6 +138,7 @@ namespace Constellation
         private void btnClose_Click(object sender, EventArgs e)
         {
             Board_F3_.NoteName = txtName.Text;
+            GC.Collect();
             this.Close();
         }
     }

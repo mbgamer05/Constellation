@@ -35,6 +35,7 @@ namespace Constellation
         }
         public string SelectedNote;
         public static string NoteName;
+        public static string PNoteName;
         public static int Create;
         public static string Action;
         public Board_F3_()
@@ -67,13 +68,13 @@ namespace Constellation
         }
         private void GenerateNotes(bool UA)
         {
-            foreach (Panel pl in ng.AllPanels)
-            {
-                pl.Controls.Clear();
-
-            }
+            
             if (UA == true)
             {
+                foreach (Panel pl in this.ng.AllPanels)
+                {
+                    pl.Controls.Clear();
+                }
                 DataRow[] rows = DataRowNote.ReadCurrentBoardsNotes();
                 bool create = true;
                 int i = 0;
@@ -130,12 +131,11 @@ namespace Constellation
             }
             else if (UA == false)
             {
-
                 foreach (Panel pl in ng.AllPanels)
                 {
                     foreach (Note nt in pl.Controls)
                     {
-                        if (nt.NoteName == NoteName)
+                        if (nt.NoteName == PNoteName)
                         {
                             (DataRow[] rows, int i) = DataRowNote.FindInDataRowNote(NoteName);
                             nt.NoteName = rows[i]["Name"].ToString();
@@ -155,10 +155,11 @@ namespace Constellation
             Note nt = (Note)sender;
             SelectedNote = nt.Name;
             Create = 1;
-            NoteName = nt.NoteName.ToString();
+            NoteName = PNoteName = nt.NoteName.ToString();
             NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
             NoteExpanded.Show();
             NoteExpanded.FormClosed += Form_Reload;
+
         }
         private void Note_ButtonClick(object sender, EventArgs e)
         {
@@ -168,15 +169,16 @@ namespace Constellation
             Button bt = (Button)sender;
             SelectedNote = bt.Parent.ToString();
             Create = 1;
-            NoteName = bt.Tag.ToString();
+            NoteName = PNoteName = bt.Tag.ToString();
             NoteExpanded_F4_ NoteExpanded = new NoteExpanded_F4_();
             NoteExpanded.Show();
             NoteExpanded.FormClosed += Form_Reload;
+
         }
         public void Form_Reload(object sender, EventArgs e)
         {
             //reloads the form by removing all notes and recreating them 
-            GenerateNotes(true);
+            GenerateNotes(false);
         }
 
         private void Note_MouseMove_1(object sender, MouseEventArgs e)
@@ -266,6 +268,7 @@ namespace Constellation
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            GC.Collect();
             this.Close();
         }
 
